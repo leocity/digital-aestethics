@@ -118,9 +118,125 @@
         /* GRAIN */
         body::after { content:''; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:0.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
         .light body::after { opacity: 0.015; }
+
+        /* ═══════════════════════════════════════
+           VAPORWAVE / GLITCH LAYER
+           ═══════════════════════════════════════ */
+
+        /* CRT scanlines — always on, very subtle on content, stronger on title */
+        body::before {
+            content:'';
+            position:fixed; inset:0; z-index:9998; pointer-events:none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,0,0,0.06) 0px,
+                rgba(0,0,0,0.06) 1px,
+                transparent 1px,
+                transparent 4px
+            );
+        }
+        .light body::before { opacity: 0.4; }
+
+        /* VHS tracking line — slides down every 10s */
+        @keyframes vhs-slide {
+            0%   { top: -4px; opacity: 0; }
+            3%   { opacity: 1; }
+            97%  { opacity: 0.6; }
+            100% { top: 100vh; opacity: 0; }
+        }
+        .vhs-line {
+            position: fixed;
+            left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent 0%, rgba(139,92,246,0.4) 20%, rgba(196,181,253,0.6) 50%, rgba(139,92,246,0.4) 80%, transparent 100%);
+            pointer-events: none;
+            z-index: 9997;
+            animation: vhs-slide 10s linear infinite;
+        }
+
+        /* Section number: neon glow */
+        .section-num {
+            background: linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(196,181,253,0.08) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(139,92,246,0.15);
+        }
+
+        /* Title slide h1: occasional glitch */
+        @keyframes title-glitch {
+            0%,88%,100% {
+                text-shadow: none;
+                clip-path: none;
+                transform: none;
+            }
+            89% {
+                clip-path: inset(15% 0 70% 0);
+                transform: translate(4px, 0);
+                text-shadow: -4px 0 rgba(196,181,253,0.7), 4px 0 rgba(139,92,246,0.7);
+            }
+            90% {
+                clip-path: inset(60% 0 10% 0);
+                transform: translate(-3px, 0);
+            }
+            91% {
+                clip-path: inset(30% 0 50% 0);
+                transform: translate(2px, 0);
+                text-shadow: 3px 0 rgba(196,181,253,0.5), -3px 0 rgba(139,92,246,0.5);
+            }
+            92% {
+                clip-path: none;
+                transform: none;
+                text-shadow: none;
+            }
+        }
+        h1.glitch { animation: title-glitch 7s ease-in-out infinite; }
+
+        /* Embed frames: subtle neon border */
+        .embed-frame {
+            box-shadow: 0 0 0 1px rgba(139,92,246,0.15), 0 0 20px rgba(139,92,246,0.06);
+            transition: box-shadow 0.4s;
+        }
+        .embed-frame:hover {
+            box-shadow: 0 0 0 1px rgba(139,92,246,0.3), 0 0 40px rgba(139,92,246,0.12);
+        }
+
+        /* Slide images: hover chromatic micro-shift */
+        .slide-img, .slide-img-contain {
+            transition: filter 0.3s, transform 0.3s;
+        }
+        .slide-img:hover, .slide-img-contain:hover {
+            filter: saturate(1.15) contrast(1.05);
+            transform: scale(1.01);
+        }
+
+        /* Glass cards: accent glow on hover */
+        .glass:hover {
+            box-shadow: 0 0 20px rgba(139,92,246,0.08);
+        }
+
+        /* Retro terminal: stronger phosphor glow */
+        .retro-terminal {
+            box-shadow: 0 0 30px rgba(51,255,51,0.06), inset 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* Glitch bar — fires on slide scroll (JS-triggered) */
+        @keyframes glitch-bar-in {
+            0%   { opacity: 0.8; transform: scaleX(1); }
+            40%  { opacity: 0.5; transform: scaleX(0.98); }
+            100% { opacity: 0; transform: scaleX(1.02); }
+        }
+        .slide-glitch-bar {
+            position: absolute;
+            left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(139,92,246,0.8), rgba(196,181,253,0.6), transparent);
+            pointer-events: none;
+            animation: glitch-bar-in 0.5s ease-out forwards;
+        }
     </style>
 </head>
 <body class="antialiased">
+
+<!-- VHS tracking line -->
+<div class="vhs-line"></div>
 
 <!-- THEME TOGGLE -->
 <button class="theme-toggle" onclick="document.documentElement.classList.toggle('light')" title="Toggle light/dark theme">
@@ -133,7 +249,7 @@
     <section class="slide items-center text-center overflow-hidden" style="border-top:none">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] md:w-[50vw] md:h-[50vw] bg-accent/15 rounded-full blur-[140px] -z-10 pointer-events-none"></div>
         <p class="text-sm font-mono text-accent tracking-[0.3em] uppercase mb-8 reveal">Digital Aesthetics &mdash; Politecnico di Milano</p>
-        <h1 class="text-5xl md:text-7xl lg:text-[6rem] font-display leading-[1.05] mb-10 max-w-5xl reveal d1">
+        <h1 class="text-5xl md:text-7xl lg:text-[6rem] font-display leading-[1.05] mb-10 max-w-5xl reveal d1 glitch">
             A Journey Through 50 Years of<br/>
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent via-purple-400 to-pink-400">Interactive Digital Storytelling</span>
         </h1>
@@ -322,9 +438,9 @@
                             <p class="text-base text-txtMuted"><strong class="text-accent">Key innovation:</strong> Personalized stories enabling collaborative storytelling between AI and humans.</p>
                         </div>
                     </div>
-                    <div class="m-6 mt-0 rounded-lg overflow-hidden border border-border bg-black">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Galatea_computer_game_screenshot.png" alt="Galatea interactive fiction game screenshot showing text-based conversation" class="w-full" loading="lazy">
-                        <p class="text-xs text-txtFaint text-center py-2 font-mono">Galatea &mdash; Emily Short, 2000</p>
+                    <div class="m-6 mt-0 rounded-lg overflow-hidden border border-border">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Jean-L%C3%A9on_G%C3%A9r%C3%B4me_-_Pygmalion_and_Galatea_-_Met.jpg" alt="Jean-Léon Gérôme, Pygmalion and Galatea, c.1890 — the statue that comes to life through human attention, mirror of Emily Short's interactive fiction" class="w-full" loading="lazy" onclick="zoomImg(this)" style="cursor:zoom-in;">
+                        <p class="text-xs text-txtFaint text-center py-2 font-mono">Jean-Léon Gérôme, <em>Pygmalion and Galatea</em>, c.1890 &mdash; Metropolitan Museum of Art</p>
                     </div>
                 </div>
             </div>
@@ -374,8 +490,8 @@
             </div>
             <div class="space-y-4 reveal d1">
                 <div class="rounded-2xl overflow-hidden border border-border" style="min-height:320px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/03/Photo_of_a_floppy_diskette_labelled_Shelley_Jackson_Patchwork_Girl.jpg" alt="Floppy diskette of Patchwork Girl by Shelley Jackson - Eastgate Systems hypertext" class="slide-img" loading="lazy">
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Patchwork Girl floppy disk &mdash; Eastgate Systems, 1995 &middot; Wikimedia Commons (CC)</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Frontispiece_to_Frankenstein_1831.jpg" alt="Theodore Von Holst, frontispiece to Mary Shelley's Frankenstein, 1831 — the literary ancestor Patchwork Girl reimagines from the monster's perspective" class="slide-img" loading="lazy" onclick="zoomImg(this)" style="cursor:zoom-in;">
+                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Theodore Von Holst, frontispiece to <em>Frankenstein</em>, 1831 &mdash; the literary ancestor Patchwork Girl rewrites</p>
                 </div>
                 <p class="text-xs text-txtFaint text-center font-mono">Shelley Jackson, 1995 &middot; Published by <a href="https://www.eastgate.com/" target="_blank" rel="noopener" class="ref">Eastgate Systems</a></p>
             </div>
@@ -480,9 +596,15 @@
         <div class="w-full max-w-6xl">
             <h2 class="text-4xl md:text-6xl font-display mb-6 reveal">Video Games &amp; Storytelling</h2>
             <p class="text-xl text-txtMuted max-w-3xl mb-12 reveal d1">The 1990s golden age &mdash; richly detailed worlds and characters offering unique, immersive experiences.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal d2">
-                <div class="glass p-8 rounded-2xl"><h3 class="text-2xl font-display mb-4">The Golden Age</h3><ul class="bl text-txtMuted text-base space-y-2"><li>Richly detailed worlds and characters</li><li>Unique, immersive player experiences</li><li>Genre-defining titles</li><li>Narrative complexity rivaling film</li></ul></div>
-                <div class="glass p-8 rounded-2xl"><h3 class="text-2xl font-display mb-4">Rise of MMORPGs</h3><ul class="bl text-txtMuted text-base space-y-2"><li>Massive multiplayer online worlds</li><li>Real-time interaction with others</li><li>Emergent storytelling through community</li><li>Persistent, evolving narratives</li></ul></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 reveal d2">
+                <div class="space-y-4">
+                    <div class="glass p-8 rounded-2xl"><h3 class="text-2xl font-display mb-4">The Golden Age</h3><ul class="bl text-txtMuted text-base space-y-2"><li>Richly detailed worlds and characters</li><li>Unique, immersive player experiences</li><li>Genre-defining titles</li><li>Narrative complexity rivaling film</li></ul></div>
+                    <div class="glass p-8 rounded-2xl"><h3 class="text-2xl font-display mb-4">Rise of MMORPGs</h3><ul class="bl text-txtMuted text-base space-y-2"><li>Massive multiplayer online worlds</li><li>Real-time interaction with others</li><li>Emergent storytelling through community</li><li>Persistent, evolving narratives</li></ul></div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-border">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/7/74/Planescape-Torment-GOG.jpg" alt="Planescape: Torment — the definitive narrative RPG of the 1990s, asking 'What can change the nature of a man?'" class="slide-img" loading="lazy" onclick="zoomImg(this)" style="cursor:zoom-in; min-height:300px;">
+                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30"><em>Planescape: Torment</em> &mdash; Black Isle Studios, 1999 &middot; &ldquo;What can change the nature of a man?&rdquo;</p>
+                </div>
             </div>
         </div>
     </section>
@@ -505,9 +627,15 @@
                 </div>
                 <p class="text-lg text-txtFaint italic">&ldquo;Twine and similar platforms have decentralized creative power.&rdquo; &mdash; <a href="https://en.wikipedia.org/wiki/Anna_Anthropy" target="_blank" rel="noopener" class="ref">Anna Anthropy</a></p>
             </div>
-            <div class="rounded-2xl overflow-hidden border border-border reveal d1">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Twine_2.9.2_screenshot.png" alt="Screenshot of the Twine 2.9.2 interactive fiction editor showing the story map view with connected passage nodes" class="slide-img" loading="lazy">
-                <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Twine editor &mdash; story node map &middot; Wikimedia Commons</p>
+            <div class="space-y-4 reveal d1">
+                <div class="rounded-2xl overflow-hidden border border-border">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Twine_2.9.2_screenshot.png" alt="Twine 2.9.2 story map editor — visual node-based authoring for interactive fiction" class="slide-img" loading="lazy" onclick="zoomImg(this)" style="cursor:zoom-in;">
+                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Twine editor &mdash; visual node map &middot; Wikimedia Commons</p>
+                </div>
+                <div class="glass p-5 rounded-xl border-accent/10">
+                    <p class="text-base text-txtMuted italic">&ldquo;Twine is the closest thing to a blank page in game design.&rdquo;</p>
+                    <p class="text-sm text-txtFaint font-mono mt-2">&mdash; Anna Anthropy, <em>Rise of the Videogame Zinesters</em>, 2012</p>
+                </div>
             </div>
         </div>
     </section>
@@ -584,11 +712,11 @@
                     <p class="text-sm uppercase tracking-[0.2em] text-txtMuted mb-3 font-mono">Core Mission</p>
                     <h3 class="text-2xl font-display leading-tight">&ldquo;Games are one of the most important cultural mediums of our time.&rdquo;</h3>
                 </div>
-                <div class="glass p-8 rounded-2xl text-center min-h-[240px] flex flex-col items-center justify-center">
-                    <p class="text-6xl mb-4">🎮</p>
-                    <p class="text-xl font-display text-accentLight mb-2">Est. 2008 &middot; Berlin</p>
-                    <p class="text-base text-txtMuted">Indie games, playful media, interactive art, VR experiences, alt.ctrl installations</p>
-                    <p class="text-sm text-accent font-mono mt-4">amaze-berlin.de</p>
+                <div class="rounded-2xl overflow-hidden border border-border">
+                    <div class="aspect-video w-full bg-black yt-thumb" onclick="playYT(this,'4tIpFGkBVMo')">
+                        <img src="https://img.youtube.com/vi/4tIpFGkBVMo/maxresdefault.jpg" alt="A MAZE. Berlin festival — indie games and playful media" loading="lazy">
+                    </div>
+                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">A MAZE. Berlin 2023 &mdash; Festival Highlights</p>
                 </div>
                 <p class="text-sm text-txtFaint font-mono text-center"><a href="https://amaze-berlin.de/" target="_blank" rel="noopener" class="ref">amaze-berlin.de</a></p>
             </div>
@@ -659,11 +787,11 @@
                 <div class="glass p-8 rounded-2xl">
                     <p class="text-lg text-txtMuted italic leading-relaxed border-l-2 border-accent/30 pl-4">Advocates for <strong class="text-txt">lightweight, sustainable, and accessible web technologies</strong> as both an ethical and aesthetic stance.</p>
                 </div>
-                <div class="glass p-8 rounded-2xl text-center min-h-[240px] flex flex-col items-center justify-center">
-                    <p class="text-6xl mb-4">🐚</p>
-                    <p class="text-xl font-display text-accentLight mb-2">Shell Song</p>
-                    <p class="text-base text-txtMuted">Procedural poetry &middot; interactive audio narrative exploring shells, ocean, and loss</p>
-                    <a href="https://shell-song.neocities.org/" target="_blank" rel="noopener" class="ref text-sm font-mono mt-4">Play: shell-song.neocities.org</a>
+                <div class="rounded-2xl overflow-hidden border border-border">
+                    <div class="aspect-video w-full bg-black yt-thumb" onclick="playYT(this,'YsHOLqC3nek')">
+                        <img src="https://img.youtube.com/vi/YsHOLqC3nek/maxresdefault.jpg" alt="Everest Pipkin — The Barnacle Goose Experiment" loading="lazy">
+                    </div>
+                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Everest Pipkin &mdash; <em>The Barnacle Goose Experiment</em> &middot; <a href="https://shell-song.neocities.org/" target="_blank" rel="noopener" class="ref">shell-song.neocities.org</a></p>
                 </div>
                 <p class="text-sm text-txtFaint font-mono text-center"><a href="https://everest-pipkin.com/" target="_blank" rel="noopener" class="ref">everest-pipkin.com</a></p>
             </div>
@@ -692,15 +820,18 @@
                 </div>
                 <p class="text-lg text-txtFaint italic mt-6 border-l-2 border-accent/30 pl-4">&ldquo;I&rsquo;m interested in the space where the screen meets the body.&rdquo;</p>
             </div>
-            <div class="space-y-6 reveal d1">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="glass p-6 rounded-xl text-center stat-glow"><p class="text-base font-mono text-accent">2016</p><p class="text-sm text-txtMuted mt-1">Whitney Biennial</p></div>
-                    <div class="glass p-6 rounded-xl text-center stat-glow"><p class="text-base font-mono text-accent">Rhizome</p><p class="text-sm text-txtMuted mt-1">Prix Net Art</p></div>
-                    <div class="glass p-6 rounded-xl text-center stat-glow"><p class="text-base font-mono text-accent">IndieCade</p><p class="text-sm text-txtMuted mt-1">Nominated</p></div>
-                    <div class="glass p-6 rounded-xl text-center stat-glow"><p class="text-base font-mono text-accent">IGF</p><p class="text-sm text-txtMuted mt-1">Nuovo Finalist</p></div>
+            <div class="space-y-4 reveal d1">
+                <div class="rounded-2xl overflow-hidden border border-border">
+                    <div class="aspect-video w-full bg-black yt-thumb" onclick="playYT(this,'mKSABNOYDiM')">
+                        <img src="https://img.youtube.com/vi/mKSABNOYDiM/maxresdefault.jpg" alt="Porpentine — With Those We Love Alive walkthrough" loading="lazy">
+                    </div>
+                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Porpentine &mdash; <em>With Those We Love Alive</em>, 2014</p>
                 </div>
-                <div class="glass p-6 rounded-xl">
-                    <p class="text-base text-txtMuted">Her work demonstrates that <strong class="text-txt">hypertext and interactive fiction are powerful literary and artistic forms</strong>, not merely game mechanics.</p>
+                <div class="grid grid-cols-4 gap-3">
+                    <div class="glass p-4 rounded-xl text-center stat-glow"><p class="text-sm font-mono text-accent">2016</p><p class="text-xs text-txtMuted mt-1">Whitney Biennial</p></div>
+                    <div class="glass p-4 rounded-xl text-center stat-glow"><p class="text-sm font-mono text-accent">Rhizome</p><p class="text-xs text-txtMuted mt-1">Prix Net Art</p></div>
+                    <div class="glass p-4 rounded-xl text-center stat-glow"><p class="text-sm font-mono text-accent">IndieCade</p><p class="text-xs text-txtMuted mt-1">Nominated</p></div>
+                    <div class="glass p-4 rounded-xl text-center stat-glow"><p class="text-sm font-mono text-accent">IGF</p><p class="text-xs text-txtMuted mt-1">Nuovo Finalist</p></div>
                 </div>
                 <p class="text-sm text-txtFaint font-mono text-center"><a href="http://slimedaughter.com/" target="_blank" rel="noopener" class="ref">slimedaughter.com</a></p>
             </div>
@@ -762,10 +893,16 @@
         <div class="w-full max-w-6xl">
             <h2 class="text-4xl md:text-6xl font-display mb-6 reveal">The Modern Era</h2>
             <p class="text-xl text-txtMuted max-w-4xl mb-12 reveal d1">The 2000s: rich 3D worlds, detailed characters, experiences pushing immersion to new levels.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal d2">
-                <div class="glass p-8 rounded-2xl"><h3 class="text-2xl font-display mb-3">3D Worlds</h3><p class="text-base text-txtMuted">The Sims, Grand Theft Auto &mdash; unprecedented player freedom in richly detailed environments.</p></div>
-                <div class="glass p-8 rounded-2xl"><h3 class="text-2xl font-display mb-3">Mobile Gaming</h3><p class="text-base text-txtMuted">Portable virtual worlds democratizing access to interactive narratives.</p></div>
-                <div class="glass p-8 rounded-2xl"><h3 class="text-2xl font-display mb-3">Deeper Narratives</h3><p class="text-base text-txtMuted">Games tackling morality, identity, politics with storytelling rivaling cinema.</p></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 reveal d2">
+                <div class="space-y-4">
+                    <div class="glass p-8 rounded-2xl"><h3 class="text-2xl font-display mb-3">3D Worlds</h3><p class="text-base text-txtMuted">The Sims, Grand Theft Auto &mdash; unprecedented player freedom in richly detailed environments.</p></div>
+                    <div class="glass p-8 rounded-2xl"><h3 class="text-2xl font-display mb-3">Mobile Gaming</h3><p class="text-base text-txtMuted">Portable virtual worlds democratizing access to interactive narratives.</p></div>
+                    <div class="glass p-8 rounded-2xl"><h3 class="text-2xl font-display mb-3">Deeper Narratives</h3><p class="text-base text-txtMuted">Games tackling morality, identity, politics with storytelling rivaling cinema.</p></div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-border">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/c/c9/The_Sims_1_Build.jpg" alt="The Sims — player-authored suburban life stories, 2000" class="slide-img" loading="lazy" onclick="zoomImg(this)" style="cursor:zoom-in; min-height:300px;">
+                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30"><em>The Sims</em> &mdash; Maxis / EA, 2000 &middot; Emergent narrative through simulated life</p>
+                </div>
             </div>
         </div>
     </section>
