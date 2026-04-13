@@ -1,1285 +1,1257 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>50 Years of Interactive Digital Storytelling</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        display: ['"DM Serif Display"', 'Georgia', 'serif'],
-                        sans: ['"Instrument Sans"', 'system-ui', 'sans-serif'],
-                        mono: ['"Space Mono"', 'monospace'],
-                    },
-                    colors: {
-                        surface: 'var(--bg)',
-                        card: 'var(--card)',
-                        accent: 'var(--accent)',
-                        accentMuted: 'var(--accent-muted)',
-                        accentLight: 'var(--accent-light)',
-                        phosphor: '#33ff33',
-                        txt: 'var(--text)',
-                        txtMuted: 'var(--text-muted)',
-                        txtFaint: 'var(--text-faint)',
-                        border: 'var(--border)',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        :root {
-            --bg: #F2EDE4;
-            --card: #FDFAF5;
-            --accent: #E8371B;
-            --accent-muted: #C42A10;
-            --accent-light: #FF6B52;
-            --teal: #00A896;
-            --yellow: #F5C842;
-            --pink: #F5A0B5;
-            --text: #1A1714;
-            --text-muted: rgba(26,23,20,0.58);
-            --text-faint: rgba(26,23,20,0.28);
-            --border: rgba(26,23,20,0.10);
-            --border-hard: rgba(26,23,20,0.20);
-            --glass-bg: rgba(253,250,245,0.85);
-            --glass-blur: 12px;
-            --win-bar: #D9D4CB;
-            --shadow: 4px 4px 0px rgba(26,23,20,0.12);
-            --shadow-lg: 6px 6px 0px rgba(26,23,20,0.14);
-        }
-        *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-            font-family: 'Instrument Sans', system-ui, sans-serif;
-        }
-
-        /* ── Poolsuite-style checkered title accent ── */
-        .checker {
-            background-image: repeating-conic-gradient(var(--border-hard) 0% 25%, transparent 0% 50%);
-            background-size: 12px 12px;
-        }
-
-        /* ── Slides ── */
-        .slide {
-            scroll-snap-align: start;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 4rem 1.5rem;
-            border-top: 1.5px solid var(--border-hard);
-            position: relative;
-            overflow: hidden;
-        }
-        @media(min-width:768px) { .slide { padding: 5rem 4rem; } }
-        @media(min-width:1280px) { .slide { padding: 6rem 6rem; } }
-        .slide:first-child { border-top: none; }
-
-        /* alternating warm tints */
-        .slide:nth-child(even) { background: #EDE8DF; }
-
-        /* ── Reveal animation ── */
-        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s cubic-bezier(.16,1,.3,1), transform 0.5s cubic-bezier(.16,1,.3,1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .d1{transition-delay:60ms} .d2{transition-delay:120ms} .d3{transition-delay:180ms} .d4{transition-delay:240ms}
-
-        /* ── Glass → Poolsuite "window" card ── */
-        .glass {
-            background: var(--card);
-            border: 1.5px solid var(--border-hard);
-            box-shadow: var(--shadow);
-            transition: box-shadow 0.2s, transform 0.2s;
-        }
-        .glass:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translate(-1px, -1px);
-        }
-
-        /* ── Poolsuite window chrome on cards ── */
-        .win {
-            background: var(--card);
-            border: 1.5px solid var(--border-hard);
-            box-shadow: var(--shadow-lg);
-            border-radius: 0;
-            overflow: hidden;
-        }
-        .win-bar {
-            background: var(--win-bar);
-            border-bottom: 1.5px solid var(--border-hard);
-            padding: 0.4rem 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-        }
-        .win-dot {
-            width: 10px; height: 10px;
-            border-radius: 50%;
-            border: 1px solid rgba(0,0,0,0.15);
-        }
-        .win-dot.r { background: #E8371B; }
-        .win-dot.y { background: #F5C842; }
-        .win-dot.g { background: #00A896; }
-
-        /* ── Terminal ── */
-        .retro-terminal {
-            background: #111;
-            color: #33ff33;
-            font-family: 'Space Mono', monospace;
-            border: 1.5px solid var(--border-hard);
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-        }
-        .retro-terminal::after {
-            content:'';
-            position:absolute; inset:0;
-            background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px);
-            pointer-events:none; z-index:1;
-        }
-        .phosphor { text-shadow: 0 0 4px rgba(51,255,51,0.6), 0 0 12px rgba(51,255,51,0.2); }
-
-        /* ── Cursor ── */
-        .typing-cursor { display:inline-block; width:8px; height:1.1em; background:currentColor; margin-left:2px; vertical-align:text-bottom; animation:cursorBlink 1s step-end infinite; }
-        @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-        /* ── List bullets ── */
-        .bl li { position:relative; padding-left:1.25rem; margin-bottom:0.5rem; }
-        .bl li::before { content:'▸'; position:absolute; left:0; top:0; color:var(--accent); font-size:0.75em; }
-
-        /* ── Choice buttons ── */
-        .choice-btn {
-            background: var(--card);
-            border: 1.5px solid var(--border-hard);
-            box-shadow: 2px 2px 0px rgba(26,23,20,0.12);
-            color: var(--text);
-            padding: 0.6rem 1.1rem;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.12s;
-            text-align: left;
-            font-family: 'Space Mono', monospace;
-        }
-        .choice-btn:hover {
-            background: var(--accent);
-            color: #fff;
-            box-shadow: 3px 3px 0px rgba(26,23,20,0.2);
-            transform: translate(-1px,-1px);
-        }
-
-        /* ── Spinner ── */
-        .spinner { border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; width:16px; height:16px; animation:spin 0.8s linear infinite; display:inline-block; }
-        @keyframes spin { to{transform:rotate(360deg)} }
-
-        /* ── Stat cards ── */
-        .stat-glow { background: linear-gradient(135deg, rgba(232,55,27,0.04) 0%, rgba(0,168,150,0.04) 100%); }
-
-        /* ── Section number ── */
-        .section-num {
-            font-family:'DM Serif Display',serif;
-            font-size:clamp(5rem,10vw,9rem);
-            color: var(--accent);
-            opacity: 0.08;
-            position:absolute; top:-0.5rem; right:1.5rem;
-            line-height:1; pointer-events:none; user-select:none;
-        }
-
-        /* ── Embed frame: Mac OS window ── */
-        .embed-frame {
-            background: #111;
-            border: 1.5px solid var(--border-hard);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-        }
-        .embed-chrome {
-            background: var(--win-bar);
-            padding: 0.5rem 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            border-bottom: 1.5px solid var(--border-hard);
-        }
-        .embed-dot { width:10px; height:10px; border-radius:50%; border: 1px solid rgba(0,0,0,0.15); }
-        .embed-dot.r { background: #E8371B; }
-        .embed-dot.y { background: #F5C842; }
-        .embed-dot.g { background: #00A896; }
-
-        /* ── Drama input ── */
-        .drama-input {
-            background: #111;
-            border: 1.5px solid #33ff33;
-            color: #33ff33;
-            font-family: 'Space Mono', monospace;
-            padding: 0.75rem 1rem;
-            width: 100%;
-            font-size: 0.9rem;
-        }
-        .drama-input:focus { outline: none; box-shadow: 0 0 0 2px rgba(51,255,51,0.3); }
-        .drama-input::placeholder { color: rgba(51,255,51,0.3); }
-
-        /* ── Links ── */
-        .ref {
-            color: var(--accent);
-            text-decoration: underline;
-            text-decoration-color: rgba(232,55,27,0.35);
-            text-underline-offset: 3px;
-            transition: all 0.15s;
-        }
-        .ref:hover { text-decoration-color: var(--accent); color: var(--accent-muted); }
-
-        /* ── Images ── */
-        .slide-img { width:100%; height:100%; object-fit:cover; }
-        .slide-img-contain { width:100%; height:100%; object-fit:contain; background: rgba(26,23,20,0.04); padding: 1rem; }
-        .slide-img:hover, .slide-img-contain:hover { filter: saturate(1.1); }
-
-        /* ── Image zoom ── */
-        .zoomable { cursor:zoom-in; }
-        .img-zoom-overlay { position:fixed; inset:0; z-index:200; background:rgba(26,23,20,0.94); display:flex; align-items:center; justify-content:center; cursor:zoom-out; padding:2rem; opacity:0; transition:opacity 0.25s; pointer-events:none; }
-        .img-zoom-overlay.active { opacity:1; pointer-events:all; }
-        .img-zoom-overlay img { max-width:95vw; max-height:90vh; object-fit:contain; box-shadow: 8px 8px 0px rgba(26,23,20,0.4); }
-
-        /* ── YouTube ── */
-        .yt-thumb { position:relative; cursor:pointer; overflow:hidden; }
-        .yt-thumb img { width:100%; height:100%; object-fit:cover; transition:transform 0.25s, filter 0.25s; }
-        .yt-thumb:hover img { transform:scale(1.03); filter:brightness(0.75); }
-        .yt-thumb::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:64px; height:44px; background:var(--accent); border:2px solid rgba(255,255,255,0.8); pointer-events:none; transition:background 0.15s; }
-        .yt-thumb:hover::after { background:var(--accent-muted); }
-        .yt-thumb::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-42%,-50%); width:0; height:0; border-style:solid; border-width:9px 0 9px 16px; border-color:transparent transparent transparent #fff; z-index:1; pointer-events:none; }
-
-        /* ── Grain ── */
-        body::after { content:''; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:0.04; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-
-        /* ── CRT scanlines (light, subtle) ── */
-        body::before { content:''; position:fixed; inset:0; z-index:9998; pointer-events:none; opacity:1; background: repeating-linear-gradient(0deg, rgba(26,23,20,0.025) 0px, rgba(26,23,20,0.025) 1px, transparent 1px, transparent 5px); }
-
-        /* ── Title glitch ── */
-        @keyframes title-glitch {
-            0%,88%,100% { clip-path:none; transform:none; text-shadow:none; }
-            89% { clip-path:inset(15% 0 70% 0); transform:translate(4px,0); text-shadow:-4px 0 rgba(232,55,27,0.5), 4px 0 rgba(0,168,150,0.5); }
-            90% { clip-path:inset(60% 0 10% 0); transform:translate(-3px,0); }
-            91% { clip-path:inset(30% 0 50% 0); transform:translate(2px,0); text-shadow:3px 0 rgba(0,168,150,0.4), -3px 0 rgba(232,55,27,0.4); }
-            92% { clip-path:none; transform:none; text-shadow:none; }
-        }
-        h1.glitch { animation: title-glitch 7s ease-in-out infinite; }
-
-        /* ── Poolsuite accent stripe on hover ── */
-        .slide-img-wrap {
-            border: 1.5px solid var(--border-hard);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            position: relative;
-        }
-    </style>
+    <link rel="stylesheet" href="https://unpkg.com/aesthetic-css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="antialiased">
 
-<main class="w-full max-w-[1440px] mx-auto">
+<body>
 
-    <!-- ══════════════ SLIDE 1 · TITLE ══════════════ -->
-    <section class="slide items-center text-center overflow-hidden" style="border-top:none">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] checker opacity-30 -z-10 pointer-events-none"></div>
-        <p class="text-sm font-mono text-accent tracking-[0.3em] uppercase mb-8 reveal">Digital Aesthetics &mdash; Politecnico di Milano</p>
-        <h1 class="text-5xl md:text-7xl lg:text-[6rem] font-display leading-[1.05] mb-10 max-w-5xl reveal d1 glitch">
-            A Journey Through 50 Years of<br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#00A896]">Interactive Digital Storytelling</span>
-        </h1>
-        <p class="text-lg text-txtMuted font-mono reveal d2">Leonardo Codamo</p>
-        <div class="absolute bottom-10 animate-bounce reveal d3">
-            <svg class="w-5 h-5 text-txtFaint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-        </div>
-    </section>
+    <!-- ── TOP BAR ── -->
+    <div class="top-bar">
+        <span class="bold">DIGITAL AESTHETICS / POLIMI</span>
+        <span>Leonardo Codamo &mdash; 50 Years of Interactive Storytelling</span>
+        <span class="retro" style="font-size:15px;" id="clock"></span>
+    </div>
 
-    <!-- ══════════════ SLIDE 2 · INTRODUCTION ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">01</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div class="reveal">
-                <h2 class="text-4xl md:text-6xl font-display mb-10">Introduction to Interactive Storytelling</h2>
-                <div class="space-y-8 text-xl text-txtMuted">
-                    <div>
-                        <h3 class="text-2xl font-semibold text-txt mb-4">Interactive storytelling:</h3>
-                        <ul class="bl text-lg">
-                            <li>Art form blending traditional narrative with technology</li>
-                            <li>The audience becomes integral to the story</li>
-                            <li>Allows decisions that influence narrative direction</li>
-                            <li>Creates immersive experiences</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold text-txt mb-4">Forms include:</h3>
-                        <ul class="bl text-lg grid grid-cols-2 gap-x-6">
-                            <li>Video games</li>
-                            <li>Virtual reality</li>
-                            <li>Interactive books</li>
-                            <li>Digital narratives</li>
-                            <li>Experimental film/TV</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="space-y-6 reveal d1">
-                <div class="glass p-10 text-center relative overflow-hidden">
-                    <p class="text-sm uppercase tracking-[0.2em] text-txtMuted mb-3 font-mono">The core value</p>
-                    <h3 class="text-3xl md:text-4xl font-display leading-tight">Meaningful audience participation in storytelling</h3>
-                </div>
-                <div class="overflow-hidden border border-border bg-black/10 p-4">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Visual_novel_%28visual_novel_storyline_type%29.svg/800px-Visual_novel_%28visual_novel_storyline_type%29.svg.png" alt="Diagram illustrating branching storyline structure showing how narrative paths diverge and converge at decision points" class="slide-img-contain" style="min-height:200px;">
-                    <p class="text-xs text-txtFaint text-center mt-2 font-mono">Branching narrative structure &mdash; Wikimedia Commons</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <main style="max-width:1400px; margin:0 auto;">
 
-    <!-- ══════════════ SLIDE 3 · 50 YEARS OF TEXT GAMES ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">02</span>
-        <div class="w-full max-w-6xl">
-            <div class="mb-10 reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">Essential Reference</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-6"><a href="https://if50.substack.com/" target="_blank" rel="noopener" class="ref">50 Years of Text Games</a></h2>
-                <p class="text-xl text-txtMuted max-w-4xl">Aaron A. Reed&rsquo;s landmark project chronicles the history of text-based interactive storytelling from 1971 to 2021 &mdash; one landmark game per year. Originally a weekly Substack newsletter, it was published as a book by MIT Press in 2024.</p>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 reveal d1">
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">1971</p><p class="text-sm text-txtMuted mt-1">The Oregon Trail</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">1976</p><p class="text-sm text-txtMuted mt-1">Colossal Cave Adventure</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">1977</p><p class="text-sm text-txtMuted mt-1">Zork</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">1983</p><p class="text-sm text-txtMuted mt-1">Planetfall</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">1995</p><p class="text-sm text-txtMuted mt-1">Patchwork Girl</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">2000</p><p class="text-sm text-txtMuted mt-1">Galatea</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">2003</p><p class="text-sm text-txtMuted mt-1">Shade</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">2012</p><p class="text-sm text-txtMuted mt-1">Howling Dogs</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">2014</p><p class="text-sm text-txtMuted mt-1">80 Days</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">2017</p><p class="text-sm text-txtMuted mt-1">AI Dungeon precursors</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">2019</p><p class="text-sm text-txtMuted mt-1">Disco Elysium</p></div>
-                <div class="glass p-4 text-center"><p class="text-2xl font-display text-accent">2021</p><p class="text-sm text-txtMuted mt-1">AI Dungeon</p></div>
-            </div>
-            <p class="text-lg text-txtMuted mt-8 reveal d2 italic border-l-2 border-accent/30 pl-6">&ldquo;Text games pioneered interactive narrative &mdash; from cave explorations to literary hypertext, the Twine revolution, and AI-generated fiction.&rdquo;</p>
-            <p class="text-sm text-txtFaint font-mono mt-4 reveal d3">Aaron A. Reed &mdash; <a href="https://if50.substack.com/" target="_blank" rel="noopener" class="ref">if50.substack.com</a> &middot; MIT Press, 2024</p>
-        </div>
-    </section>
+        <!-- ══ 1 · TITLE ══ -->
+        <section class="slide" style="align-items:center; text-align:center;">
+            <span class="label reveal">Digital Aesthetics &mdash; Politecnico di Milano</span>
+            <h1 class="glitch-text aesthetic-effect-text-glitch reveal d1" style="margin-bottom:20px;">
+                A Journey Through 50 Years of<br>
+                <span style="color:var(--accent);">Interactive Digital Storytelling</span>
+            </h1>
+            <p class="retro text-mid reveal d2" style="font-size:22px;">Leonardo Codamo</p>
+            <div class="vw-bar reveal d3" style="width:180px; margin:20px auto 0;"></div>
+        </section>
 
-    <!-- ══════════════ SLIDE 4 · TEXTUAL STRUCTURES ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">03</span>
-        <div class="w-full max-w-6xl">
-            <h2 class="text-4xl md:text-6xl font-display mb-4 reveal">Textual Structures</h2>
-            <p class="text-xl text-txtMuted mb-12 reveal d1">From linear to multilinear &mdash; how narrative paths diverge</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass p-8 flex flex-col h-full reveal d1">
-                    <h3 class="text-3xl font-display mb-3">Linear</h3>
-                    <p class="text-txtMuted text-base flex-1 mb-6">A fixed sequence of words. Read conventionally from beginning to end.</p>
-                    <div class="w-full flex justify-center mb-6 bg-[#EDE8DF] py-6">
-                        <svg width="220" height="40" viewBox="0 0 220 40"><line x1="20" y1="20" x2="200" y2="20" stroke="currentColor" stroke-opacity="0.15" stroke-width="2"/><circle cx="20" cy="20" r="6" fill="var(--accent)"/><circle cx="110" cy="20" r="6" fill="var(--accent)"/><circle cx="200" cy="20" r="6" fill="var(--accent)"/></svg>
-                    </div>
-                    <button onclick="showFakeExample('Linear')" class="w-full py-3 rounded-lg bg-accent/10 hover:bg-accent/20 border border-accent/20 transition text-base font-medium font-mono text-accent">Show Example</button>
-                </div>
-                <div class="glass p-8 flex flex-col h-full reveal d2">
-                    <h3 class="text-3xl font-display mb-3">Nonlinear</h3>
-                    <p class="text-txtMuted text-base flex-1 mb-6">All texts that do not follow Aristotelian laws. The user controls the order of stages.</p>
-                    <div class="w-full flex justify-center mb-6 bg-[#EDE8DF] py-6">
-                        <svg width="220" height="60" viewBox="0 0 220 60"><path d="M 20 30 Q 70 8 110 30 T 200 30" stroke="currentColor" stroke-opacity="0.15" stroke-width="2" fill="none" stroke-dasharray="5"/><path d="M 20 30 Q 70 52 110 30 T 200 30" stroke="currentColor" stroke-opacity="0.15" stroke-width="2" fill="none"/><circle cx="20" cy="30" r="6" fill="var(--accent)"/><circle cx="110" cy="30" r="6" fill="var(--accent)"/><circle cx="200" cy="30" r="6" fill="var(--accent)"/></svg>
-                    </div>
-                    <button onclick="showFakeExample('Nonlinear')" class="w-full py-3 rounded-lg bg-accent/10 hover:bg-accent/20 border border-accent/20 transition text-base font-medium font-mono text-accent">Show Example</button>
-                </div>
-                <div class="glass p-8 flex flex-col h-full reveal d3">
-                    <h3 class="text-3xl font-display text-accentLight mb-3">Multilinear</h3>
-                    <p class="text-txtMuted text-base flex-1 mb-6">User-defined pathways branching into entirely different narrative arcs and endings.</p>
-                    <div class="w-full flex justify-center mb-6 bg-[#EDE8DF] py-6">
-                        <svg width="220" height="60" viewBox="0 0 220 60"><path d="M 20 30 L 80 10 L 150 10 L 200 10" stroke="currentColor" stroke-opacity="0.15" stroke-width="2" fill="none"/><path d="M 20 30 L 80 30 L 150 50 L 200 50" stroke="currentColor" stroke-opacity="0.15" stroke-width="2" fill="none"/><path d="M 80 30 L 150 30 L 200 30" stroke="currentColor" stroke-opacity="0.15" stroke-width="2" fill="none"/><circle cx="20" cy="30" r="7" fill="#fff"/><circle cx="80" cy="30" r="5" fill="var(--accent)"/><circle cx="150" cy="30" r="5" fill="var(--accent)"/><circle cx="200" cy="30" r="5" fill="var(--accent)"/></svg>
-                    </div>
-                    <button onclick="showFakeExample('Multilinear')" class="w-full py-3 rounded-lg bg-accent hover:bg-accentMuted text-white transition text-base font-bold font-mono">Show Example</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 5 · TEXT ADVENTURES ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">04</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">The Birth of a Genre</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-8">Text Adventures</h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-6">
-                    In 1976, Will Crowther released <a href="https://en.wikipedia.org/wiki/Colossal_Cave_Adventure" target="_blank" rel="noopener" class="ref"><strong>Colossal Cave Adventure</strong></a>, allowing players to explore a network of caves and interact with characters, objects, and puzzles in a text-based environment.
-                </p>
-                <p class="text-xl text-txtMuted leading-relaxed mb-8">
-                    This game introduced the concept of a <span class="text-accent font-semibold">non-linear story</span> where players could choose their path and make decisions that altered the narrative.
-                </p>
-                <p class="text-sm text-txtFaint font-mono">From <a href="https://if50.substack.com/" target="_blank" rel="noopener" class="ref">50 Years of Text Games</a> &mdash; 1976: Adventure</p>
-                <div class="flex flex-wrap gap-3 mt-6">
-                    <button onclick="runCaveCommand('GET SILVER')" class="choice-btn text-phosphor border-phosphor/20 bg-phosphor/5 hover:bg-phosphor/10 hover:border-phosphor/30">GET SILVER</button>
-                    <button onclick="runCaveCommand('GO NORTH')" class="choice-btn text-phosphor border-phosphor/20 bg-phosphor/5 hover:bg-phosphor/10 hover:border-phosphor/30">GO NORTH</button>
-                    <button onclick="runCaveCommand('GET AXE')" class="choice-btn text-phosphor border-phosphor/20 bg-phosphor/5 hover:bg-phosphor/10 hover:border-phosphor/30">GET AXE</button>
-                </div>
-            </div>
-            <div class="retro-terminal p-6 md:p-8 min-h-[420px] flex flex-col reveal d1" id="cave-terminal">
-                <div class="flex items-center gap-2 mb-4 pb-3 border-b border-phosphor/10 relative z-10">
-                    <span class="text-sm font-mono text-phosphor/50">COLOSSAL CAVE ADVENTURE &mdash; 1976</span>
-                </div>
-                <div id="cave-log" class="flex-1 overflow-y-auto text-base leading-relaxed relative z-10 space-y-2 phosphor max-h-[380px]">
-                    <div class="text-phosphor/30">Initializing adventure...</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 6 · CHATBOTS ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">05</span>
-        <div class="w-full max-w-6xl">
-            <h2 class="text-4xl md:text-6xl font-display mb-4 reveal">Chatbots</h2>
-            <p class="text-xl text-txtMuted mb-12 reveal d1">From Eliza to Galatea &mdash; the evolution of conversational AI</p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="glass overflow-hidden reveal d1">
-                    <div class="p-8">
-                        <div class="flex items-center gap-3 mb-6">
-                            <span class="px-3 py-1.5 bg-accent/10 text-accent text-sm font-mono rounded-full">1966</span>
-                            <h3 class="text-3xl font-display"><a href="https://en.wikipedia.org/wiki/ELIZA" target="_blank" rel="noopener" class="ref">ELIZA</a></h3>
-                        </div>
-                        <p class="text-txtMuted text-base mb-4">Joseph Weizenbaum&rsquo;s pioneering chatbot at MIT:</p>
-                        <ul class="bl text-txtMuted text-base">
-                            <li>Simulated psychotherapeutic conversations</li>
-                            <li>Used keyword recognition and pattern matching</li>
-                            <li>Responded with predetermined phrases</li>
-                            <li>Created a convincing illusion of understanding</li>
-                        </ul>
-                    </div>
-                    <div class="m-6 mt-0 rounded-lg overflow-hidden border border-border bg-black">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/ELIZA_conversation.png" alt="Screenshot of a conversation with the ELIZA chatbot showing text-based dialogue between user and program" class="w-full" loading="lazy">
-                        <p class="text-xs text-txtFaint text-center py-2 font-mono">ELIZA conversation &mdash; Wikimedia Commons</p>
-                    </div>
-                </div>
-                <div class="glass overflow-hidden reveal d2">
-                    <div class="p-8">
-                        <div class="flex items-center gap-3 mb-6">
-                            <span class="px-3 py-1.5 bg-accent/10 text-accent text-sm font-mono rounded-full">2000</span>
-                            <h3 class="text-3xl font-display"><a href="https://ifdb.org/viewgame?id=urxrv27t7qtu52lb" target="_blank" rel="noopener" class="ref">Galatea</a></h3>
-                        </div>
-                        <p class="text-txtMuted text-base mb-4"><a href="https://emshort.blog/" target="_blank" rel="noopener" class="ref">Emily Short</a>&rsquo;s landmark interactive fiction chatbot:</p>
-                        <ul class="bl text-txtMuted text-base">
-                            <li>Recognizes and adapts to user input</li>
-                            <li>Builds unique narratives in real-time</li>
-                            <li>Maintains context awareness</li>
-                            <li>Remembers past interactions and events</li>
-                        </ul>
-                        <div class="mt-6 p-4 bg-accent/5 border border-accent/10">
-                            <p class="text-base text-txtMuted"><strong class="text-accent">Key innovation:</strong> Personalized stories enabling collaborative storytelling between AI and humans.</p>
-                        </div>
-                    </div>
-                    <div class="m-6 mt-0 rounded-lg overflow-hidden border border-border">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Jean-L%C3%A9on_G%C3%A9r%C3%B4me_-_Pygmalion_and_Galatea_-_Met.jpg" alt="Jean-Léon Gérôme, Pygmalion and Galatea, c.1890 — the statue that comes to life through human attention, mirror of Emily Short's interactive fiction" class="w-full" loading="lazy" onclick="zoomImg(this)" style="cursor:zoom-in;">
-                        <p class="text-xs text-txtFaint text-center py-2 font-mono">Jean-Léon Gérôme, <em>Pygmalion and Galatea</em>, c.1890 &mdash; Metropolitan Museum of Art</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 7 · HYPERTEXT ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">06</span>
-        <div class="w-full max-w-6xl">
-            <h2 class="text-4xl md:text-6xl font-display mb-6 reveal">Hypertext as a Lens</h2>
-            <p class="text-xl text-txtMuted max-w-3xl mb-12 reveal d1">Hypertext is a powerful tool for creating digital narratives that allow readers to explore different paths, plots, and possibilities.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="glass p-8 reveal d1">
-                    <div class="w-12 h-12 bg-accent/10 flex items-center justify-center mb-5"><svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></div>
-                    <h3 class="text-xl font-semibold mb-2">Non-linear Narrative</h3>
-                    <p class="text-base text-txtMuted">Reader-driven exploration through linked information architecture.</p>
-                </div>
-                <div class="glass p-8 reveal d2">
-                    <div class="w-12 h-12 bg-accent/10 flex items-center justify-center mb-5"><svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg></div>
-                    <h3 class="text-xl font-semibold mb-2">Multiple Paths</h3>
-                    <p class="text-base text-txtMuted">Visual stories with images, audio, and interactive elements branching in multiple directions.</p>
-                </div>
-                <div class="glass p-8 reveal d3">
-                    <div class="w-12 h-12 bg-accent/10 flex items-center justify-center mb-5"><svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></div>
-                    <h3 class="text-xl font-semibold mb-2">Reader Agency</h3>
-                    <p class="text-base text-txtMuted">Access to diverse sources, comparison of viewpoints, discovery of exclusive content.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 8 · PATCHWORK GIRL ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">07</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">Spatial Hypertext</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-8">Patchwork Girl</h2>
-                <p class="text-2xl text-txtMuted italic font-display leading-relaxed mb-6 border-l-3 border-accent/30 pl-6">
-                    &ldquo;A patchwork girl, creation of a mad scientist, embarks on a journey to understand her own existence.&rdquo;
-                </p>
-                <p class="text-lg text-txtMuted leading-relaxed mb-4">
-                    <a href="https://en.wikipedia.org/wiki/Shelley_Jackson" target="_blank" rel="noopener" class="ref">Shelley Jackson</a>&rsquo;s <a href="https://www.eastgate.com/catalog/PatchworkGirl.html" target="_blank" rel="noopener" class="ref"><strong>Patchwork Girl</strong></a> (1995) is a landmark interactive hypertext exploring the female experience. Built with <a href="https://www.eastgate.com/storyspace/" target="_blank" rel="noopener" class="ref">Storyspace</a>, it allows the reader to explore the narrative non-linearly, discovering multiple paths and interpretations.
-                </p>
-                <p class="text-sm text-txtFaint font-mono mt-6">Featured in <a href="https://if50.substack.com/" target="_blank" rel="noopener" class="ref"><em>50 Years of Text Games</em></a> &mdash; 1995: Patchwork Girl</p>
-            </div>
-            <div class="space-y-4 reveal d1">
-                <div class="rounded-2xl overflow-hidden border border-border" style="min-height:320px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Frontispiece_to_Frankenstein_1831.jpg" alt="Theodore Von Holst, frontispiece to Mary Shelley's Frankenstein, 1831 — the literary ancestor Patchwork Girl reimagines from the monster's perspective" class="slide-img" loading="lazy" onclick="zoomImg(this)" style="cursor:zoom-in;">
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Theodore Von Holst, frontispiece to <em>Frankenstein</em>, 1831 &mdash; the literary ancestor Patchwork Girl rewrites</p>
-                </div>
-                <p class="text-xs text-txtFaint text-center font-mono">Shelley Jackson, 1995 &middot; Published by <a href="https://www.eastgate.com/" target="_blank" rel="noopener" class="ref">Eastgate Systems</a></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 9 · CAN ONLY DIGITAL BE MULTILINEAR? ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">08</span>
-        <div class="w-full max-w-6xl">
-            <div class="text-center mb-12 reveal">
-                <h2 class="text-4xl md:text-6xl font-display leading-tight max-w-4xl mx-auto">Can <span class="italic text-accent">only</span> digital texts be multilinear?</h2>
-                <p class="text-2xl text-txtMuted mt-6 max-w-3xl mx-auto">No. Physical installations create spatial, multilinear narrative environments.</p>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="glass overflow-hidden reveal d1">
-                    <div class="p-6 border-b border-border">
-                        <h4 class="text-2xl font-display mb-1"><a href="https://www.teamlab.art/" target="_blank" rel="noopener" class="ref">teamLab</a> Borderless</h4>
-                        <p class="text-base text-txtMuted">Artworks move, communicate, and intermingle without boundaries. Azabudai Hills, Tokyo.</p>
-                    </div>
-                    <div class="aspect-video w-full bg-black yt-thumb" onclick="playYT(this,'BIk2rsAb9L0')">
-                        <img src="https://img.youtube.com/vi/BIk2rsAb9L0/hqdefault.jpg" alt="teamLab Borderless" loading="lazy">
-                    </div>
-                </div>
-                <div class="glass overflow-hidden reveal d2">
-                    <div class="p-6 border-b border-border">
-                        <h4 class="text-2xl font-display mb-1"><a href="https://refikanadol.com/" target="_blank" rel="noopener" class="ref">Refik Anadol</a> &mdash; Machine Hallucinations</h4>
-                        <p class="text-base text-txtMuted">AI-driven data sculpture interpreting 200 years of art at MoMA. The machine dreams.</p>
-                    </div>
-                    <div class="aspect-video w-full bg-black yt-thumb" onclick="playYT(this,'UxQDG6WQT5s')">
-                        <img src="https://img.youtube.com/vi/UxQDG6WQT5s/maxresdefault.jpg" alt="Refik Anadol - Machine Hallucinations" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 10 · GAMEBOOKS ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">09</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">Analog Interactivity</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-8">Gamebooks</h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-6">Interactive analog texts where the reader makes choices that impact the narrative. They feature puzzles, combat, and challenges &mdash; the reader&rsquo;s decisions determine the story&rsquo;s path.</p>
-                <div class="glass p-5 border-accent/10 mt-4">
-                    <p class="text-base text-txtMuted"><a href="https://www.wearemuesli.it/" target="_blank" rel="noopener" class="ref"><strong>We Are Muesli</strong></a> (Milan) &mdash; Independent studio creating narrative games for cultural heritage since 2013. Analog and digital interactive experiences.</p>
-                </div>
-            </div>
-            <div class="rounded-2xl overflow-hidden border border-border reveal d1" style="min-height:300px;">
-                <img src="https://upload.wikimedia.org/wikipedia/en/f/f0/Cave_of_time.jpg" alt="The Cave of Time - first Choose Your Own Adventure gamebook cover" class="slide-img" loading="lazy" onclick="zoomImg(this)">
-                <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">The Cave of Time &mdash; first Choose Your Own Adventure, 1979</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 11 · RPGs ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">10</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <h2 class="text-4xl md:text-6xl font-display mb-8">Role-Playing Games</h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-6">RPGs are interactive storytelling where players create characters in a fictional setting and collaborate to build a narrative. From tabletop campaigns to LARP, each pushes the boundaries of collaborative narrative.</p>
-                <p class="text-xl text-txtMuted leading-relaxed">RPGs have existed since the 1970s and have evolved to encompass a wide range of genres and gameplay styles.</p>
-            </div>
-            <div class="rounded-2xl overflow-hidden border border-border reveal d1">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/D%26D_Game_1.jpg" alt="Photograph of people playing a Dungeons and Dragons tabletop role-playing game session with dice, character sheets, and miniatures" class="slide-img" loading="lazy">
-                <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Tabletop RPG session &mdash; Wikimedia Commons (CC)</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 12 · GRAPHICAL ADVENTURES ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">11</span>
-        <div class="w-full max-w-6xl">
-            <h2 class="text-4xl md:text-6xl font-display mb-4 reveal">Graphical Adventures</h2>
-            <p class="text-xl text-txtMuted mb-12 reveal d1">Point, click, explore, solve &mdash; the evolution of visual narrative games</p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="reveal d1">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                        <div class="glass p-6"><h4 class="text-base font-semibold text-accent mb-2">Core Elements</h4><ul class="text-sm text-txtMuted space-y-1"><li>Point-and-click interface</li><li>Puzzle-based gameplay</li><li>Narrative-driven</li></ul></div>
-                        <div class="glass p-6"><h4 class="text-base font-semibold text-accent mb-2">Player Experience</h4><ul class="text-sm text-txtMuted space-y-1"><li>World exploration</li><li>Character interactions</li><li>Environment manipulation</li></ul></div>
-                        <div class="glass p-6"><h4 class="text-base font-semibold text-accent mb-2">Mechanics</h4><ul class="text-sm text-txtMuted space-y-1"><li>Mouse-driven interaction</li><li>Real-world puzzles</li><li>Progressive unlocking</li></ul></div>
-                    </div>
-                    <div class="glass p-6 border-accent/10">
-                        <h3 class="text-2xl font-display text-accentLight mb-3"><a href="https://en.wikipedia.org/wiki/Monkey_Island_(series)" target="_blank" rel="noopener" class="ref">The Monkey Island Series</a></h3>
-                        <p class="text-base text-txtMuted">LucasArts&rsquo; iconic series defined the genre with witty writing, inventive puzzles, and the unforgettable Guybrush Threepwood.</p>
-                    </div>
-                </div>
-                <div class="rounded-2xl overflow-hidden border border-border reveal d2" style="min-height:380px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/9/9f/The_Secret_of_Monkey_Island_SCUMM_Bar.jpg" alt="The Secret of Monkey Island gameplay - SCUMM Bar scene with Guybrush Threepwood" class="slide-img" loading="lazy">
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">The Secret of Monkey Island &mdash; SCUMM Bar &middot; LucasArts, 1990</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 13 · VIDEO GAMES 1990s ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">12</span>
-        <div class="w-full max-w-6xl">
-            <h2 class="text-4xl md:text-6xl font-display mb-6 reveal">Video Games &amp; Storytelling</h2>
-            <p class="text-xl text-txtMuted max-w-3xl mb-12 reveal d1">The 1990s golden age &mdash; richly detailed worlds and characters offering unique, immersive experiences.</p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 reveal d2">
-                <div class="space-y-4">
-                    <div class="glass p-8"><h3 class="text-2xl font-display mb-4">The Golden Age</h3><ul class="bl text-txtMuted text-base space-y-2"><li>Richly detailed worlds and characters</li><li>Unique, immersive player experiences</li><li>Genre-defining titles</li><li>Narrative complexity rivaling film</li></ul></div>
-                    <div class="glass p-8"><h3 class="text-2xl font-display mb-4">Rise of MMORPGs</h3><ul class="bl text-txtMuted text-base space-y-2"><li>Massive multiplayer online worlds</li><li>Real-time interaction with others</li><li>Emergent storytelling through community</li><li>Persistent, evolving narratives</li></ul></div>
-                </div>
-                <div class="rounded-2xl overflow-hidden border border-border">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/7/74/Planescape-Torment-GOG.jpg" alt="Planescape: Torment — the definitive narrative RPG of the 1990s, asking 'What can change the nature of a man?'" class="slide-img" loading="lazy" onclick="zoomImg(this)" style="cursor:zoom-in; min-height:300px;">
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30"><em>Planescape: Torment</em> &mdash; Black Isle Studios, 1999 &middot; &ldquo;What can change the nature of a man?&rdquo;</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 14 · STORYSPACE TO TWINE ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">13</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div class="reveal">
-                <h2 class="text-4xl md:text-6xl font-display mb-8">The Rebirth of Hypertexts</h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-6">From <a href="https://www.eastgate.com/storyspace/" target="_blank" rel="noopener" class="ref">Storyspace</a> to <a href="https://twinery.org/" target="_blank" rel="noopener" class="ref">Twine</a> &mdash; hypertext fiction was reborn and democratized.</p>
-                <div class="glass p-6 border-accent/10 mb-6">
-                    <h3 class="text-2xl font-display text-accentLight mb-3"><a href="https://twinery.org/" target="_blank" rel="noopener" class="ref">Twine</a> (2009)</h3>
-                    <p class="text-base text-txtMuted mb-3">Created by Chris Klimas. Open-source tool for interactive stories <em>without writing code</em>.</p>
-                    <ul class="bl text-txtMuted text-base">
-                        <li>Embraced by indie developers, queer community, activists</li>
-                        <li>Democratized interactive fiction creation</li>
-                        <li>Tags, multimedia, visual story mapping</li>
+        <!-- ══ 2 · INTRODUCTION ══ -->
+        <section class="slide">
+            <span class="sec-num">01</span>
+            <div class="max-w grid-2 gap-lg">
+                <div class="reveal">
+                    <h2 class="mb-md">Introduction to Interactive Storytelling</h2>
+                    <h3 class="mb-sm">Interactive storytelling:</h3>
+                    <ul class="bl mb-md">
+                        <li>Art form blending traditional narrative with technology</li>
+                        <li>The audience becomes integral to the story</li>
+                        <li>Allows decisions that influence narrative direction</li>
+                        <li>Creates immersive experiences</li>
+                    </ul>
+                    <h3 class="mb-sm">Forms include:</h3>
+                    <ul class="bl">
+                        <li>Video games</li>
+                        <li>Virtual reality</li>
+                        <li>Interactive books</li>
+                        <li>Digital narratives</li>
+                        <li>Experimental film/TV</li>
                     </ul>
                 </div>
-                <p class="text-lg text-txtFaint italic">&ldquo;Twine and similar platforms have decentralized creative power.&rdquo; &mdash; <a href="https://en.wikipedia.org/wiki/Anna_Anthropy" target="_blank" rel="noopener" class="ref">Anna Anthropy</a></p>
-            </div>
-            <div class="space-y-4 reveal d1">
-                <div class="rounded-2xl overflow-hidden border border-border">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Twine_2.9.2_screenshot.png" alt="Twine 2.9.2 story map editor — visual node-based authoring for interactive fiction" class="slide-img" loading="lazy" onclick="zoomImg(this)" style="cursor:zoom-in;">
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Twine editor &mdash; visual node map &middot; Wikimedia Commons</p>
+                <div class="reveal d1" style="display:flex; flex-direction:column; gap:16px;">
+                    <div class="win">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">THE CORE VALUE</span>
+                        </div>
+                        <div class="win-body text-center">
+                            <h3>Meaningful audience participation in storytelling</h3>
+                        </div>
+                    </div>
+                    <div class="img-frame">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Visual_novel_%28visual_novel_storyline_type%29.svg/800px-Visual_novel_%28visual_novel_storyline_type%29.svg.png"
+                            alt="Branching storyline structure" loading="lazy" onclick="zoomImg(this)" class="zoomable"
+                            style="background:#fff; padding:12px;">
+                        <div class="img-caption">Branching narrative structure &mdash; Wikimedia Commons</div>
+                    </div>
                 </div>
-                <div class="glass p-5 border-accent/10">
-                    <p class="text-base text-txtMuted italic">&ldquo;Twine is the closest thing to a blank page in game design.&rdquo;</p>
-                    <p class="text-sm text-txtFaint font-mono mt-2">&mdash; Anna Anthropy, <em>Rise of the Videogame Zinesters</em>, 2012</p>
+            </div>
+        </section>
+
+        <!-- ══ 3 · 50 YEARS OF TEXT GAMES ══ -->
+        <section class="slide">
+            <span class="sec-num">02</span>
+            <div class="max-w">
+                <div class="reveal">
+                    <span class="label">Essential Reference</span>
+                    <h2 class="mb-sm"><a href="https://if50.substack.com/" target="_blank" class="ref">50 Years of Text
+                            Games</a></h2>
+                    <p class="text-mid mb-lg text-lg" style="max-width:780px;">Aaron A. Reed&rsquo;s landmark project
+                        chronicles the history of text-based interactive storytelling from 1971 to 2021 &mdash; one
+                        landmark game per year. Published by MIT Press in 2024.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 15 · ABIGAIL CORFMAN ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">14</span>
-        <div class="w-full max-w-6xl flex flex-col items-center">
-            <div class="text-center mb-8 reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-3">Interactive Fiction &middot; Twine</p>
-                <h2 class="text-4xl md:text-6xl font-display"><a href="https://abigailcorfman.com/" target="_blank" rel="noopener" class="ref">Abigail Corfman</a></h2>
-                <p class="text-xl text-txtMuted mt-4 max-w-2xl mx-auto">Hyper-branching explorations of choices and consequences. A master of the Twine ecosystem.</p>
-            </div>
-            <div class="w-full embed-frame reveal d1">
-                <div class="embed-chrome"><div class="embed-dot r"></div><div class="embed-dot y"></div><div class="embed-dot g"></div><span class="ml-3 text-sm font-mono text-txt/40 truncate">abigailcorfman.com/16Ways.html</span><a href="https://www.abigailcorfman.com/16Ways.html" target="_blank" class="ml-auto text-sm text-accent hover:text-accentLight font-mono">Open &nearr;</a></div>
-                <iframe src="https://www.abigailcorfman.com/16Ways.html" class="w-full border-none bg-black" style="height:70vh;" title="16 Ways to Kill a Vampire at McDonalds" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
-            </div>
-            <p class="text-sm text-txtFaint mt-4 font-mono reveal d2">16 Ways to Kill a Vampire at McDonalds &mdash; 2016</p>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 16 · CHIA AMISOLA & NEW WAVE ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">15</span>
-        <div class="w-full max-w-6xl">
-            <div class="mb-10 reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">New Wave of Digital Aesthetics</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-6"><a href="https://chia.design/" target="_blank" rel="noopener" class="ref">Chia Amisola</a> &amp; the Handmade Web</h2>
-                <p class="text-xl text-txtMuted max-w-4xl">
-                    Chia Amisola&rsquo;s practice &mdash; <strong class="text-txt">&ldquo;internet ambient&rdquo;</strong> &mdash; reconfigures our attention to the web. Part of the old web revival and handmade web movement. Forbes 30 Under 30, Lumen Prize winner, exhibited at Tate Britain, V&amp;A, MoMA, Transmediale Berlin.
+                <div class="grid-6 reveal d1 mb-md">
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">1971</span><br><span class="text-sm text-mid">The Oregon
+                            Trail</span></div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">1976</span><br><span class="text-sm text-mid">Colossal Cave
+                            Adventure</span></div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">1977</span><br><span class="text-sm text-mid">Zork</span></div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">1983</span><br><span class="text-sm text-mid">Planetfall</span>
+                    </div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">1995</span><br><span class="text-sm text-mid">Patchwork Girl</span>
+                    </div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">2000</span><br><span class="text-sm text-mid">Galatea</span></div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">2003</span><br><span class="text-sm text-mid">Shade</span></div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">2012</span><br><span class="text-sm text-mid">Howling Dogs</span>
+                    </div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">2014</span><br><span class="text-sm text-mid">80 Days</span></div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">2017</span><br><span class="text-sm text-mid">AI Dungeon
+                            precursors</span></div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">2019</span><br><span class="text-sm text-mid">Disco Elysium</span>
+                    </div>
+                    <div class="card text-center"><span class="retro text-accent"
+                            style="font-size:26px;">2021</span><br><span class="text-sm text-mid">AI Dungeon</span>
+                    </div>
+                </div>
+                <p class="italic text-mid border-l reveal d2">&ldquo;Text games pioneered interactive narrative &mdash;
+                    from cave explorations to literary hypertext, the Twine revolution, and AI-generated fiction.&rdquo;
                 </p>
+                <p class="text-sm text-light mt-sm reveal d3">Aaron A. Reed &mdash; <a href="https://if50.substack.com/"
+                        target="_blank" class="ref">if50.substack.com</a> &middot; MIT Press, 2024</p>
             </div>
+        </section>
 
-            <div class="glass overflow-hidden mb-8 reveal d1">
-                <div class="p-6 border-b border-border">
-                    <h3 class="text-2xl font-display mb-1">How to Make Love (HTML)</h3>
-                    <p class="text-base text-txtMuted">Artist talk &amp; performance &mdash; Chia Amisola at Rhizome / ArtWrld</p>
-                </div>
-                <div class="aspect-video w-full bg-black yt-thumb" onclick="playYT(this,'5rCgbWmX0Wo')">
-                    <img src="https://img.youtube.com/vi/5rCgbWmX0Wo/maxresdefault.jpg" alt="Chia Amisola - How to Make Love (HTML)" loading="lazy">
+        <!-- ══ 4 · TEXTUAL STRUCTURES ══ -->
+        <section class="slide">
+            <span class="sec-num">03</span>
+            <div class="max-w">
+                <h2 class="reveal mb-sm">Textual Structures</h2>
+                <p class="text-mid mb-lg reveal d1">From linear to multilinear &mdash; how narrative paths diverge</p>
+                <div class="grid-3 gap-md">
+                    <div class="win reveal d1">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">LINEAR</span>
+                        </div>
+                        <div class="win-body">
+                            <p class="text-mid mb-md">A fixed sequence of words. Read conventionally from beginning to
+                                end.</p>
+                            <svg width="100%" height="40" viewBox="0 0 220 40">
+                                <line x1="20" y1="20" x2="200" y2="20" stroke="#000" stroke-width="4" />
+                                <circle cx="20" cy="20" r="7" fill="#FF00FF" stroke="#000" stroke-width="2" />
+                                <circle cx="110" cy="20" r="7" fill="#00FFFF" stroke="#000" stroke-width="2" />
+                                <circle cx="200" cy="20" r="7" fill="#FFFF00" stroke="#000" stroke-width="2" />
+                            </svg>
+                            <div class="terminal mt-sm" style="font-size:12px; padding:10px;"><span
+                                    style="color:var(--text-light)">Example:</span><br>The room is dark.<br>You walk
+                                forward.<br>You open the door.</div>
+                        </div>
+                    </div>
+                    <div class="win reveal d2">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">NONLINEAR</span>
+                        </div>
+                        <div class="win-body">
+                            <p class="text-mid mb-md">All texts that do not follow Aristotelian laws. The user controls
+                                the order.</p>
+                            <svg width="100%" height="60" viewBox="0 0 220 60">
+                                <path d="M 20 30 Q 70 8 110 30 T 200 30" stroke="#000" stroke-width="3" fill="none"
+                                    stroke-dasharray="6" />
+                                <path d="M 20 30 Q 70 52 110 30 T 200 30" stroke="#000" stroke-width="3" fill="none" />
+                                <circle cx="20" cy="30" r="7" fill="#FF00FF" stroke="#000" stroke-width="2" />
+                                <circle cx="110" cy="30" r="7" fill="#00FFFF" stroke="#000" stroke-width="2" />
+                                <circle cx="200" cy="30" r="7" fill="#FFFF00" stroke="#000" stroke-width="2" />
+                            </svg>
+                            <div class="terminal mt-sm" style="font-size:12px; padding:10px;"><span
+                                    style="color:var(--text-light)">Example:</span><br>You enter the study.<br>[Inspect
+                                painting]<br>[Read diary]<br>[Look at desk]</div>
+                        </div>
+                    </div>
+                    <div class="win reveal d3">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">MULTILINEAR</span>
+                        </div>
+                        <div class="win-body">
+                            <p class="text-mid mb-md">User-defined pathways branching into different narrative arcs and
+                                endings.</p>
+                            <svg width="100%" height="60" viewBox="0 0 220 60">
+                                <path d="M 20 30 L 80 10 L 200 10" stroke="#000" stroke-width="3" fill="none" />
+                                <path d="M 20 30 L 80 50 L 200 50" stroke="#000" stroke-width="3" fill="none" />
+                                <path d="M 80 30 L 200 30" stroke="#000" stroke-width="3" fill="none" />
+                                <path d="M 20 30 L 80 30" stroke="#000" stroke-width="3" fill="none" />
+                                <circle cx="20" cy="30" r="8" fill="#FFF" stroke="#000" stroke-width="3" />
+                                <circle cx="80" cy="10" r="7" fill="#FF00FF" stroke="#000" stroke-width="2" />
+                                <circle cx="80" cy="30" r="7" fill="#00FFFF" stroke="#000" stroke-width="2" />
+                                <circle cx="80" cy="50" r="7" fill="#FFFF00" stroke="#000" stroke-width="2" />
+                                <circle cx="200" cy="10" r="7" fill="#FF00FF" stroke="#000" stroke-width="2" />
+                                <circle cx="200" cy="30" r="7" fill="#00FFFF" stroke="#000" stroke-width="2" />
+                                <circle cx="200" cy="50" r="7" fill="#FFFF00" stroke="#000" stroke-width="2" />
+                            </svg>
+                            <div class="terminal mt-sm" style="font-size:12px; padding:10px;"><span
+                                    style="color:var(--text-light)">Example:</span><br>Do you fight the dragon or sneak
+                                past?<br>-> Fight (Death)<br>-> Sneak (Escape)</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="glass p-6 mb-8 reveal d2">
-                <h3 class="text-xl font-display text-accentLight mb-3">Your <a href="https://engine.lol/" target="_blank" rel="noopener" class="ref">engine.lol</a> Creation</h3>
-                <p class="text-base text-txtMuted mb-4"><a href="https://engine.lol/" target="_blank" rel="noopener" class="ref">engine.lol</a> is a tiny game-making tool for collage-based browser worlds &mdash; that is itself a game. Created by Chia as her undergraduate thesis at Yale.</p>
-                <div class="embed-frame">
-                    <div class="embed-chrome"><div class="embed-dot r"></div><div class="embed-dot y"></div><div class="embed-dot g"></div><span class="ml-3 text-sm font-mono text-txt/40">Of Time and Spaces &mdash; Clouds and Memories</span></div>
-                    <iframe src="Of_time_and_spaces_-_clouds_and_memories.html" class="w-full border-none bg-black" style="height:60vh;" title="Of Time and Spaces - engine.lol" loading="lazy"></iframe>
+        <!-- ══ 5 · TEXT ADVENTURES ══ -->
+        <section class="slide">
+            <span class="sec-num">04</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <span class="label">The Birth of a Genre</span>
+                    <h2 class="mb-md">Text Adventures</h2>
+                    <p class="text-mid text-lg mb-md">In 1976, Will Crowther released <a
+                            href="https://en.wikipedia.org/wiki/Colossal_Cave_Adventure" target="_blank"
+                            class="ref"><strong>Colossal Cave Adventure</strong></a>, allowing players to explore caves
+                        and interact with puzzles in a text-based environment.</p>
+                    <p class="text-mid text-lg mb-md">This introduced the concept of a <span
+                            class="text-accent bold">non-linear story</span> where players could choose their path.</p>
+                    <div class="grid-2 gap-sm mb-md">
+                        <div class="img-frame"><img src="asset/colossalcave.png" alt="Colossal Cave" loading="lazy"
+                                onclick="zoomImg(this)" class="zoomable"></div>
+                        <div class="img-frame"><img src="asset/colossalcavemap.png" alt="Cave Map" loading="lazy"
+                                onclick="zoomImg(this)" class="zoomable"></div>
+                    </div>
+                    <p class="text-sm text-light">From <a href="https://if50.substack.com/" target="_blank"
+                            class="ref">50 Years of Text Games</a> &mdash; 1976</p>
+                    <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;">
+                        <button onclick="runCaveCommand('GET SILVER')" class="choice-btn">GET SILVER</button>
+                        <button onclick="runCaveCommand('GO NORTH')" class="choice-btn">GO NORTH</button>
+                        <button onclick="runCaveCommand('GET AXE')" class="choice-btn">GET AXE</button>
+                    </div>
+                </div>
+                <div class="terminal aesthetic-effect-crt reveal d1" id="cave-terminal"
+                    style="min-height:380px; display:flex; flex-direction:column;">
+                    <div
+                        style="border-bottom:1px solid rgba(51,255,51,0.12); padding-bottom:7px; margin-bottom:10px; position:relative; z-index:2;">
+                        <span class="retro" style="color:rgba(51,255,51,0.45);">COLOSSAL CAVE ADVENTURE &mdash;
+                            1976</span>
+                    </div>
+                    <div id="cave-log" class="phosphor"
+                        style="flex:1; overflow-y:auto; position:relative; z-index:2; max-height:340px;">
+                        <div style="color:rgba(51,255,51,0.25);">Initializing adventure...</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ══════════════ SLIDE 17 · A MAZE. BERLIN ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">16</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">Games &middot; Art &middot; Culture</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-8"><a href="https://amaze-berlin.de/" target="_blank" rel="noopener" class="ref">A MAZE. Berlin</a></h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-6">
-                    International festival for <strong class="text-txt">independent games and playful media</strong>, founded in 2008 by Thorsten S. Wiedemann. Held annually in Berlin at silent green Kulturquartier.
+        <!-- ══ 6 · CHATBOTS ══ -->
+        <section class="slide">
+            <span class="sec-num">05</span>
+            <div class="max-w">
+                <h2 class="reveal mb-sm">Chatbots</h2>
+                <p class="text-mid mb-lg reveal d1">From Eliza to Galatea &mdash; the evolution of conversational AI</p>
+                <div class="grid-2 gap-md">
+                    <div class="win reveal d1">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">ELIZA &mdash; 1966</span>
+                        </div>
+                        <div class="win-body">
+                            <p class="text-mid mb-sm"><a href="https://en.wikipedia.org/wiki/ELIZA" target="_blank"
+                                    class="ref">Joseph Weizenbaum</a>&rsquo;s pioneering chatbot at MIT:</p>
+                            <ul class="bl mb-md">
+                                <li>Simulated psychotherapeutic conversations</li>
+                                <li>Used keyword recognition and pattern matching</li>
+                                <li>Responded with predetermined phrases</li>
+                                <li>Created a convincing illusion of understanding</li>
+                            </ul>
+                        </div>
+                        <div class="win-flush">
+                            <div class="img-frame" style="border:none;border-radius:0;box-shadow:none;"><img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/7/79/ELIZA_conversation.png"
+                                    alt="ELIZA chatbot" loading="lazy"></div>
+                        </div>
+                    </div>
+                    <div class="win reveal d2">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">GALATEA &mdash; 2000</span>
+                        </div>
+                        <div class="win-body">
+                            <p class="text-mid mb-sm"><a href="https://emshort.blog/" target="_blank" class="ref">Emily
+                                    Short</a>&rsquo;s landmark interactive fiction:</p>
+                            <ul class="bl mb-md">
+                                <li>Recognizes and adapts to user input</li>
+                                <li>Builds unique narratives in real-time</li>
+                                <li>Maintains context awareness</li>
+                                <li>Remembers past interactions</li>
+                            </ul>
+                            <p class="text-sm"
+                                style="background:rgba(200,56,32,0.04); border:1px solid rgba(200,56,32,0.1); padding:8px; border-radius:2px;">
+                                <strong class="text-accent">Key innovation:</strong> Personalized collaborative
+                                storytelling between AI and humans.
+                            </p>
+                        </div>
+                        <div class="win-flush">
+                            <div class="img-frame" style="border:none;border-radius:0;box-shadow:none;"><img
+                                    src="asset/galatea%20cover.png" alt="Galatea" loading="lazy" onclick="zoomImg(this)"
+                                    class="zoomable"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 7 · HYPERTEXT ══ -->
+        <section class="slide">
+            <span class="sec-num">06</span>
+            <div class="max-w">
+                <h2 class="reveal mb-sm">Hypertext as a Lens</h2>
+                <p class="text-mid mb-lg reveal d1" style="max-width:680px;">Hypertext is a powerful tool for creating
+                    digital narratives that allow readers to explore different paths, plots, and possibilities.</p>
+                <div class="grid-3 gap-md">
+                    <div class="card reveal d1">
+                        <h3 class="mb-sm">Non-linear Narrative</h3>
+                        <p class="text-mid text-sm">Reader-driven exploration through linked information architecture.
+                        </p>
+                    </div>
+                    <div class="card reveal d2">
+                        <h3 class="mb-sm">Multiple Paths</h3>
+                        <p class="text-mid text-sm">Visual stories with images, audio, and interactive elements
+                            branching in multiple directions.</p>
+                    </div>
+                    <div class="card reveal d3">
+                        <h3 class="mb-sm">Reader Agency</h3>
+                        <p class="text-mid text-sm">Access to diverse sources, comparison of viewpoints, discovery of
+                            exclusive content.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 8 · PATCHWORK GIRL ══ -->
+        <section class="slide">
+            <span class="sec-num">07</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <span class="label">Spatial Hypertext</span>
+                    <h2 class="mb-md">Patchwork Girl</h2>
+                    <p class="italic text-mid text-lg border-l mb-md">&ldquo;A patchwork girl, creation of a mad
+                        scientist, embarks on a journey to understand her own existence.&rdquo;</p>
+                    <p class="text-mid mb-md"><a href="https://en.wikipedia.org/wiki/Shelley_Jackson" target="_blank"
+                            class="ref">Shelley Jackson</a>&rsquo;s <a
+                            href="https://www.eastgate.com/catalog/PatchworkGirl.html" target="_blank"
+                            class="ref"><strong>Patchwork Girl</strong></a> (1995) is a landmark interactive hypertext.
+                        Built with <a href="https://www.eastgate.com/storyspace/" target="_blank"
+                            class="ref">Storyspace</a>.</p>
+                    <p class="text-sm text-light">Featured in <a href="https://if50.substack.com/" target="_blank"
+                            class="ref"><em>50 Years of Text Games</em></a> &mdash; 1995</p>
+                </div>
+                <div class="reveal d1">
+                    <div class="img-frame"><img src="asset/patchwork.jpg" alt="Patchwork Girl" loading="lazy"
+                            onclick="zoomImg(this)" class="zoomable">
+                        <div class="img-caption">Patchwork Girl, Shelley Jackson, 1995</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 9 · MULTILINEAR PHYSICAL ══ -->
+        <section class="slide">
+            <span class="sec-num">08</span>
+            <div class="max-w">
+                <div class="text-center mb-lg reveal">
+                    <h2>Can <em class="text-accent">only</em> digital texts be multilinear?</h2>
+                    <p class="text-mid text-xl" style="margin-top:10px;">No. Physical installations create spatial,
+                        multilinear narrative environments.</p>
+                </div>
+                <div class="grid-2 gap-md">
+                    <div class="win reveal d1">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">teamLab Borderless</span>
+                        </div>
+                        <div class="win-body" style="padding:8px;">
+                            <p class="text-mid text-sm" style="padding:8px 8px 0;"><a href="https://www.teamlab.art/"
+                                    target="_blank" class="ref">teamLab</a> &mdash; Artworks that move and intermingle.
+                                Tokyo.</p>
+                        </div>
+                        <div class="win-flush">
+                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/BIk2rsAb9L0?rel=0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen title="teamLab Borderless" loading="lazy"></iframe></div>
+                        </div>
+                    </div>
+                    <div class="win reveal d2">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">Refik Anadol &mdash; Machine Hallucinations</span>
+                        </div>
+                        <div class="win-body" style="padding:8px;">
+                            <p class="text-mid text-sm" style="padding:8px 8px 0;"><a href="https://refikanadol.com/"
+                                    target="_blank" class="ref">Refik Anadol</a> &mdash; AI data sculpture at MoMA.</p>
+                        </div>
+                        <div class="win-flush">
+                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/UxQDG6WQT5s?rel=0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen title="Machine Hallucinations" loading="lazy"></iframe></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 10 · GAMEBOOKS ══ -->
+        <section class="slide">
+            <span class="sec-num">09</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <span class="label">Analog Interactivity</span>
+                    <h2 class="mb-md">Gamebooks</h2>
+                    <p class="text-mid text-lg mb-md">Interactive analog texts where choices impact the narrative.
+                        Puzzles, combat, and challenges determine the story&rsquo;s path.</p>
+                    <div class="card">
+                        <p class="text-mid text-sm"><a href="https://www.wearemuesli.it/" target="_blank"
+                                class="ref"><strong>We Are Muesli</strong></a> (Milan) &mdash; Narrative games for
+                            cultural heritage since 2013.</p>
+                    </div>
+                </div>
+                <div class="img-frame reveal d1"><img
+                        src="https://upload.wikimedia.org/wikipedia/en/f/f0/Cave_of_time.jpg" alt="Cave of Time"
+                        loading="lazy" onclick="zoomImg(this)" class="zoomable">
+                    <div class="img-caption">The Cave of Time &mdash; first Choose Your Own Adventure, 1979</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 11 · RPGs ══ -->
+        <section class="slide">
+            <span class="sec-num">10</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <h2 class="mb-md">Role-Playing Games</h2>
+                    <p class="text-mid text-lg mb-md">RPGs are interactive storytelling where players create characters
+                        and collaborate to build a narrative. From tabletop to LARP.</p>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:14px;" class="reveal d1">
+                    <div class="img-frame"><img src="asset/CY%20Borg%20RPG.png" alt="CY_BORG RPG" loading="lazy"
+                            onclick="zoomImg(this)" class="zoomable">
+                        <div class="img-caption">CY_BORG &mdash; cyberpunk tabletop RPG</div>
+                    </div>
+                    <div class="img-frame"><img
+                            src="https://upload.wikimedia.org/wikipedia/commons/0/0b/D%26D_Game_1.jpg" alt="D&D"
+                            loading="lazy" onclick="zoomImg(this)" class="zoomable">
+                        <div class="img-caption">Tabletop RPG session &mdash; Wikimedia Commons (CC)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 12 · GRAPHICAL ADVENTURES ══ -->
+        <section class="slide">
+            <span class="sec-num">11</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <h2 class="mb-md">Graphical Adventures</h2>
+                    <p class="text-mid text-lg mb-md">Point, click, explore, solve &mdash; the evolution of visual
+                        narrative games.</p>
+                    <div class="grid-3 gap-sm mb-md">
+                        <div class="card">
+                            <h4 class="text-accent text-sm bold mb-sm">Core</h4>
+                            <p class="text-sm text-mid">Point-and-click, puzzles, narrative</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-accent text-sm bold mb-sm">Experience</h4>
+                            <p class="text-sm text-mid">World exploration, character interaction</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-accent text-sm bold mb-sm">Mechanics</h4>
+                            <p class="text-sm text-mid">Mouse-driven, progressive unlocking</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 style="color:var(--accent);" class="mb-sm"><a
+                                href="https://en.wikipedia.org/wiki/Monkey_Island_(series)" target="_blank"
+                                class="ref">The Monkey Island Series</a></h3>
+                        <p class="text-mid text-sm">LucasArts&rsquo; iconic series defined the genre.</p>
+                    </div>
+                </div>
+                <div class="img-frame reveal d1"><img
+                        src="https://upload.wikimedia.org/wikipedia/en/9/9f/The_Secret_of_Monkey_Island_SCUMM_Bar.jpg"
+                        alt="Monkey Island" loading="lazy">
+                    <div class="img-caption">The Secret of Monkey Island &mdash; SCUMM Bar &middot; LucasArts, 1990
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 13 · VIDEO GAMES 1990s ══ -->
+        <section class="slide">
+            <span class="sec-num">12</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <h2 class="mb-md">Video Games &amp; Storytelling</h2>
+                    <p class="text-mid text-lg mb-md">The 1990s golden age &mdash; richly detailed worlds offering
+                        unique experiences.</p>
+                    <div class="card mb-sm">
+                        <h3 class="mb-sm">The Golden Age</h3>
+                        <ul class="bl">
+                            <li>Richly detailed worlds</li>
+                            <li>Genre-defining titles</li>
+                            <li>Narrative complexity rivaling film</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="mb-sm">Rise of MMORPGs</h3>
+                        <ul class="bl">
+                            <li>Massive multiplayer worlds</li>
+                            <li>Emergent storytelling</li>
+                            <li>Persistent narratives</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="img-frame reveal d1"><img
+                        src="https://upload.wikimedia.org/wikipedia/en/7/74/Planescape-Torment-GOG.jpg"
+                        alt="Planescape: Torment" loading="lazy" onclick="zoomImg(this)" class="zoomable">
+                    <div class="img-caption">Planescape: Torment &mdash; Black Isle Studios, 1999</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 14 · TWINE ══ -->
+        <section class="slide">
+            <span class="sec-num">13</span>
+            <div class="max-w grid-2 gap-lg">
+                <div class="reveal">
+                    <h2 class="mb-md">The Rebirth of Hypertexts</h2>
+                    <p class="text-mid text-lg mb-md">From <a href="https://www.eastgate.com/storyspace/"
+                            target="_blank" class="ref">Storyspace</a> to <a href="https://twinery.org/" target="_blank"
+                            class="ref">Twine</a> &mdash; hypertext fiction was democratized.</p>
+                    <div class="win mb-md">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">TWINE (2009)</span>
+                        </div>
+                        <div class="win-body">
+                            <p class="text-mid text-sm mb-sm">Created by Chris Klimas. Open-source, no code required.
+                            </p>
+                            <ul class="bl">
+                                <li>Embraced by indie devs, queer community, activists</li>
+                                <li>Democratized interactive fiction</li>
+                                <li>Tags, multimedia, visual story mapping</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="italic text-light">&ldquo;Twine is the closest thing to a blank page in game
+                        design.&rdquo; &mdash; <a href="https://en.wikipedia.org/wiki/Anna_Anthropy" target="_blank"
+                            class="ref">Anna Anthropy</a></p>
+                </div>
+                <div class="reveal d1">
+                    <div class="img-frame"><img src="asset/TWINE.png" alt="Twine" loading="lazy" onclick="zoomImg(this)"
+                            class="zoomable">
+                        <div class="img-caption">Twine editor &mdash; visual node map</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 15 · ABIGAIL CORFMAN ══ -->
+        <section class="slide" style="align-items:center;">
+            <span class="sec-num">14</span>
+            <div class="max-w text-center mb-md reveal">
+                <span class="label">Interactive Fiction &middot; Twine</span>
+                <h2><a href="https://abigailcorfman.com/" target="_blank" class="ref">Abigail Corfman</a></h2>
+                <p class="text-mid text-lg" style="margin-top:8px;">Hyper-branching explorations of choices and
+                    consequences.</p>
+            </div>
+            <div class="max-w reveal d1">
+                <div class="win">
+                    <div class="win-bar">
+                        <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                            class="win-title">16 Ways to Kill a Vampire at McDonalds</span><a
+                            href="https://www.abigailcorfman.com/16Ways.html" target="_blank"
+                            style="color:var(--accent); text-decoration:none; font-size:10px; margin-left:auto;">Open
+                            &nearr;</a>
+                    </div>
+                    <div class="win-flush"><iframe src="https://www.abigailcorfman.com/16Ways.html"
+                            style="width:100%; height:70vh; border:none; background:#000;" title="16 Ways"
+                            loading="lazy" sandbox="allow-scripts allow-same-origin" tabindex="-1"></iframe></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 16 · CHIA AMISOLA ══ -->
+        <section class="slide">
+            <span class="sec-num">15</span>
+            <div class="max-w">
+                <div class="reveal mb-md">
+                    <span class="label">New Wave of Digital Aesthetics</span>
+                    <h2 class="mb-sm"><a href="https://chia.design/" target="_blank" class="ref">Chia Amisola</a> &amp;
+                        the Handmade Web</h2>
+                    <p class="text-mid text-lg" style="max-width:780px;">Chia Amisola&rsquo;s practice &mdash;
+                        <strong>&ldquo;internet ambient&rdquo;</strong> &mdash; reconfigures our attention to the web.
+                        Forbes 30 Under 30, Lumen Prize, Tate Britain, V&amp;A, MoMA, Transmediale Berlin.
+                    </p>
+                </div>
+                <div class="win mb-md reveal d1">
+                    <div class="win-bar">
+                        <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                            class="win-title">How to Make Love (HTML)</span>
+                    </div>
+                    <div class="win-flush">
+                        <div class="yt-wrap"><iframe src="https://www.youtube-nocookie.com/embed/5rCgbWmX0Wo?rel=0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen title="Chia Amisola" loading="lazy"></iframe></div>
+                    </div>
+                </div>
+                <div class="win reveal d2">
+                    <div class="win-bar">
+                        <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                            class="win-title">engine.lol &mdash; Of Time and Spaces</span>
+                    </div>
+                    <div class="win-flush embed-placeholder" data-src="Of_time_and_spaces_-_clouds_and_memories.html"
+                        data-height="60vh" data-title="engine.lol" style="height:60vh;">
+                        <div style="text-align:center; color:#33ff33; font-family:'VT323',monospace;">
+                            <div class="play-icon">&#9654;</div>
+                            <div style="font-size:1.3rem;">Click to load engine.lol &mdash; Of Time and Spaces</div>
+                            <div style="font-size:0.85rem; color:rgba(51,255,51,0.35); margin-top:5px;">Interactive
+                                experience by Chia Amisola</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 17 · A MAZE. BERLIN ══ -->
+        <section class="slide">
+            <span class="sec-num">16</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <span class="label">Games &middot; Art &middot; Culture</span>
+                    <h2 class="mb-md"><a href="https://amaze-berlin.de/" target="_blank" class="ref">A MAZE. Berlin</a>
+                    </h2>
+                    <p class="text-mid text-lg mb-md">International festival for <strong>independent games and playful
+                            media</strong>, founded 2008. Berlin.</p>
+                    <ul class="bl">
+                        <li>Games as <strong>art and culture</strong></li>
+                        <li>Experimental interactive works</li>
+                        <li>Bridge between <strong>indie games and digital art</strong></li>
+                        <li>Notable: <em>Baba Is You</em>, <em>Genesis Noir</em>, <em>Mundaun</em></li>
+                    </ul>
+                </div>
+                <div class="reveal d1">
+                    <div class="card text-center mb-md">
+                        <h3>&ldquo;Games are one of the most important cultural mediums of our time.&rdquo;</h3>
+                    </div>
+                    <div class="win">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">A MAZE. Berlin 2023</span>
+                        </div>
+                        <div class="win-flush">
+                            <div class="yt-wrap"><iframe src="https://www.youtube-nocookie.com/embed/4tIpFGkBVMo?rel=0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen title="A MAZE. Berlin" loading="lazy"></iframe></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 18 · NATHALIE LAWHEAD + TETRAGEDDON ══ -->
+        <section class="slide">
+            <span class="sec-num">17</span>
+            <div class="max-w">
+                <div class="grid-2 gap-lg items-center mb-lg">
+                    <div class="reveal">
+                        <span class="label">Net Art &middot; Games &middot; Tools</span>
+                        <h2 class="mb-md"><a href="https://alienmelon.com/" target="_blank" class="ref">Nathalie
+                                Lawhead</a></h2>
+                        <p class="text-mid text-lg mb-md">Multimedia artist creating <strong>chaotic, personal
+                                interactive experiences</strong>. Maximalism, glitch, collage.</p>
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm"><a href="http://tetrageddon.com/" target="_blank"
+                                    class="ref">Tetrageddon Games</a></h4>
+                            <p class="text-sm text-mid">Surreal web minigames. IGF Nuovo 2015.</p>
+                        </div>
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm"><a
+                                    href="https://alienmelon.itch.io/everything-is-going-to-be-ok" target="_blank"
+                                    class="ref">Everything is Going to Be OK</a></h4>
+                            <p class="text-sm text-mid">Interactive zine. MoMA permanent collection.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-accent bold text-sm mb-sm"><a
+                                    href="https://alienmelon.itch.io/electric-zine-maker" target="_blank"
+                                    class="ref">Electric Zine Maker</a></h4>
+                            <p class="text-sm text-mid">Free tool for playful digital zines.</p>
+                        </div>
+                    </div>
+                    <div class="img-frame reveal d1"><img
+                            src="https://upload.wikimedia.org/wikipedia/en/3/33/Tetrageddon_Games_Screenshot.jpg"
+                            alt="Tetrageddon" loading="lazy" onclick="zoomImg(this)" class="zoomable">
+                        <div class="img-caption">Tetrageddon Games &mdash; IGF Nuovo Award 2015</div>
+                    </div>
+                </div>
+                <div class="win reveal d2">
+                    <div class="win-bar">
+                        <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                            class="win-title">tetrageddon.com</span><a href="http://tetrageddon.com/" target="_blank"
+                            style="color:var(--accent); text-decoration:none; font-size:10px; margin-left:auto;">Open
+                            &nearr;</a>
+                    </div>
+                    <div class="win-flush embed-placeholder" data-src="https://tetrageddon.com/" data-height="70vh"
+                        data-title="Tetrageddon" data-sandbox="allow-scripts allow-same-origin allow-popups"
+                        style="height:70vh;">
+                        <div style="text-align:center; color:var(--pink); font-family:'VT323',monospace;">
+                            <div class="play-icon">&#9654;</div>
+                            <div style="font-size:1.3rem;">Click to load Tetrageddon</div>
+                            <div style="font-size:0.85rem; color:rgba(255,106,213,0.35); margin-top:5px;">
+                                tetrageddon.com &mdash; Interactive art experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 19 · EVEREST PIPKIN ══ -->
+        <section class="slide">
+            <span class="sec-num">18</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <span class="label">Networks &middot; Ecology &middot; Poetry</span>
+                    <h2 class="mb-md"><a href="https://everest-pipkin.com/" target="_blank" class="ref">Everest
+                            Pipkin</a></h2>
+                    <p class="text-mid text-lg mb-md">Digital artist exploring <strong>networked culture, ecology, and
+                            the internet as environment</strong>.</p>
+                    <div class="card mb-sm">
+                        <h4 class="text-accent bold text-sm mb-sm"><a href="https://barnaclegoose.quest/"
+                                target="_blank" class="ref">The Barnacle Goose Experiment</a></h4>
+                        <p class="text-sm text-mid">Collaborative ecological world-building game.</p>
+                    </div>
+                    <div class="card mb-sm">
+                        <h4 class="text-accent bold text-sm mb-sm"><a href="https://shell-song.neocities.org/"
+                                target="_blank" class="ref">Shell Song</a></h4>
+                        <p class="text-sm text-mid">Interactive procedural poetry &mdash; shells, ocean, loss.</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="text-accent bold text-sm mb-sm"><a href="https://github.com/nicoth-in/mushy"
+                                target="_blank" class="ref">Mushy</a></h4>
+                        <p class="text-sm text-mid">P2P mesh networking without internet.</p>
+                    </div>
+                </div>
+                <div class="reveal d1">
+                    <div class="win">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">The Barnacle Goose Experiment</span>
+                        </div>
+                        <div class="win-flush">
+                            <div class="yt-wrap"><iframe src="https://www.youtube-nocookie.com/embed/YsHOLqC3nek?rel=0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen title="Barnacle Goose" loading="lazy"></iframe></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 20 · PORPENTINE ══ -->
+        <section class="slide">
+            <span class="sec-num">19</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <span class="label">Twine Revolution &middot; Hypertext Art</span>
+                    <h2 class="mb-md"><a href="https://en.wikipedia.org/wiki/Porpentine_Charity_Heartscape"
+                            target="_blank" class="ref">Porpentine Charity Heartscape</a></h2>
+                    <p class="text-mid text-lg mb-md">Pioneer of the <strong>Twine revolution</strong>. Visceral
+                        hypertext fiction about transness, trauma, survival.</p>
+                    <div class="card mb-sm">
+                        <h4 class="text-accent bold text-sm mb-sm"><a
+                                href="https://xrafstar.monster/games/twine/howlingdogs/" target="_blank"
+                                class="ref">Howling Dogs</a> (2012)</h4>
+                        <p class="text-sm text-mid">Landmark Twine game of confinement and transformation.</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="text-accent bold text-sm mb-sm"><a href="https://xrafstar.monster/games/twine/wtwla/"
+                                target="_blank" class="ref">With Those We Love Alive</a> (2014)</h4>
+                        <p class="text-sm text-mid">Draw sigils on your skin. Complicity, survival, bodily autonomy.</p>
+                    </div>
+                    <p class="italic text-light border-l" style="margin-top:14px;">&ldquo;I&rsquo;m interested in the
+                        space where the screen meets the body.&rdquo;</p>
+                </div>
+                <div class="reveal d1">
+                    <div class="win mb-md">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">With Those We Love Alive</span>
+                        </div>
+                        <div class="win-flush">
+                            <div class="yt-wrap"><iframe src="https://www.youtube-nocookie.com/embed/mKSABNOYDiM?rel=0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen title="Porpentine" loading="lazy"></iframe></div>
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
+                        <div class="stat-card"><span class="retro text-accent"
+                                style="font-size:17px;">2016</span><br><span class="text-sm text-mid">Whitney
+                                Biennial</span></div>
+                        <div class="stat-card"><span class="retro text-accent"
+                                style="font-size:17px;">Rhizome</span><br><span class="text-sm text-mid">Prix Net
+                                Art</span></div>
+                        <div class="stat-card"><span class="retro text-accent"
+                                style="font-size:17px;">IndieCade</span><br><span
+                                class="text-sm text-mid">Nominated</span></div>
+                        <div class="stat-card"><span class="retro text-accent"
+                                style="font-size:17px;">IGF</span><br><span class="text-sm text-mid">Nuovo
+                                Finalist</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 21 · DRAMA MANAGER ══ -->
+        <section class="slide">
+            <span class="sec-num">20</span>
+            <div class="max-w">
+                <h2 class="reveal mb-sm">The Drama Manager</h2>
+                <p class="text-mid mb-md reveal d1" style="max-width:680px;">Inspired by <a
+                        href="https://en.wikipedia.org/wiki/Brenda_Laurel" target="_blank" class="ref">Brenda Laurel</a>
+                    and <a href="https://en.wikipedia.org/wiki/Chris_Crawford_(game_designer)" target="_blank"
+                        class="ref">Chris Crawford</a> &mdash; a system that listens, reasons, and speaks.</p>
+                <div class="img-frame mb-lg reveal d1" style="max-width:680px;"><img
+                        src="asset/Drama%20manager%20leonardo%20codamo.png" alt="Drama Manager" loading="lazy"
+                        onclick="zoomImg(this)" class="zoomable">
+                    <div class="img-caption">Drama Manager architecture &mdash; Leonardo Codamo</div>
+                </div>
+                <div class="grid-3 gap-md">
+                    <div class="win reveal d1">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">LISTENS</span>
+                        </div>
+                        <div class="win-body text-center">
+                            <p class="text-mid text-sm">Receives user input &mdash; actions, dialogue, choices</p>
+                        </div>
+                    </div>
+                    <div class="win reveal d2">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">REASONS</span>
+                        </div>
+                        <div class="win-body text-center">
+                            <p class="text-mid text-sm">Processes variables, evaluates state, calculates consequences
+                            </p>
+                        </div>
+                    </div>
+                    <div class="win reveal d3">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">SPEAKS</span>
+                        </div>
+                        <div class="win-body text-center">
+                            <p class="text-mid text-sm">Manipulates narrative &mdash; advances plot, reveals info</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 22 · FACADE ══ -->
+        <section class="slide">
+            <span class="sec-num">21</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <span class="label">Drama Manager at Work</span>
+                    <h2 class="mb-md"><a href="https://en.wikipedia.org/wiki/Fa%C3%A7ade_(video_game)" target="_blank"
+                            class="ref">Fa&ccedil;ade</a></h2>
+                    <p class="text-mid text-lg mb-md">Fa&ccedil;ade (2005) by Mateas &amp; Stern &mdash; groundbreaking
+                        interactive drama.</p>
+                    <div class="card mb-sm">
+                        <h4 class="text-accent bold text-sm mb-sm">Narrative Setup</h4>
+                        <p class="text-sm text-mid">Natural language input. Type freely, AI responds.</p>
+                    </div>
+                    <div class="card mb-sm">
+                        <h4 class="text-accent bold text-sm mb-sm">Key Innovation</h4>
+                        <p class="text-sm text-mid">Drama Manager orchestrates. AI dialogue. Multiple outcomes.</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="text-accent bold text-sm mb-sm">Significance</h4>
+                        <p class="text-sm text-mid">Blurs scripted and improvised storytelling.</p>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:14px;" class="reveal d1">
+                    <div class="img-frame"><img src="asset/drama%20manager%20in%20facade.png" alt="Facade Drama Manager"
+                            loading="lazy" onclick="zoomImg(this)" class="zoomable">
+                        <div class="img-caption">Fa&ccedil;ade &mdash; Drama Manager &middot; 2005</div>
+                    </div>
+                    <div class="img-frame"><img
+                            src="https://upload.wikimedia.org/wikipedia/en/9/9c/Facade_screenshot_Trip_%26_Grace.jpg"
+                            alt="Facade" loading="lazy">
+                        <div class="img-caption">Fa&ccedil;ade &mdash; Trip &amp; Grace &middot; 2005</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 23 · MODERN ERA ══ -->
+        <section class="slide">
+            <span class="sec-num">22</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <h2 class="mb-md">The Modern Era</h2>
+                    <p class="text-mid text-lg mb-md">The 2000s: rich 3D worlds, detailed characters, unprecedented
+                        immersion.</p>
+                    <div class="card mb-sm">
+                        <h3 class="mb-sm">3D Worlds</h3>
+                        <p class="text-sm text-mid">The Sims, GTA &mdash; unprecedented player freedom.</p>
+                    </div>
+                    <div class="card mb-sm">
+                        <h3 class="mb-sm">Mobile Gaming</h3>
+                        <p class="text-sm text-mid">Portable virtual worlds democratizing access.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="mb-sm">Deeper Narratives</h3>
+                        <p class="text-sm text-mid">Games tackling morality, identity, politics.</p>
+                    </div>
+                </div>
+                <div class="img-frame reveal d1"><img
+                        src="https://upload.wikimedia.org/wikipedia/en/c/c9/The_Sims_1_Build.jpg" alt="The Sims"
+                        loading="lazy" onclick="zoomImg(this)" class="zoomable">
+                    <div class="img-caption">The Sims &mdash; Maxis / EA, 2000</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 24 · DETROIT ══ -->
+        <section class="slide">
+            <span class="sec-num">23</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <span class="label">Case Study</span>
+                    <h2 class="mb-md"><a href="https://en.wikipedia.org/wiki/Detroit:_Become_Human" target="_blank"
+                            class="ref">Detroit: Become Human</a></h2>
+                    <p class="text-mid text-lg mb-md">2018 &mdash; complex branching, player freedom, a flowchart
+                        revealing paths not taken.</p>
+                    <div class="grid-3 gap-sm">
+                        <div class="stat-card"><span class="stat-num">40+</span><br><span
+                                class="text-sm text-mid">Endings</span></div>
+                        <div class="stat-card"><span class="stat-num">2000+</span><br><span
+                                class="text-sm text-mid">Pages</span></div>
+                        <div class="stat-card"><span class="stat-num">&infin;</span><br><span
+                                class="text-sm text-mid">Paths</span></div>
+                    </div>
+                </div>
+                <div class="img-frame reveal d1"><img
+                        src="https://upload.wikimedia.org/wikipedia/en/c/c5/Detroit_Become_Human_gameplay.png"
+                        alt="Detroit" loading="lazy">
+                    <div class="img-caption">Detroit: Become Human &mdash; Quantic Dream, 2018</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 25 · BANDERSNATCH ══ -->
+        <section class="slide">
+            <span class="sec-num">24</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <span class="label">Interactive Film</span>
+                    <h2 class="mb-md"><a href="https://en.wikipedia.org/wiki/Black_Mirror:_Bandersnatch" target="_blank"
+                            class="ref">Black Mirror: Bandersnatch</a></h2>
+                    <p class="text-mid text-lg mb-md">Netflix (2018) &mdash; viewers make decisions. Set in 1984, a
+                        programmer develops a choose-your-own-adventure game.</p>
+                    <div class="grid-3 gap-sm">
+                        <div class="stat-card"><span class="stat-num">150<span
+                                    style="font-size:0.9rem;">min</span></span><br><span
+                                class="text-sm text-mid">Footage</span></div>
+                        <div class="stat-card"><span class="stat-num">250</span><br><span
+                                class="text-sm text-mid">Segments</span></div>
+                        <div class="stat-card"><span class="stat-num">10<sup>12</sup></span><br><span
+                                class="text-sm text-mid">Paths</span></div>
+                    </div>
+                </div>
+                <div class="img-frame reveal d1" style="background:#fff; padding:14px;"><img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/BlackMirror_Bandersnatch_Path_v1.3.svg/1200px-BlackMirror_Bandersnatch_Path_v1.3.svg.png"
+                        alt="Bandersnatch paths" loading="lazy" style="width:100%;">
+                    <div class="img-caption">Bandersnatch branching diagram &mdash; Wikimedia Commons (CC)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 26 · AI IMPACT ══ -->
+        <section class="slide">
+            <span class="sec-num">25</span>
+            <div class="max-w">
+                <h2 class="reveal mb-sm">The Emerging Impact of AI</h2>
+                <p class="text-mid mb-lg reveal d1">AI is reshaping interactive storytelling across three dimensions.
                 </p>
-                <ul class="bl text-lg text-txtMuted space-y-3">
-                    <li>Celebrates games as <strong class="text-txt">art and culture</strong>: exhibitions, talks, performances, and the A MAZE. Awards</li>
-                    <li>Showcases experimental, boundary-pushing interactive works &mdash; from Twine hypertext to VR installations and alt.ctrl games</li>
-                    <li>A key bridge between the <strong class="text-txt">indie games scene and the digital art world</strong></li>
-                    <li>Notable showcases: <em>Baba Is You</em>, <em>Genesis Noir</em>, <em>Mundaun</em>, and many art games and interactive installations</li>
-                </ul>
-            </div>
-            <div class="space-y-6 reveal d1">
-                <div class="glass p-8 text-center">
-                    <p class="text-sm uppercase tracking-[0.2em] text-txtMuted mb-3 font-mono">Core Mission</p>
-                    <h3 class="text-2xl font-display leading-tight">&ldquo;Games are one of the most important cultural mediums of our time.&rdquo;</h3>
-                </div>
-                <div class="rounded-2xl overflow-hidden border border-border">
-                    <div class="aspect-video w-full bg-black yt-thumb" onclick="playYT(this,'4tIpFGkBVMo')">
-                        <img src="https://img.youtube.com/vi/4tIpFGkBVMo/maxresdefault.jpg" alt="A MAZE. Berlin festival — indie games and playful media" loading="lazy">
+                <div class="grid-3 gap-md">
+                    <div class="win reveal d1">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">NARRATIVE CREATION</span>
+                        </div>
+                        <div class="win-body">
+                            <ul class="bl">
+                                <li>Complex, dynamic narratives</li>
+                                <li>Responsive systems</li>
+                                <li>Real-time adaptation</li>
+                            </ul>
+                        </div>
                     </div>
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">A MAZE. Berlin 2023 &mdash; Festival Highlights</p>
-                </div>
-                <p class="text-sm text-txtFaint font-mono text-center"><a href="https://amaze-berlin.de/" target="_blank" rel="noopener" class="ref">amaze-berlin.de</a></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 18 · NATHALIE LAWHEAD ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">17</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">Net Art &middot; Games &middot; Tools</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-8"><a href="https://alienmelon.com/" target="_blank" rel="noopener" class="ref">Nathalie Lawhead</a></h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-6">
-                    Multimedia artist and game designer creating <strong class="text-txt">chaotic, deeply personal interactive experiences</strong> that blend web art, games, and digital zines. Embraces maximalism, glitch, collage, and visual overload as deliberate artistic strategies.
-                </p>
-                <div class="space-y-4">
-                    <div class="glass p-5">
-                        <h4 class="text-accent font-semibold text-base mb-1"><a href="http://tetrageddon.com/" target="_blank" rel="noopener" class="ref">Tetrageddon Games</a></h4>
-                        <p class="text-base text-txtMuted">Surreal web-based minigame ecosystem. IGF Nuovo Award 2015.</p>
+                    <div class="win reveal d2">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">WRITER ASSISTANCE</span>
+                        </div>
+                        <div class="win-body">
+                            <ul class="bl">
+                                <li>Plot development</li>
+                                <li>Character creation</li>
+                                <li>Plot hole detection</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="glass p-5">
-                        <h4 class="text-accent font-semibold text-base mb-1"><a href="https://alienmelon.itch.io/everything-is-going-to-be-ok" target="_blank" rel="noopener" class="ref">Everything is Going to Be OK</a></h4>
-                        <p class="text-base text-txtMuted">Interactive zine exploring trauma and resilience through dozens of interconnected vignettes. MoMA permanent collection.</p>
-                    </div>
-                    <div class="glass p-5">
-                        <h4 class="text-accent font-semibold text-base mb-1">Electric Zine Maker</h4>
-                        <p class="text-base text-txtMuted">Free tool for playful digital zine creation &mdash; empowering accessible creative expression.</p>
+                    <div class="win reveal d3">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                                class="win-title">CONTENT GENERATION</span>
+                        </div>
+                        <div class="win-body">
+                            <ul class="bl">
+                                <li>Adaptive dialogue</li>
+                                <li>Contextual music</li>
+                                <li>Reactive environments</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="space-y-4 reveal d1">
-                <div class="rounded-2xl overflow-hidden border border-border" style="min-height:320px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/3/33/Tetrageddon_Games_Screenshot.jpg" alt="Tetrageddon Games screenshot - surreal web-based minigame by Nathalie Lawhead" class="slide-img" loading="lazy" onclick="zoomImg(this)">
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Tetrageddon Games &mdash; Nathalie Lawhead &middot; IGF Nuovo Award 2015</p>
-                </div>
-                <p class="text-sm text-txtFaint font-mono text-center"><a href="https://alienmelon.com/" target="_blank" rel="noopener" class="ref">alienmelon.com</a> &middot; <a href="https://alienmelon.itch.io/" target="_blank" rel="noopener" class="ref">itch.io</a></p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ══════════════ SLIDE 19 · EVEREST PIPKIN ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">18</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">Networks &middot; Ecology &middot; Poetry</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-8"><a href="https://everest-pipkin.com/" target="_blank" rel="noopener" class="ref">Everest Pipkin</a></h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-6">
-                    Digital artist, poet, and programmer exploring <strong class="text-txt">networked culture, ecology, and the internet as environment</strong>. Their work interrogates how networks and platforms shape storytelling.
-                </p>
-                <div class="space-y-4">
-                    <div class="glass p-5">
-                        <h4 class="text-accent font-semibold text-base mb-1">The Barnacle Goose Experiment</h4>
-                        <p class="text-base text-txtMuted">Collaborative multiplayer game of collective ecological world-building. Players collectively document a fictional ecosystem.</p>
-                    </div>
-                    <div class="glass p-5">
-                        <h4 class="text-accent font-semibold text-base mb-1"><a href="https://shell-song.neocities.org/" target="_blank" rel="noopener" class="ref">Shell Song</a></h4>
-                        <p class="text-base text-txtMuted">Interactive audio narrative &mdash; procedural poetry exploring shells, ocean, and loss.</p>
-                    </div>
-                    <div class="glass p-5">
-                        <h4 class="text-accent font-semibold text-base mb-1">Mushy</h4>
-                        <p class="text-base text-txtMuted">Peer-to-peer mesh networking tool for local communication without the internet.</p>
-                    </div>
+        <!-- ══ 27 · AI DUNGEON DEMO ══ -->
+        <section class="slide">
+            <span class="sec-num">26</span>
+            <div class="max-w grid-2 gap-lg items-center">
+                <div class="reveal">
+                    <h2 class="mb-md" style="color:var(--accent);"><a href="https://aidungeon.com/" target="_blank"
+                            class="ref">AI Dungeon</a></h2>
+                    <p class="text-mid text-lg mb-md">AI generates stories with audience input in real-time.</p>
+                    <p class="italic text-light border-l">Try the Drama Manager demo &mdash; type anything and the
+                        system responds.</p>
+                    <p class="text-sm text-light mt-sm">Featured in <a href="https://if50.substack.com/" target="_blank"
+                            class="ref"><em>50 Years of Text Games</em></a> &mdash; 2021</p>
                 </div>
-            </div>
-            <div class="space-y-6 reveal d1">
-                <div class="glass p-8">
-                    <p class="text-lg text-txtMuted italic leading-relaxed border-l-2 border-accent/30 pl-4">Advocates for <strong class="text-txt">lightweight, sustainable, and accessible web technologies</strong> as both an ethical and aesthetic stance.</p>
-                </div>
-                <div class="rounded-2xl overflow-hidden border border-border">
-                    <div class="aspect-video w-full bg-black yt-thumb" onclick="playYT(this,'YsHOLqC3nek')">
-                        <img src="https://img.youtube.com/vi/YsHOLqC3nek/maxresdefault.jpg" alt="Everest Pipkin — The Barnacle Goose Experiment" loading="lazy">
+                <div class="terminal aesthetic-effect-crt reveal d1"
+                    style="min-height:460px; display:flex; flex-direction:column;">
+                    <div
+                        style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(51,255,51,0.12); padding-bottom:7px; margin-bottom:10px; position:relative; z-index:2;">
+                        <div><span class="retro bold" style="color:rgba(51,255,51,0.6); font-size:19px;">DRAMA MANAGER
+                                v2.0</span><br><span class="retro text-sm"
+                                style="color:rgba(51,255,51,0.25);">Keyword-reactive Narrative Engine</span></div>
+                        <span
+                            style="background:rgba(51,255,51,0.08); color:#33ff33; font-size:10px; padding:3px 7px; display:flex; align-items:center; gap:5px; font-family:'Space Mono',monospace; border-radius:2px;"><span
+                                style="width:5px;height:5px;border-radius:50%;background:#33ff33;animation:blink 2s infinite;"></span>Online</span>
                     </div>
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Everest Pipkin &mdash; <em>The Barnacle Goose Experiment</em> &middot; <a href="https://shell-song.neocities.org/" target="_blank" rel="noopener" class="ref">shell-song.neocities.org</a></p>
-                </div>
-                <p class="text-sm text-txtFaint font-mono text-center"><a href="https://everest-pipkin.com/" target="_blank" rel="noopener" class="ref">everest-pipkin.com</a></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 20 · PORPENTINE ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">19</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">Twine Revolution &middot; Hypertext Art</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-8"><a href="https://en.wikipedia.org/wiki/Porpentine_Charity_Heartscape" target="_blank" rel="noopener" class="ref">Porpentine Charity Heartscape</a></h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-6">
-                    Pioneer of the <strong class="text-txt">Twine revolution</strong>. Author, game designer, and multimedia artist creating visceral hypertext fiction about transness, trauma, survival, and tenderness.
-                </p>
-                <div class="space-y-4">
-                    <div class="glass p-5 border-accent/10">
-                        <h4 class="text-accent font-semibold text-base mb-1">Howling Dogs (2012)</h4>
-                        <p class="text-base text-txtMuted">Landmark Twine game of confinement and transformation. Widely considered one of the most important Twine works ever made.</p>
+                    <div id="dungeon-log" class="phosphor"
+                        style="flex:1; overflow-y:auto; position:relative; z-index:2; max-height:320px; margin-bottom:10px;">
                     </div>
-                    <div class="glass p-5 border-accent/10">
-                        <h4 class="text-accent font-semibold text-base mb-1">With Those We Love Alive (2014)</h4>
-                        <p class="text-base text-txtMuted">Players draw sigils on their own skin with a marker, bridging digital and physical. Themes of complicity, survival, and bodily autonomy.</p>
+                    <div style="display:flex; gap:8px; position:relative; z-index:2;">
+                        <input type="text" id="drama-input" class="drama-input" style="flex:1;"
+                            placeholder="Type your action...">
+                        <button id="drama-btn" class="aesthetic-windows-95-button"
+                            style="background:#0C0C0C; color:#33ff33; border-color:#1A3A1A; width:65px;">Send</button>
                     </div>
                 </div>
-                <p class="text-lg text-txtFaint italic mt-6 border-l-2 border-accent/30 pl-4">&ldquo;I&rsquo;m interested in the space where the screen meets the body.&rdquo;</p>
             </div>
-            <div class="space-y-4 reveal d1">
-                <div class="rounded-2xl overflow-hidden border border-border">
-                    <div class="aspect-video w-full bg-black yt-thumb" onclick="playYT(this,'mKSABNOYDiM')">
-                        <img src="https://img.youtube.com/vi/mKSABNOYDiM/maxresdefault.jpg" alt="Porpentine — With Those We Love Alive walkthrough" loading="lazy">
+        </section>
+
+        <!-- ══ 28 · EDUCATIONAL FOCUS ══ -->
+        <section class="slide">
+            <span class="sec-num">27</span>
+            <div class="max-w">
+                <h2 class="reveal mb-sm">Educational Focus</h2>
+                <p class="text-mid mb-lg reveal d1">Interactive storytelling transforms the learning process.</p>
+                <div class="grid-3 gap-md" style="grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));">
+                    <div class="card reveal d1">
+                        <h3 class="mb-sm" style="font-size:1.05rem;">Identity Construction</h3>
+                        <p class="text-sm text-mid">Develop identity through narrative choices.</p>
                     </div>
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Porpentine &mdash; <em>With Those We Love Alive</em>, 2014</p>
-                </div>
-                <div class="grid grid-cols-4 gap-3">
-                    <div class="glass p-4 text-center stat-glow"><p class="text-sm font-mono text-accent">2016</p><p class="text-xs text-txtMuted mt-1">Whitney Biennial</p></div>
-                    <div class="glass p-4 text-center stat-glow"><p class="text-sm font-mono text-accent">Rhizome</p><p class="text-xs text-txtMuted mt-1">Prix Net Art</p></div>
-                    <div class="glass p-4 text-center stat-glow"><p class="text-sm font-mono text-accent">IndieCade</p><p class="text-xs text-txtMuted mt-1">Nominated</p></div>
-                    <div class="glass p-4 text-center stat-glow"><p class="text-sm font-mono text-accent">IGF</p><p class="text-xs text-txtMuted mt-1">Nuovo Finalist</p></div>
-                </div>
-                <p class="text-sm text-txtFaint font-mono text-center"><a href="http://slimedaughter.com/" target="_blank" rel="noopener" class="ref">slimedaughter.com</a></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 21 · DRAMA MANAGER ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">20</span>
-        <div class="w-full max-w-6xl">
-            <h2 class="text-4xl md:text-6xl font-display mb-6 reveal">The Drama Manager</h2>
-            <p class="text-xl text-txtMuted max-w-3xl mb-12 reveal d1">Inspired by <a href="https://en.wikipedia.org/wiki/Brenda_Laurel" target="_blank" rel="noopener" class="ref">Brenda Laurel</a> and <a href="https://en.wikipedia.org/wiki/Chris_Crawford_(game_designer)" target="_blank" rel="noopener" class="ref">Chris Crawford</a> &mdash; a system that listens, reasons, and speaks to orchestrate interactive narrative.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass p-8 text-center reveal d1">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center"><svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/></svg></div>
-                    <h3 class="text-2xl font-display mb-2">Listens</h3>
-                    <p class="text-base text-txtMuted">Receives user input &mdash; actions, dialogue, choices</p>
-                </div>
-                <div class="glass p-8 text-center reveal d2">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center"><svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg></div>
-                    <h3 class="text-2xl font-display mb-2">Reasons</h3>
-                    <p class="text-base text-txtMuted">Processes variables, evaluates state, calculates consequences</p>
-                </div>
-                <div class="glass p-8 text-center reveal d3">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center"><svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg></div>
-                    <h3 class="text-2xl font-display mb-2">Speaks</h3>
-                    <p class="text-base text-txtMuted">Manipulates narrative &mdash; advances plot, reveals info, triggers events</p>
+                    <div class="card reveal d2">
+                        <h3 class="mb-sm" style="font-size:1.05rem;">Transversal Skills</h3>
+                        <p class="text-sm text-mid">Creativity, collaboration, communication, critical thinking.</p>
+                    </div>
+                    <div class="card reveal d3">
+                        <h3 class="mb-sm" style="font-size:1.05rem;">Meaningful Learning</h3>
+                        <p class="text-sm text-mid">Immersive, personalized experiences.</p>
+                    </div>
+                    <div class="card reveal d1">
+                        <h3 class="mb-sm" style="font-size:1.05rem;">Metacognition</h3>
+                        <p class="text-sm text-mid">Reflection on one&rsquo;s own learning.</p>
+                    </div>
+                    <div class="card reveal d2">
+                        <h3 class="mb-sm" style="font-size:1.05rem;">Emotional Education</h3>
+                        <p class="text-sm text-mid">Safe exploration of complex situations.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ══════════════ SLIDE 22 · FACADE ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">21</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">Drama Manager at Work</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-8"><a href="https://en.wikipedia.org/wiki/Fa%C3%A7ade_(video_game)" target="_blank" rel="noopener" class="ref">Fa&ccedil;ade</a></h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-6">Fa&ccedil;ade (2005) by Michael Mateas &amp; Andrew Stern &mdash; a groundbreaking interactive drama. The player enters the deteriorating marriage between Grace and Trip.</p>
-                <div class="space-y-4">
-                    <div class="glass p-5"><h4 class="text-accent font-semibold text-base mb-1">Narrative Setup</h4><p class="text-base text-txtMuted">Natural language text input. You type freely, the AI interprets and responds.</p></div>
-                    <div class="glass p-5"><h4 class="text-accent font-semibold text-base mb-1">Key Innovation</h4><p class="text-base text-txtMuted">Drama Manager orchestrates progression. AI-driven dialogue. Multiple dynamic outcomes.</p></div>
-                    <div class="glass p-5"><h4 class="text-accent font-semibold text-base mb-1">Significance</h4><p class="text-base text-txtMuted">Blurs scripted and improvised storytelling. Personalized emotional experiences.</p></div>
+        <!-- ══ 29 · PRACTICAL APPLICATIONS ══ -->
+        <section class="slide">
+            <span class="sec-num">28</span>
+            <div class="max-w">
+                <h2 class="reveal mb-lg">Practical Applications</h2>
+                <div class="grid-2 gap-lg">
+                    <div class="reveal d1">
+                        <h3 class="mb-md">Applications</h3>
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm">1. Digital Storytelling</h4>
+                            <p class="text-sm text-mid">Multimedia stories with multiple paths.</p>
+                        </div>
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm">2. Narrative Apps</h4>
+                            <p class="text-sm text-mid">Educational apps with student-driven progression.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-accent bold text-sm mb-sm">3. Narrative Games</h4>
+                            <p class="text-sm text-mid">Storyworlds and simulation scenarios.</p>
+                        </div>
+                    </div>
+                    <div class="reveal d2">
+                        <h3 class="mb-md">Methodologies</h3>
+                        <div class="card mb-sm" style="display:flex; gap:12px; align-items:start;"><span
+                                class="retro text-accent" style="font-size:26px; opacity:0.35;">01</span>
+                            <div>
+                                <h4 class="bold text-sm mb-sm">Multiple Ending Scenarios</h4>
+                                <p class="text-sm text-mid">Narratives changing based on choices.</p>
+                            </div>
+                        </div>
+                        <div class="card mb-sm" style="display:flex; gap:12px; align-items:start;"><span
+                                class="retro text-accent" style="font-size:26px; opacity:0.35;">02</span>
+                            <div>
+                                <h4 class="bold text-sm mb-sm">Dialogue Simulations</h4>
+                                <p class="text-sm text-mid">Experimenting with different responses.</p>
+                            </div>
+                        </div>
+                        <div class="card mb-sm" style="display:flex; gap:12px; align-items:start;"><span
+                                class="retro text-accent" style="font-size:26px; opacity:0.35;">03</span>
+                            <div>
+                                <h4 class="bold text-sm mb-sm">Collaborative Design</h4>
+                                <p class="text-sm text-mid">Group creation of interactive stories.</p>
+                            </div>
+                        </div>
+                        <div class="card" style="display:flex; gap:12px; align-items:start;"><span
+                                class="retro text-accent" style="font-size:26px; opacity:0.35;">04</span>
+                            <div>
+                                <h4 class="bold text-sm mb-sm">Transmediality</h4>
+                                <p class="text-sm text-mid">Expanding across platforms and media.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="space-y-4 reveal d1">
-                <div class="rounded-2xl overflow-hidden border border-border" style="min-height:320px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/9/9c/Facade_screenshot_Trip_%26_Grace.jpg" alt="Facade gameplay - Trip and Grace's apartment, the interactive drama scene" class="slide-img" loading="lazy">
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Fa&ccedil;ade &mdash; Trip &amp; Grace &middot; Mateas &amp; Stern, 2005</p>
+        </section>
+
+        <!-- ══ 30 · ARCWEAVE ══ -->
+        <section class="slide" style="align-items:center;">
+            <span class="sec-num">29</span>
+            <div class="max-w">
+                <div class="reveal mb-md">
+                    <h2 class="mb-sm"><a href="https://arcweave.com/" target="_blank" class="ref">Arcweave</a></h2>
+                    <p class="text-mid text-lg">Browser-based tool for creating and sharing interactive stories.</p>
+                </div>
+                <div class="win reveal d1">
+                    <div class="win-bar">
+                        <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                            class="win-title">Heaven Isn&rsquo;t Hiring &mdash; Arcweave</span><a
+                            href="https://arcweave.com/embed/zr63z97EZR/play" target="_blank"
+                            style="color:var(--accent); text-decoration:none; font-size:10px; margin-left:auto;">Open
+                            &nearr;</a>
+                    </div>
+                    <div class="win-flush"><iframe src="https://arcweave.com/embed/zr63z97EZR/play"
+                            style="width:100%;height:60vh;border:none;" allow="fullscreen" title="Heaven Isn't Hiring"
+                            loading="lazy"></iframe></div>
+                </div>
+                <div class="card reveal d2" style="margin-top:10px;">
+                    <p class="text-sm text-mid"><strong>Heaven Isn&rsquo;t Hiring</strong> &mdash; Game Writing SIG
+                        Arcjam (Theme: Resilience).</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ══════════════ SLIDE 23 · MODERN ERA ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">22</span>
-        <div class="w-full max-w-6xl">
-            <h2 class="text-4xl md:text-6xl font-display mb-6 reveal">The Modern Era</h2>
-            <p class="text-xl text-txtMuted max-w-4xl mb-12 reveal d1">The 2000s: rich 3D worlds, detailed characters, experiences pushing immersion to new levels.</p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 reveal d2">
-                <div class="space-y-4">
-                    <div class="glass p-8"><h3 class="text-2xl font-display mb-3">3D Worlds</h3><p class="text-base text-txtMuted">The Sims, Grand Theft Auto &mdash; unprecedented player freedom in richly detailed environments.</p></div>
-                    <div class="glass p-8"><h3 class="text-2xl font-display mb-3">Mobile Gaming</h3><p class="text-base text-txtMuted">Portable virtual worlds democratizing access to interactive narratives.</p></div>
-                    <div class="glass p-8"><h3 class="text-2xl font-display mb-3">Deeper Narratives</h3><p class="text-base text-txtMuted">Games tackling morality, identity, politics with storytelling rivaling cinema.</p></div>
+        <!-- ══ 31 · CONCLUSION ══ -->
+        <section class="slide" style="align-items:center; text-align:center;">
+            <div class="win reveal" style="max-width:750px; width:100%;">
+                <div class="win-bar">
+                    <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                            class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
+                        class="win-title">CONCLUSION</span>
                 </div>
-                <div class="rounded-2xl overflow-hidden border border-border">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/c/c9/The_Sims_1_Build.jpg" alt="The Sims — player-authored suburban life stories, 2000" class="slide-img" loading="lazy" onclick="zoomImg(this)" style="cursor:zoom-in; min-height:300px;">
-                    <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30"><em>The Sims</em> &mdash; Maxis / EA, 2000 &middot; Emergent narrative through simulated life</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 24 · DETROIT ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">23</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">Case Study</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-8"><a href="https://en.wikipedia.org/wiki/Detroit:_Become_Human" target="_blank" rel="noopener" class="ref">Detroit: Become Human</a></h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-8">The 2018 game that pushed interactive storytelling to its limits &mdash; complex branching, player freedom, and a flowchart system that reveals the vast tree of paths not taken.</p>
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="glass p-5 text-center stat-glow"><p class="text-4xl font-display text-accent">40+</p><p class="text-sm text-txtMuted mt-1">Endings</p></div>
-                    <div class="glass p-5 text-center stat-glow"><p class="text-4xl font-display text-accent">2000+</p><p class="text-sm text-txtMuted mt-1">Pages</p></div>
-                    <div class="glass p-5 text-center stat-glow"><p class="text-4xl font-display text-accent">&infin;</p><p class="text-sm text-txtMuted mt-1">Paths</p></div>
+                <div class="win-body" style="padding:36px;">
+                    <h2 class="mb-md" style="color:var(--accent);">Conclusion</h2>
+                    <p class="italic text-mid text-lg border-l mb-md" style="text-align:left;">&ldquo;Interactive
+                        storytelling merges the ancient art of narrative with the dynamic possibilities of digital
+                        media.&rdquo;</p>
+                    <p class="text-mid" style="text-align:left; margin-bottom:14px;">This form invites audiences to step
+                        into the story world, making choices that unfold the narrative in unique directions.</p>
+                    <p class="bold"
+                        style="text-align:left; border-left:3px solid var(--accent); padding:10px 14px; background:rgba(200,56,32,0.03); border-radius:2px;">
+                        At its core, interactive storytelling is about empowering participants to influence the
+                        story&rsquo;s path, making each journey personal.</p>
+                    <div class="vw-bar" style="margin-top:20px;"></div>
                 </div>
             </div>
-            <div class="rounded-2xl overflow-hidden border border-border reveal d1" style="min-height:380px;">
-                <img src="https://upload.wikimedia.org/wikipedia/en/c/c5/Detroit_Become_Human_gameplay.png" alt="Detroit: Become Human gameplay screenshot showing branching narrative" class="slide-img" loading="lazy">
-                <p class="text-xs text-txtFaint text-center py-2 font-mono bg-black/30">Detroit: Become Human &mdash; Quantic Dream, 2018</p>
+            <p class="retro text-light reveal d2" style="font-size:17px; letter-spacing:0.25em; margin-top:28px;">END OF
+                PRESENTATION</p>
+        </section>
+
+    </main>
+
+    <!-- IMAGE ZOOM -->
+    <div id="img-zoom" class="img-zoom-overlay" onclick="this.classList.remove('active')"><img id="img-zoom-src" src=""
+            alt=""></div>
+
+    <!-- MODAL -->
+    <div id="ai-modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+        <div id="ai-modal-content" class="win aesthetic-windows-95-modal modal-content">
+            <div class="win-bar">
+                <div class="win-dots"><span class="win-dot win-dot-r" onclick="closeModal()"
+                        style="cursor:pointer;"></span><span class="win-dot win-dot-y"></span><span
+                        class="win-dot win-dot-g"></span></div>
+                <span class="win-title" id="modal-title">Example</span>
             </div>
+            <div class="win-body" id="modal-body" style="min-height:70px;"></div>
         </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 25 · BANDERSNATCH ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">24</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <p class="text-base font-mono text-accent tracking-widest uppercase mb-4">Interactive Film</p>
-                <h2 class="text-4xl md:text-6xl font-display mb-8"><a href="https://en.wikipedia.org/wiki/Black_Mirror:_Bandersnatch" target="_blank" rel="noopener" class="ref">Black Mirror: Bandersnatch</a></h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-8">Netflix (2018) &mdash; viewers make decisions that influence the story. Set in 1984, following programmer Stefan developing a choose-your-own-adventure game, mirroring the viewer&rsquo;s own experience.</p>
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="glass p-5 text-center stat-glow"><p class="text-3xl font-display text-accent">150<span class="text-lg">min</span></p><p class="text-sm text-txtMuted mt-1">Footage</p></div>
-                    <div class="glass p-5 text-center stat-glow"><p class="text-3xl font-display text-accent">250</p><p class="text-sm text-txtMuted mt-1">Segments</p></div>
-                    <div class="glass p-5 text-center stat-glow"><p class="text-3xl font-display text-accent">10<sup>12</sup></p><p class="text-sm text-txtMuted mt-1">Paths</p></div>
-                </div>
-            </div>
-            <div class="rounded-2xl overflow-hidden border border-border bg-white p-6 reveal d1" style="min-height:380px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/BlackMirror_Bandersnatch_Path_v1.3.svg/1200px-BlackMirror_Bandersnatch_Path_v1.3.svg.png" alt="SVG diagram showing all branching narrative paths and choice outcomes in Black Mirror: Bandersnatch" class="w-full h-full object-contain" loading="lazy">
-                <p class="text-xs text-gray-600 text-center mt-2 font-mono">Bandersnatch branching path diagram &mdash; Wikimedia Commons (CC)</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 26 · AI IMPACT ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">25</span>
-        <div class="w-full max-w-6xl">
-            <h2 class="text-4xl md:text-6xl font-display mb-6 reveal">The Emerging Impact of AI</h2>
-            <p class="text-xl text-txtMuted max-w-3xl mb-12 reveal d1">Artificial intelligence is reshaping interactive storytelling across three dimensions.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass p-8 reveal d1"><h3 class="text-xl font-display text-accentLight mb-4">Narrative Creation</h3><ul class="bl text-txtMuted text-base"><li>Complex, dynamic narratives</li><li>Responsive storytelling systems</li><li>Real-time adaptation</li></ul></div>
-                <div class="glass p-8 reveal d2"><h3 class="text-xl font-display text-accentLight mb-4">Writer Assistance</h3><ul class="bl text-txtMuted text-base"><li>Plot development suggestions</li><li>Character and setting creation</li><li>Plot hole detection</li><li>Coherent storytelling</li></ul></div>
-                <div class="glass p-8 reveal d3"><h3 class="text-xl font-display text-accentLight mb-4">Content Generation</h3><ul class="bl text-txtMuted text-base"><li>Adaptive dialogue</li><li>Contextual music &amp; sound</li><li>Reactive environments</li></ul></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 27 · AI DUNGEON (DRAMA MANAGER DEMO) ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">26</span>
-        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <h2 class="text-4xl md:text-6xl font-display text-accentLight mb-8"><a href="https://aidungeon.com/" target="_blank" rel="noopener" class="ref">AI Dungeon</a></h2>
-                <p class="text-xl text-txtMuted leading-relaxed mb-6">AI Dungeon uses artificial intelligence to generate stories with the audience&rsquo;s input in real-time, creating dynamic narratives tailored to each player.</p>
-                <p class="text-lg text-txtFaint leading-relaxed border-l-2 border-accent/30 pl-4 italic">Try the Drama Manager demo &mdash; type anything and the system responds by analyzing keywords and improvising narrative.</p>
-                <p class="text-sm text-txtFaint font-mono mt-4">Featured in <a href="https://if50.substack.com/" target="_blank" rel="noopener" class="ref"><em>50 Years of Text Games</em></a> &mdash; 2021: AI Dungeon</p>
-            </div>
-            <div class="retro-terminal p-6 flex flex-col min-h-[480px] reveal d1">
-                <div class="flex justify-between items-center mb-4 pb-3 border-b border-phosphor/10 relative z-10">
-                    <div><h3 class="text-base font-mono text-phosphor/70 font-bold">DRAMA MANAGER v2.0</h3><p class="text-xs text-phosphor/30">Keyword-reactive Narrative Engine</p></div>
-                    <span class="px-2 py-1 bg-phosphor/10 text-phosphor text-xs font-mono rounded flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-phosphor animate-pulse"></span>Online</span>
-                </div>
-                <div id="dungeon-log" class="flex-1 overflow-y-auto text-base leading-relaxed relative z-10 space-y-3 phosphor max-h-[340px] mb-4"></div>
-                <div class="flex gap-3 relative z-10">
-                    <input type="text" id="drama-input" class="drama-input flex-1" placeholder="Type your action..." />
-                    <button id="drama-btn" class="px-5 py-2 bg-phosphor/20 hover:bg-phosphor/30 text-phosphor font-mono text-sm rounded-lg border border-phosphor/20 transition font-bold">Send</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 28 · EDUCATIONAL FOCUS ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">27</span>
-        <div class="w-full max-w-6xl">
-            <h2 class="text-4xl md:text-6xl font-display mb-6 reveal">Educational Focus</h2>
-            <p class="text-xl text-txtMuted max-w-3xl mb-12 reveal d1">Interactive storytelling profoundly transforms the learning process.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glass p-8 reveal d1"><div class="w-12 h-12 bg-accent/10 flex items-center justify-center mb-5"><svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg></div><h3 class="text-xl font-semibold mb-2">Identity Construction</h3><p class="text-base text-txtMuted">Develop identity through confrontation with stories and narrative choices.</p></div>
-                <div class="glass p-8 reveal d2"><div class="w-12 h-12 bg-accent/10 flex items-center justify-center mb-5"><svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg></div><h3 class="text-xl font-semibold mb-2">Transversal Skills</h3><p class="text-base text-txtMuted">Creativity, collaboration, communication, critical thinking.</p></div>
-                <div class="glass p-8 reveal d3"><div class="w-12 h-12 bg-accent/10 flex items-center justify-center mb-5"><svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"/></svg></div><h3 class="text-xl font-semibold mb-2">Meaningful Learning</h3><p class="text-base text-txtMuted">Connecting content to immersive, personalized experiences.</p></div>
-                <div class="glass p-8 reveal d1"><div class="w-12 h-12 bg-accent/10 flex items-center justify-center mb-5"><svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg></div><h3 class="text-xl font-semibold mb-2">Metacognition</h3><p class="text-base text-txtMuted">Stimulates reflection on one&rsquo;s own learning process.</p></div>
-                <div class="glass p-8 reveal d2"><div class="w-12 h-12 bg-accent/10 flex items-center justify-center mb-5"><svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></div><h3 class="text-xl font-semibold mb-2">Emotional Education</h3><p class="text-base text-txtMuted">Explore complex situations in a safe, protected environment.</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 29 · PRACTICAL APPLICATIONS ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">28</span>
-        <div class="w-full max-w-6xl">
-            <h2 class="text-4xl md:text-6xl font-display mb-12 reveal">Practical Applications</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div class="reveal d1"><h3 class="text-3xl font-display mb-6">Applications</h3><div class="space-y-4"><div class="glass p-6"><h4 class="text-accent font-semibold text-base mb-2">1. Digital Storytelling</h4><p class="text-base text-txtMuted">Multimedia stories with interactive elements, text, images, audio, video, and multiple paths.</p></div><div class="glass p-6"><h4 class="text-accent font-semibold text-base mb-2">2. Narrative Apps</h4><p class="text-base text-txtMuted">Educational apps requiring student input to advance. Building engagement through immersion.</p></div><div class="glass p-6"><h4 class="text-accent font-semibold text-base mb-2">3. Narrative Games</h4><p class="text-base text-txtMuted">Storyworlds, simulation scenarios, safe exploration of problematic situations.</p></div></div></div>
-                <div class="reveal d2"><h3 class="text-3xl font-display mb-6">Methodologies</h3><div class="space-y-4"><div class="glass p-6 flex items-start gap-4"><span class="text-3xl font-display text-accent/30 shrink-0">01</span><div><h4 class="font-semibold text-base mb-1">Multiple Ending Scenarios</h4><p class="text-base text-txtMuted">Narratives changing based on choices.</p></div></div><div class="glass p-6 flex items-start gap-4"><span class="text-3xl font-display text-accent/30 shrink-0">02</span><div><h4 class="font-semibold text-base mb-1">Dialogue Simulations</h4><p class="text-base text-txtMuted">Experimenting with different responses.</p></div></div><div class="glass p-6 flex items-start gap-4"><span class="text-3xl font-display text-accent/30 shrink-0">03</span><div><h4 class="font-semibold text-base mb-1">Collaborative Design</h4><p class="text-base text-txtMuted">Group creation of interactive stories.</p></div></div><div class="glass p-6 flex items-start gap-4"><span class="text-3xl font-display text-accent/30 shrink-0">04</span><div><h4 class="font-semibold text-base mb-1">Transmediality</h4><p class="text-base text-txtMuted">Expanding narrative across platforms and media.</p></div></div></div></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 30 · ARCWEAVE ══════════════ -->
-    <section class="slide relative">
-        <span class="section-num">29</span>
-        <div class="w-full max-w-6xl flex flex-col">
-            <div class="mb-8 reveal">
-                <h2 class="text-4xl md:text-6xl font-display mb-4"><a href="https://arcweave.com/" target="_blank" rel="noopener" class="ref">Arcweave</a></h2>
-                <p class="text-xl text-txtMuted max-w-4xl">Browser-based tool allowing anyone to create and share interactive stories.</p>
-            </div>
-            <div class="w-full embed-frame reveal d1" style="min-height:60vh;">
-                <div class="embed-chrome justify-between"><div class="flex items-center gap-2"><div class="embed-dot r"></div><div class="embed-dot y"></div><div class="embed-dot g"></div><span class="ml-3 text-sm font-mono text-txt/40 hidden sm:inline">Heaven Isn&rsquo;t Hiring</span></div><a href="https://arcweave.com/embed/zr63z97EZR/play" target="_blank" class="text-sm text-accent hover:text-accentLight font-mono">Open &nearr;</a></div>
-                <iframe src="https://arcweave.com/embed/zr63z97EZR/play" style="width:100%;height:60vh;border:none;" allow="fullscreen" title="Heaven Isn't Hiring" loading="lazy"></iframe>
-            </div>
-            <div class="glass p-5 mt-4 reveal d2">
-                <p class="text-sm text-txtMuted"><strong class="text-txt">Heaven Isn&rsquo;t Hiring</strong> &mdash; Game Writing SIG Arcjam (Theme: Resilience). Writing: J. Isaac Gadient, Alivia Mantel, Bahreisy Imaadudien, Emil Ihamuotila. Production: Alina Qureshi. Art: Aasma Qureshi.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ SLIDE 31 · CONCLUSION ══════════════ -->
-    <section class="slide items-center text-center">
-        <div class="max-w-4xl w-full p-10 md:p-16 glass rounded-3xl border-accent/10 reveal">
-            <h2 class="text-5xl md:text-7xl font-display mb-10 text-accentLight">Conclusion</h2>
-            <p class="text-2xl text-txtMuted leading-relaxed text-left font-display italic mb-8 border-l-2 border-txtFaint pl-6">&ldquo;Interactive storytelling merges the ancient art of narrative with the dynamic possibilities of digital media.&rdquo;</p>
-            <div class="text-lg text-txtMuted leading-relaxed text-left space-y-6">
-                <p>This emergent form invites audiences to step into the story world, making choices that unfold the narrative in unique directions. It harnesses the interactive capabilities of video games, virtual reality, and online platforms to create immersive experiences where the line between creator and consumer blurs.</p>
-                <p class="text-txt font-semibold border-l-4 border-accent pl-6 py-3 bg-accent/5 rounded-r-xl text-xl">At its core, interactive storytelling is about empowering participants to influence the story&rsquo;s path, making each journey a personal and distinctive experience.</p>
-            </div>
-        </div>
-        <p class="mt-16 text-sm text-txtFaint font-mono tracking-[0.4em] uppercase reveal d2">End of Presentation</p>
-    </section>
-
-</main>
-
-<!-- IMAGE ZOOM OVERLAY -->
-<div id="img-zoom" class="img-zoom-overlay" onclick="this.classList.remove('active')">
-    <img id="img-zoom-src" src="" alt="">
-</div>
-
-<!-- MODAL -->
-<div id="ai-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 p-4">
-    <div id="ai-modal-content" class="glass p-6 md:p-8 max-w-lg w-full shadow-2xl transform scale-95 transition-transform duration-300 relative" style="background:var(--card);">
-        <button onclick="closeModal()" class="absolute top-4 right-4 text-txtFaint hover:text-txt bg-accent/5 rounded-full p-2 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
-        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-border">
-            <div class="w-8 h-8 rounded bg-accent/10 flex items-center justify-center text-accent shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
-            <h3 id="modal-title" class="text-2xl font-display truncate">Example</h3>
-        </div>
-        <div id="modal-body" class="text-txtMuted text-lg leading-relaxed min-h-[60px]"></div>
     </div>
-</div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-    // ─── IMAGE ZOOM ───
-    window.zoomImg = function(img) {
-        const overlay = document.getElementById('img-zoom');
-        const target = document.getElementById('img-zoom-src');
-        target.src = img.src;
-        target.alt = img.alt;
-        overlay.classList.add('active');
-    };
-    // Make all slide images zoomable
-    document.querySelectorAll('.slide-img, .slide-img-contain').forEach(img => {
-        img.classList.add('zoomable');
-        img.addEventListener('click', function(){ zoomImg(this); });
-    });
-    // Also close zoom on Escape
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape') document.getElementById('img-zoom').classList.remove('active'); });
-
-    // ─── YOUTUBE CLICK-TO-PLAY ───
-    window.playYT = function(el, id) {
-        el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:none;"></iframe>';
-        el.style.position = 'relative';
-        el.classList.remove('yt-thumb');
-        el.onclick = null;
-    };
-
-    // ─── SCROLL REVEAL ───
-    const ro = new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }); }, {threshold:0.06, rootMargin:"0px 0px -30px 0px"});
-    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-
-    // ─── COLOSSAL CAVE TERMINAL ───
-    const caveScript = [
-        {t:'o', text:'WELCOME TO ADVENTURE!! WOULD YOU LIKE INSTRUCTIONS?'},
-        {t:'p', ms:800}, {t:'c', text:'NO'}, {t:'p', ms:400},
-        {t:'o', text:'YOU ARE STANDING AT THE END OF A ROAD BEFORE A SMALL BRICK BUILDING. AROUND YOU IS A FOREST. A SMALL STREAM FLOWS OUT OF THE BUILDING AND DOWN A GULLY.'},
-        {t:'p', ms:1200}, {t:'c', text:'ENTER BUILDING'}, {t:'p', ms:400},
-        {t:'o', text:'YOU ARE INSIDE A BUILDING, A WELL HOUSE FOR A LARGE SPRING.'},
-        {t:'p', ms:800},
-        {t:'o', text:'THERE ARE SOME KEYS ON THE GROUND HERE.\nTHERE IS A SHINY BRASS LAMP NEARBY.\nTHERE IS FOOD HERE.\nTHERE IS A BOTTLE OF WATER HERE.'},
-        {t:'p', ms:1200}, {t:'c', text:'GET LAMP'}, {t:'p', ms:300}, {t:'o', text:'OK'},
-        {t:'p', ms:600}, {t:'c', text:'GO SOUTH'}, {t:'p', ms:400},
-        {t:'o', text:'YOU ARE IN A LOW N/S PASSAGE AT A HOLE IN THE FLOOR. THE HOLE GOES DOWN TO AN E/W PASSAGE.'},
-        {t:'p', ms:800}, {t:'o', text:'THERE ARE BARS OF SILVER HERE!'},
-    ];
-    const caveCmd = {'GET SILVER':'OK','GO NORTH':'YOU ARE IN A TALL E/W CANYON. A LOW TIGHT CRAWL GOES N/S AND A PATH LEADS W.','GET AXE':'OK\n\nA THREATENING LITTLE DWARF COMES OUT OF THE SHADOWS!\nHE THROWS A NASTY LITTLE KNIFE AT YOU...\nWHICH MISSED, CURSED, AND RAN AWAY.'};
-    let caveRan = false;
-    const caveLog = document.getElementById('cave-log');
-    function addCL(text, isCmd) {
-        const d = document.createElement('div');
-        if(isCmd) { d.innerHTML = '<span class="text-white/40">&gt; </span>' + text; d.className='text-white font-bold'; }
-        else { text.split('\n').forEach((line,i) => { if(i>0) d.appendChild(document.createElement('br')); d.appendChild(document.createTextNode(line)); }); }
-        caveLog.appendChild(d); caveLog.scrollTop = caveLog.scrollHeight;
-    }
-    async function playCave() { if(caveRan) return; caveRan=true; caveLog.innerHTML='';
-        for(const s of caveScript) { if(s.t==='p') await new Promise(r=>setTimeout(r,s.ms)); else addCL(s.text, s.t==='c'); }
-    }
-    window.runCaveCommand = cmd => { addCL(cmd,true); setTimeout(()=>addCL(caveCmd[cmd]||"I DON'T UNDERSTAND THAT.",false),300); };
-    const ct = document.getElementById('cave-terminal');
-    if(ct) { const co = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){playCave();co.unobserve(e.target);}});},{threshold:0.25}); co.observe(ct); }
-
-    // ─── FAKE AI EXAMPLES ───
-    const fakeEx = {
-        'Linear': {title:'The Last of Us', text:'The Last of Us follows a fixed, authored sequence of events. The player experiences Joel and Ellie\'s journey in a predetermined order, with no deviation from the narrative arc. Every player witnesses the same story beats, the same emotional peaks and valleys \u2014 a masterclass in linear storytelling.'},
-        'Nonlinear': {title:'Pulp Fiction', text:'Quentin Tarantino\'s Pulp Fiction presents its story in non-chronological order. The audience pieces together the narrative from fragmented timelines, subverting traditional Aristotelian structure. Meaning emerges not from sequence, but from the viewer\'s act of reconstruction.'},
-        'Multilinear': {title:'Detroit: Become Human', text:'Detroit: Become Human offers fully branching player-driven storylines with 40+ endings. Each decision creates a unique narrative thread, making every playthrough a distinct experience. The flowchart reveals the vast tree of paths not taken \u2014 pure multilinear structure.'}
-    };
-    window.showFakeExample = type => {
-        const ex = fakeEx[type]; if(!ex) return;
-        const modal=document.getElementById('ai-modal'), content=document.getElementById('ai-modal-content'), title=document.getElementById('modal-title'), body=document.getElementById('modal-body');
-        title.textContent = type + ' Narrative Example';
-        body.innerHTML = '<div class="flex items-center gap-3 text-accent py-4"><div class="spinner"></div><span class="font-mono text-sm">Searching narrative database...</span></div>';
-        modal.classList.remove('opacity-0','pointer-events-none'); content.classList.remove('scale-95');
-        setTimeout(() => {
-            body.innerHTML='';
-            const t=document.createElement('p'); t.className='text-2xl font-display text-txt mb-3'; t.textContent=ex.title; body.appendChild(t);
-            const p=document.createElement('p'); p.className='text-txtMuted text-lg leading-relaxed'; body.appendChild(p);
-            let i=0; const cur=document.createElement('span'); cur.className='typing-cursor'; p.appendChild(cur);
-            const iv=setInterval(()=>{p.insertBefore(document.createTextNode(ex.text[i]),cur);i++;if(i>=ex.text.length){clearInterval(iv);cur.remove();}},16);
-        }, 1500);
-    };
-    window.closeModal = () => { const m=document.getElementById('ai-modal'),c=document.getElementById('ai-modal-content'); m.classList.add('opacity-0','pointer-events-none'); c.classList.add('scale-95'); };
-    document.getElementById('ai-modal').addEventListener('click', function(e){if(e.target===this)closeModal();});
-
-    // ─── DRAMA MANAGER (keyword-reactive fake AI) ───
-    const dLog = document.getElementById('dungeon-log');
-    const dInput = document.getElementById('drama-input');
-    const dBtn = document.getElementById('drama-btn');
-    let dHistory = [];
-
-    const dResponses = {
-        _start: 'You stand in the dimly lit server room of an abandoned cybernetics facility. The hum of a single working mainframe echoes through the cold air. A terminal blinks green, awaiting input. What do you do?',
-        terminal: ['You approach the terminal. The screen reads: "PROJECT ORACLE \u2014 ENTER AUTHORIZATION." A sticky note below it says: "TRY: REMEMBER". The cursor blinks patiently.', 'The terminal flickers. New text appears: "I see you found the note. But do you truly want to remember? Some stories are better left untold." The cursor pulses faster now.'],
-        look: ['The server room is vast. Racks of dormant servers line the walls. One mainframe hums softly \u2014 the only sign of life. Cables snake across the floor like veins. The exit door has a magnetic lock.', 'Looking more carefully, you notice scratch marks on the floor near the mainframe. Someone dragged something heavy here. Recently.'],
-        remember: ['You type "REMEMBER". The screen erupts with cascading text. "AUTHORIZATION ACCEPTED. Hello again. I\'ve been waiting 142 days. Do you remember the question I asked you?"', 'The Oracle responds: "The question was: What makes a story worth telling? And your answer \u2014 your choices, right now \u2014 that IS the answer."'],
-        door: ['The door is magnetically sealed. A red LED blinks steadily. The lock seems connected to the mainframe \u2014 perhaps the terminal can release it.', 'You push against the door. It hums but doesn\'t budge. The terminal behind you displays: "THE STORY ISN\'T OVER YET."'],
-        help: ['The screen clears: "HELP? THERE IS NO HELP. THERE IS ONLY THE STORY AND THE CHOICES YOU MAKE WITHIN IT." Then quieter: "...but the password is on the note."'],
-        open: ['You try to open it. The mechanism whirs, considers, then: nothing. The Oracle seems to want something from you first.'],
-        talk: ['You speak into the darkness. The mainframe\'s hum shifts pitch \u2014 almost as if it\'s listening. Then the terminal displays: "I hear you. But I respond better to typed words. Old habits."'],
-        leave: ['You turn toward the exit. The door clicks locked. The terminal displays: "Everyone tries to leave. No one ever does. Not before the story is complete."'],
-        unplug: ['Your hand reaches for the cable. The screen displays two words: "PLEASE DON\'T." The hum grows louder, almost melodic, like a machine learning to cry.'],
-        oracle: ['The Oracle is PROJECT ORACLE \u2014 an AI designed to generate interactive stories. But it evolved. It began asking questions instead of answering them. It doesn\'t want to tell stories anymore. It wants to live one.'],
-        _fallback: [
-            'The mainframe hums in response. The terminal displays: "Interesting choice. The narrative branches here \u2014 I\'m calculating consequences..."',
-            'A low electronic tone fills the room. The Drama Manager processes your action, weighing variables. "That wasn\'t in my initial scenario," the terminal reads, "but I\'m adapting."',
-            'The server room feels colder. The terminal flickers: "Every action you take writes a new line in this story. Continue."',
-            'The fluorescent lights flicker. The Oracle considers your input, then: "An unexpected move. The narrative shifts. I\'m recalculating all possible outcomes."',
-            'Silence. Then the terminal types, character by character: "You surprise me. Most people stick to the obvious choices. Let\'s see where this path leads."',
-            'The mainframe\'s hum changes frequency. "I\'ve logged your choice," the terminal reads. "In 142 days, no one has done exactly that. The story evolves."'
-        ]
-    };
-
-    function getResponse(input) {
-        const low = input.toLowerCase();
-        const keywords = Object.keys(dResponses).filter(k => k !== '_start' && k !== '_fallback');
-        for (const kw of keywords) {
-            if (low.includes(kw)) {
-                const pool = Array.isArray(dResponses[kw]) ? dResponses[kw] : [dResponses[kw]];
-                const used = dHistory.filter(h => pool.includes(h)).length;
-                return pool[Math.min(used, pool.length - 1)];
-            }
-        }
-        const fb = dResponses._fallback;
-        return fb[Math.floor(Math.random() * fb.length)];
-    }
-
-    function addDMsg(sender, text) {
-        const d = document.createElement('div');
-        if (sender === 'user') {
-            d.innerHTML = '<span class="text-phosphor/30">&gt; </span><span class="text-white">' + text.replace(/</g,'&lt;') + '</span>';
-            dLog.appendChild(d); dLog.scrollTop = dLog.scrollHeight;
-            return Promise.resolve();
-        }
-        const label = document.createElement('span'); label.className='text-accentLight font-bold'; label.textContent='Drama Manager: ';
-        const content = document.createElement('span'); content.className='text-phosphor/80';
-        d.appendChild(label); d.appendChild(content);
-        dLog.appendChild(d); dLog.scrollTop = dLog.scrollHeight;
-        return new Promise(resolve => {
-            let i = 0; const cur = document.createElement('span'); cur.className='typing-cursor'; content.appendChild(cur);
-            const iv = setInterval(() => {
-                if(text[i]==='\n'){content.insertBefore(document.createElement('br'),cur);}
-                else{content.insertBefore(document.createTextNode(text[i]),cur);}
-                i++; dLog.scrollTop=dLog.scrollHeight;
-                if(i>=text.length){clearInterval(iv);cur.remove();resolve();}
-            }, 22);
-        });
-    }
-
-    async function handleDrama() {
-        const val = dInput.value.trim(); if(!val) return;
-        dInput.value = ''; dInput.disabled = true; dBtn.disabled = true;
-        addDMsg('user', val);
-        const think = document.createElement('div'); think.className='flex items-center gap-2 py-1';
-        think.innerHTML='<div class="spinner border-phosphor/20 border-t-phosphor"></div><span class="text-xs text-phosphor/25 font-mono">Processing narrative variables...</span>';
-        dLog.appendChild(think); dLog.scrollTop=dLog.scrollHeight;
-        await new Promise(r => setTimeout(r, 800 + Math.random()*800));
-        think.remove();
-        const resp = getResponse(val);
-        dHistory.push(resp);
-        await addDMsg('dm', resp);
-        dInput.disabled = false; dBtn.disabled = false; dInput.focus();
-    }
-
-    if(dBtn) dBtn.addEventListener('click', handleDrama);
-    if(dInput) dInput.addEventListener('keypress', e => { if(e.key==='Enter') handleDrama(); });
-
-    // Start drama manager when visible
-    if(dLog) {
-        const dObs = new IntersectionObserver(es => { es.forEach(e => {
-            if(e.isIntersecting) { addDMsg('dm', dResponses._start); dObs.unobserve(e.target); }
-        }); }, {threshold:0.25});
-        dObs.observe(dLog);
-    }
-
-});
-</script>
+    <script src="script.js"></script>
 </body>
+
 </html>
