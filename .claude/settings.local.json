@@ -52,7 +52,9 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:www.awwwards.com)",
-      "WebFetch(domain:www.siteinspire.com)"
+      "WebFetch(domain:www.siteinspire.com)",
+      "WebFetch(domain:tenor.com)",
+      "WebFetch(domain:www.inklestudios.com)"
     ]
   }
 }
