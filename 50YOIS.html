@@ -39,21 +39,22 @@
             <span class="sec-num">01</span>
             <div class="max-w grid-2 gap-lg">
                 <div class="reveal">
-                    <h2 class="mb-md">Introduction to Interactive Storytelling</h2>
-                    <h3 class="mb-sm">Interactive storytelling:</h3>
+                    <h2 class="mb-md">What is Interactive Storytelling?</h2>
+                    <p class="text-mid text-lg mb-md">A story where the audience doesn&rsquo;t just watch &mdash; it <em>decides</em>. Narrative as system, not sequence.</p>
+                    <h3 class="mb-sm">Defining features:</h3>
                     <ul class="bl mb-md">
-                        <li>Art form blending traditional narrative with technology</li>
-                        <li>The audience becomes integral to the story</li>
-                        <li>Allows decisions that influence narrative direction</li>
-                        <li>Creates immersive experiences</li>
+                        <li>The reader/player is an agent, not a spectator</li>
+                        <li>Choices have consequences that alter the narrative</li>
+                        <li>Multiple valid paths through the same story world</li>
+                        <li>The author designs a <strong>possibility space</strong>, not a fixed text</li>
                     </ul>
                     <h3 class="mb-sm">Forms include:</h3>
                     <ul class="bl">
-                        <li>Video games</li>
-                        <li>Virtual reality</li>
-                        <li>Interactive books</li>
-                        <li>Digital narratives</li>
-                        <li>Experimental film/TV</li>
+                        <li>Video games &amp; text adventures</li>
+                        <li>Hypertext fiction &amp; Twine games</li>
+                        <li>Interactive film &amp; VR experiences</li>
+                        <li>Physical installations &amp; immersive theater</li>
+                        <li>Chatbots, AI narrative engines</li>
                     </ul>
                 </div>
                 <div class="reveal d1" style="display:flex; flex-direction:column; gap:16px;">
@@ -61,17 +62,65 @@
                         <div class="win-bar">
                             <div class="win-dots"><span class="win-dot win-dot-r"></span><span
                                     class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
-                                class="win-title">THE CORE VALUE</span>
+                                class="win-title">THE CORE QUESTION</span>
                         </div>
                         <div class="win-body text-center">
-                            <h3>Meaningful audience participation in storytelling</h3>
+                            <h3>If the audience can change the story &mdash; who is the author?</h3>
                         </div>
                     </div>
-                    <div class="img-frame">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Visual_novel_%28visual_novel_storyline_type%29.svg/800px-Visual_novel_%28visual_novel_storyline_type%29.svg.png"
-                            alt="Branching storyline structure" loading="lazy" onclick="zoomImg(this)" class="zoomable"
-                            style="background:#fff; padding:12px;">
-                        <div class="img-caption">Branching narrative structure &mdash; Wikimedia Commons</div>
+                    <div class="img-frame img-frame--hero" style="padding:16px; background:var(--card);">
+                        <svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;background:var(--card);">
+                            <!-- lines -->
+                            <line x1="60" y1="140" x2="160" y2="80"  stroke="#000" stroke-width="2.5"/>
+                            <line x1="60" y1="140" x2="160" y2="140" stroke="#000" stroke-width="2.5"/>
+                            <line x1="60" y1="140" x2="160" y2="200" stroke="#000" stroke-width="2.5"/>
+                            <line x1="160" y1="80"  x2="270" y2="50"  stroke="#000" stroke-width="2"/>
+                            <line x1="160" y1="80"  x2="270" y2="110" stroke="#000" stroke-width="2"/>
+                            <line x1="160" y1="140" x2="270" y2="140" stroke="#000" stroke-width="2"/>
+                            <line x1="160" y1="200" x2="270" y2="170" stroke="#000" stroke-width="2"/>
+                            <line x1="160" y1="200" x2="270" y2="230" stroke="#000" stroke-width="2"/>
+                            <line x1="270" y1="50"  x2="390" y2="50"  stroke="#000" stroke-width="1.5" stroke-dasharray="5,3"/>
+                            <line x1="270" y1="110" x2="390" y2="80"  stroke="#000" stroke-width="1.5"/>
+                            <line x1="270" y1="110" x2="390" y2="140" stroke="#000" stroke-width="1.5"/>
+                            <line x1="270" y1="140" x2="390" y2="140" stroke="#000" stroke-width="1.5"/>
+                            <line x1="270" y1="170" x2="390" y2="170" stroke="#000" stroke-width="1.5"/>
+                            <line x1="270" y1="230" x2="390" y2="200" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3"/>
+                            <line x1="270" y1="230" x2="390" y2="230" stroke="#000" stroke-width="1.5"/>
+                            <line x1="390" y1="80"  x2="480" y2="80"  stroke="#000" stroke-width="1.5"/>
+                            <line x1="390" y1="140" x2="480" y2="140" stroke="#000" stroke-width="1.5"/>
+                            <line x1="390" y1="170" x2="480" y2="170" stroke="#000" stroke-width="1.5"/>
+                            <line x1="390" y1="230" x2="480" y2="230" stroke="#000" stroke-width="1.5"/>
+                            <!-- start node -->
+                            <circle cx="60" cy="140" r="14" fill="#1a1a1a" stroke="#000" stroke-width="2"/>
+                            <text x="60" y="145" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">S</text>
+                            <!-- branch nodes -->
+                            <circle cx="160" cy="80"  r="10" fill="#fff" stroke="#000" stroke-width="2"/>
+                            <circle cx="160" cy="140" r="10" fill="#fff" stroke="#000" stroke-width="2"/>
+                            <circle cx="160" cy="200" r="10" fill="#fff" stroke="#000" stroke-width="2"/>
+                            <!-- mid nodes -->
+                            <circle cx="270" cy="50"  r="8" fill="#FF00FF" stroke="#000" stroke-width="1.5"/>
+                            <circle cx="270" cy="110" r="8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+                            <circle cx="270" cy="140" r="8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+                            <circle cx="270" cy="170" r="8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+                            <circle cx="270" cy="230" r="8" fill="#FF00FF" stroke="#000" stroke-width="1.5"/>
+                            <!-- end nodes -->
+                            <rect x="380" y="71"  width="18" height="18" fill="#00FFFF" stroke="#000" stroke-width="1.5"/>
+                            <rect x="380" y="131" width="18" height="18" fill="#fff"    stroke="#000" stroke-width="1.5"/>
+                            <rect x="380" y="161" width="18" height="18" fill="#fff"    stroke="#000" stroke-width="1.5"/>
+                            <rect x="380" y="221" width="18" height="18" fill="#00FFFF" stroke="#000" stroke-width="1.5"/>
+                            <!-- end terminals -->
+                            <rect x="468" y="72"  width="22" height="16" rx="2" fill="#1a1a1a"/>
+                            <rect x="468" y="132" width="22" height="16" rx="2" fill="#1a1a1a"/>
+                            <rect x="468" y="162" width="22" height="16" rx="2" fill="#1a1a1a"/>
+                            <rect x="468" y="222" width="22" height="16" rx="2" fill="#1a1a1a"/>
+                            <!-- labels -->
+                            <text x="60"  y="165" text-anchor="middle" font-size="9" font-family="monospace" fill="#777">START</text>
+                            <text x="270" y="28"  text-anchor="middle" font-size="9" font-family="monospace" fill="#FF00FF">branch</text>
+                            <text x="270" y="250" text-anchor="middle" font-size="9" font-family="monospace" fill="#FF00FF">branch</text>
+                            <text x="479" y="97"  text-anchor="middle" font-size="9" font-family="monospace" fill="#fff">END</text>
+                            <text x="479" y="157" text-anchor="middle" font-size="9" font-family="monospace" fill="#fff">END</text>
+                        </svg>
+                        <div class="img-caption">Branching narrative structure &mdash; multilinear storytelling paths</div>
                     </div>
                 </div>
             </div>
@@ -266,11 +315,7 @@
                                 <li>Responded with predetermined phrases</li>
                                 <li>Created a convincing illusion of understanding</li>
                             </ul>
-                        </div>
-                        <div class="win-flush">
-                            <div class="img-frame" style="border:none;border-radius:0;box-shadow:none;"><img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/7/79/ELIZA_conversation.png"
-                                    alt="ELIZA chatbot" loading="lazy"></div>
+                            <p class="text-sm text-light italic">&ldquo;The first machine that made humans forget they were talking to a machine &mdash; a distinction we would spend the next 60 years unsuccessfully trying to restore.&rdquo;</p>
                         </div>
                     </div>
                     <div class="win reveal d2">
@@ -294,11 +339,18 @@
                                 storytelling between AI and humans.
                             </p>
                         </div>
-                        <div class="win-flush">
-                            <div class="img-frame" style="border:none;border-radius:0;box-shadow:none;"><img
-                                    src="asset/galatea%20cover.png" alt="Galatea" loading="lazy" onclick="zoomImg(this)"
-                                    class="zoomable"></div>
-                        </div>
+                    </div>
+                </div>
+                <div class="grid-2 gap-md reveal d3" style="margin-top:20px;">
+                    <div class="img-frame img-frame--hero">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/ELIZA_conversation.png"
+                            alt="ELIZA chatbot conversation" loading="lazy" onclick="zoomImg(this)" class="zoomable">
+                        <div class="img-caption">ELIZA session transcript &mdash; MIT, 1966</div>
+                    </div>
+                    <div class="img-frame img-frame--hero">
+                        <img src="asset/galatea%20cover.png" alt="Galatea cover" loading="lazy" onclick="zoomImg(this)"
+                            class="zoomable">
+                        <div class="img-caption">Galatea &mdash; Emily Short, 2000</div>
                     </div>
                 </div>
             </div>
@@ -309,23 +361,19 @@
             <span class="sec-num">06</span>
             <div class="max-w">
                 <h2 class="reveal mb-sm">Hypertext as a Lens</h2>
-                <p class="text-mid mb-lg reveal d1" style="max-width:680px;">Hypertext is a powerful tool for creating
-                    digital narratives that allow readers to explore different paths, plots, and possibilities.</p>
+                <p class="text-mid mb-lg reveal d1" style="max-width:680px;"><a href="https://en.wikipedia.org/wiki/Ted_Nelson" target="_blank" class="ref">Ted Nelson</a> coined the term in 1963. The idea: text need not be linear. Links are not just navigation &mdash; they are <strong>editorial acts</strong>. Every choice of what to connect is an argument about meaning.</p>
                 <div class="grid-3 gap-md">
                     <div class="card reveal d1">
                         <h3 class="mb-sm">Non-linear Narrative</h3>
-                        <p class="text-mid text-sm">Reader-driven exploration through linked information architecture.
-                        </p>
+                        <p class="text-mid text-sm">The reader navigates, and in navigating, <em>authors</em> their own reading. The text changes depending on the path taken. There is no canonical version.</p>
                     </div>
                     <div class="card reveal d2">
-                        <h3 class="mb-sm">Multiple Paths</h3>
-                        <p class="text-mid text-sm">Visual stories with images, audio, and interactive elements
-                            branching in multiple directions.</p>
+                        <h3 class="mb-sm">The Link as Argument</h3>
+                        <p class="text-mid text-sm">Every hyperlink is a rhetorical move. Where you place a link &mdash; and where it leads &mdash; shapes interpretation. The structure <em>is</em> the narrative.</p>
                     </div>
                     <div class="card reveal d3">
                         <h3 class="mb-sm">Reader Agency</h3>
-                        <p class="text-mid text-sm">Access to diverse sources, comparison of viewpoints, discovery of
-                            exclusive content.</p>
+                        <p class="text-mid text-sm">Freedom to explore &mdash; but within a space the author designed. The illusion of infinite choice inside a carefully bounded world. Sound familiar?</p>
                     </div>
                 </div>
             </div>
@@ -334,22 +382,41 @@
         <!-- ══ 8 · PATCHWORK GIRL ══ -->
         <section class="slide">
             <span class="sec-num">07</span>
-            <div class="max-w grid-2 gap-lg items-center">
+            <div class="max-w grid-2 gap-lg">
                 <div class="reveal">
-                    <span class="label">Spatial Hypertext</span>
+                    <span class="label">Spatial Hypertext &middot; Body &middot; Identity</span>
                     <h2 class="mb-md">Patchwork Girl</h2>
-                    <p class="italic text-mid text-lg border-l mb-md">&ldquo;A patchwork girl, creation of a mad
-                        scientist, embarks on a journey to understand her own existence.&rdquo;</p>
+                    <p class="italic text-mid text-lg border-l mb-md">&ldquo;She is buried in several places.&rdquo;</p>
                     <p class="text-mid mb-md"><a href="https://en.wikipedia.org/wiki/Shelley_Jackson" target="_blank"
                             class="ref">Shelley Jackson</a>&rsquo;s <a
                             href="https://www.eastgate.com/catalog/PatchworkGirl.html" target="_blank"
-                            class="ref"><strong>Patchwork Girl</strong></a> (1995) is a landmark interactive hypertext.
-                        Built with <a href="https://www.eastgate.com/storyspace/" target="_blank"
-                            class="ref">Storyspace</a>.</p>
+                            class="ref"><strong>Patchwork Girl</strong></a> (1995) is one of the most studied works in
+                        digital literature. Composed in Storyspace, it retells Frankenstein from the monster&rsquo;s
+                        perspective &mdash; except the monster is a woman stitched together from female corpses.</p>
+                    <p class="text-mid mb-md">The structure <em>is</em> the argument: each lexia is a body part, each
+                        link a suture. To read the text is to assemble the body. You cannot read it linearly because
+                        the body was never linear &mdash; it was collected, scattered, buried in several places.</p>
+                    <ul class="bl text-sm text-mid mb-md">
+                        <li>Five sections: The Body &middot; A Graveyard &middot; A Journal &middot; A Story &middot; Broken Accents</li>
+                        <li>Intertextual with Mary Shelley, L. Frank Baum, and Donna Haraway&rsquo;s cyborg</li>
+                        <li>Spatial hypertext: Storyspace&rsquo;s map shows the &ldquo;body map&rdquo; of nodes</li>
+                        <li>First major hypertext by a woman &mdash; and the most formally ambitious of its era</li>
+                    </ul>
                     <p class="text-sm text-light">Featured in <a href="https://if50.substack.com/" target="_blank"
                             class="ref"><em>50 Years of Text Games</em></a> &mdash; 1995</p>
                 </div>
-                <div class="reveal d1">
+                <div class="reveal d1" style="display:flex; flex-direction:column; gap:16px;">
+                    <div class="win">
+                        <div class="win-bar">
+                            <div class="win-dots"></div>
+                            <span class="win-title">Patchwork Girl &mdash; video essay</span>
+                            <button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
+                        </div>
+                        <div class="win-flush">
+                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/jYvfIAI1je8?rel=0"
+                                    allowfullscreen title="Patchwork Girl video essay" loading="lazy"></iframe></div>
+                        </div>
+                    </div>
                     <div class="img-frame"><img src="asset/patchwork.jpg" alt="Patchwork Girl" loading="lazy"
                             onclick="zoomImg(this)" class="zoomable">
                         <div class="img-caption">Patchwork Girl, Shelley Jackson, 1995</div>
@@ -372,7 +439,7 @@
                         <div class="win-bar">
                             <div class="win-dots"><span class="win-dot win-dot-r"></span><span
                                     class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
-                                class="win-title">teamLab Borderless</span>
+                                class="win-title">teamLab Borderless</span><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                         </div>
                         <div class="win-body" style="padding:8px;">
                             <p class="text-mid text-sm" style="padding:8px 8px 0;"><a href="https://www.teamlab.art/"
@@ -389,7 +456,7 @@
                         <div class="win-bar">
                             <div class="win-dots"><span class="win-dot win-dot-r"></span><span
                                     class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
-                                class="win-title">Refik Anadol &mdash; Machine Hallucinations</span>
+                                class="win-title">Refik Anadol &mdash; Machine Hallucinations</span><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                         </div>
                         <div class="win-body" style="padding:8px;">
                             <p class="text-mid text-sm" style="padding:8px 8px 0;"><a href="https://refikanadol.com/"
@@ -420,10 +487,10 @@
                             cultural heritage since 2013.</p>
                     </div>
                 </div>
-                <div class="img-frame reveal d1"><img
-                        src="https://upload.wikimedia.org/wikipedia/en/f/f0/Cave_of_time.jpg" alt="Cave of Time"
+                <div class="img-frame img-frame--hero reveal d1"><img
+                        src="https://wearemuesli.it/wp-content/uploads/2022/10/mockup_app_cec-1.jpg" alt="We Are Muesli app"
                         loading="lazy" onclick="zoomImg(this)" class="zoomable">
-                    <div class="img-caption">The Cave of Time &mdash; first Choose Your Own Adventure, 1979</div>
+                    <div class="img-caption">We Are Muesli &mdash; Narrative app for cultural heritage &middot; Milan</div>
                 </div>
             </div>
         </section>
@@ -431,13 +498,12 @@
         <!-- ══ 11 · RPGs ══ -->
         <section class="slide">
             <span class="sec-num">10</span>
-            <div class="max-w grid-2 gap-lg items-center">
-                <div class="reveal">
+            <div class="max-w">
+                <div class="reveal mb-lg">
                     <h2 class="mb-md">Role-Playing Games</h2>
-                    <p class="text-mid text-lg mb-md">RPGs are interactive storytelling where players create characters
-                        and collaborate to build a narrative. From tabletop to LARP.</p>
+                    <p class="text-mid text-lg" style="max-width:680px;">RPGs are collaborative interactive storytelling: players create characters, the Game Master builds the world, and the narrative emerges from negotiation. From tabletop to LARP to video game &mdash; the oldest interactive format.</p>
                 </div>
-                <div style="display:flex; flex-direction:column; gap:14px;" class="reveal d1">
+                <div class="img-row-2 reveal d1">
                     <div class="img-frame"><img src="asset/CY%20Borg%20RPG.png" alt="CY_BORG RPG" loading="lazy"
                             onclick="zoomImg(this)" class="zoomable">
                         <div class="img-caption">CY_BORG &mdash; cyberpunk tabletop RPG</div>
@@ -495,30 +561,21 @@
             <div class="max-w grid-2 gap-lg items-center">
                 <div class="reveal">
                     <h2 class="mb-md">Video Games &amp; Storytelling</h2>
-                    <p class="text-mid text-lg mb-md">The 1990s golden age &mdash; richly detailed worlds offering
-                        unique experiences.</p>
+                    <p class="text-mid text-lg mb-md">The 1990s: the decade when games decided they had something to say. It turned out they were right, and critics were slow.</p>
                     <div class="card mb-sm">
                         <h3 class="mb-sm">The Golden Age</h3>
-                        <ul class="bl">
-                            <li>Richly detailed worlds</li>
-                            <li>Genre-defining titles</li>
-                            <li>Narrative complexity rivaling film</li>
-                        </ul>
+                        <p class="text-sm text-mid mb-sm">MYST (1993), Planescape: Torment (1999), Final Fantasy VII (1997). Narrative complexity previously reserved for novels &mdash; delivered through a controller. The cutscene as cinematic ambition.</p>
                     </div>
                     <div class="card">
-                        <h3 class="mb-sm">Rise of MMORPGs</h3>
-                        <ul class="bl">
-                            <li>Massive multiplayer worlds</li>
-                            <li>Emergent storytelling</li>
-                            <li>Persistent narratives</li>
-                        </ul>
+                        <h3 class="mb-sm">Emergent Narrative &amp; MMOs</h3>
+                        <p class="text-sm text-mid">Ultima Online, EverQuest, World of Warcraft: stories <strong>no one wrote</strong> but everyone experienced. Guilds, betrayals, server events &mdash; the first proof that narrative could emerge from systems rather than scripts.</p>
                     </div>
                 </div>
                 <div class="win reveal d1">
                     <div class="win-bar">
                         <div class="win-dots"><span class="win-dot win-dot-r"></span><span
                                 class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div>
-                        <span class="win-title">MYST (1993)</span>
+                        <span class="win-title">MYST (1993)</span><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                     </div>
                     <div class="win-flush">
                         <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/1f17iLSWqTE?rel=0"
@@ -566,6 +623,67 @@
             </div>
         </section>
 
+        <!-- ══ 14b · MEMES & PARTICIPATORY CULTURE ══ -->
+        <section class="slide">
+            <div class="max-w">
+                <div class="reveal mb-md">
+                    <span class="label">Participatory Culture &middot; Remix &middot; Collective Authorship</span>
+                    <h2 class="mb-sm">Memes &amp; the Distributed Narrative</h2>
+                    <p class="text-mid text-lg" style="max-width:780px;">The meme is the folk tale of the digital age &mdash; collectively authored, endlessly remixed, and fundamentally untraceable. Which is, depending on your perspective, either democracy or chaos.</p>
+                </div>
+                <div class="grid-2 gap-lg">
+                    <div class="reveal d1">
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm"><a href="https://en.wikipedia.org/wiki/Henry_Jenkins" target="_blank" class="ref">Henry Jenkins</a> &mdash; Participatory Culture</h4>
+                            <p class="text-sm text-mid">A culture with low barriers to expression, strong support for sharing, and informal mentorship. The audience is no longer passive: it <em>produces</em>.</p>
+                        </div>
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm">The Meme as Narrative Unit</h4>
+                            <p class="text-sm text-mid">Every meme format encodes a <strong>story grammar</strong>: setup, subversion, punchline. The Drake Format, "This is Fine", Distracted Boyfriend &mdash; each one is a reusable narrative template.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-accent bold text-sm mb-sm">Remix Culture &amp; Intertextuality</h4>
+                            <p class="text-sm text-mid">Meaning is produced through <strong>recombination</strong>. A meme divorced from its original context generates new readings. Lawrence Lessig called it &ldquo;Read/Write culture&rdquo; &mdash; as opposed to a Read-Only one.</p>
+                        </div>
+                    </div>
+                    <div class="reveal d2">
+                        <div class="grid-2 gap-sm mb-md">
+                            <div class="stat-card text-center">
+                                <div style="font-size:2rem; margin-bottom:6px;">🐸</div>
+                                <span class="retro text-accent" style="font-size:13px;">Pepe / Wojak</span><br>
+                                <span class="text-sm text-mid">emotional archetypes</span>
+                            </div>
+                            <div class="stat-card text-center">
+                                <div style="font-size:2rem; margin-bottom:6px;">🔥</div>
+                                <span class="retro text-accent" style="font-size:13px;">This is Fine</span><br>
+                                <span class="text-sm text-mid">crisis normalization</span>
+                            </div>
+                            <div class="stat-card text-center">
+                                <div style="font-size:2rem; margin-bottom:6px;">👇</div>
+                                <span class="retro text-accent" style="font-size:13px;">Drake Format</span><br>
+                                <span class="text-sm text-mid">preference binary</span>
+                            </div>
+                            <div class="stat-card text-center">
+                                <div style="font-size:2rem; margin-bottom:6px;">🧵</div>
+                                <span class="retro text-accent" style="font-size:13px;">Thread Narratives</span><br>
+                                <span class="text-sm text-mid">serial micro-fiction</span>
+                            </div>
+                        </div>
+                        <div class="exercise-block">
+                            <span class="exercise-label">✦ At Home Exercise</span>
+                            <p class="text-sm text-mid mb-sm">Pick any meme format you know. Identify:</p>
+                            <ul class="bl text-sm text-mid">
+                                <li>The <strong>narrative arc</strong> (setup &rarr; tension &rarr; resolution)</li>
+                                <li>The <strong>protagonist</strong> (implicit or explicit)</li>
+                                <li>How many <strong>different readings</strong> the same template allows</li>
+                            </ul>
+                            <p class="text-sm italic text-light" style="margin-top:10px;">Is the meme an interactive story? Who is the author?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ══ 15 · ABIGAIL CORFMAN ══ -->
         <section class="slide" style="align-items:center;">
             <span class="sec-num">14</span>
@@ -583,7 +701,7 @@
                             class="win-title">16 Ways to Kill a Vampire at McDonalds</span><a
                             href="https://www.abigailcorfman.com/16Ways.html" target="_blank"
                             style="color:var(--accent); text-decoration:none; font-size:10px; margin-left:auto;">Open
-                            &nearr;</a>
+                            &nearr;</a><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                     </div>
                     <div class="win-flush"><iframe src="https://www.abigailcorfman.com/16Ways.html"
                             style="width:100%; height:70vh; border:none; background:#000;" title="16 Ways"
@@ -621,15 +739,126 @@
                     <div class="win-bar">
                         <div class="win-dots"><span class="win-dot win-dot-r"></span><span
                                 class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
-                            class="win-title">engine.lol &mdash; Of Time and Spaces</span>
+                            class="win-title">engine.lol &mdash; Of Time and Spaces</span><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                     </div>
                     <div class="win-flush embed-placeholder" data-src="Of_time_and_spaces_-_clouds_and_memories.html"
                         data-height="60vh" data-title="engine.lol" style="height:60vh;">
-                        <div style="text-align:center; color:#33ff33; font-family:'VT323',monospace;">
+                        <div style="text-align:center; font-family:'VT323',monospace; padding:20px;">
                             <div class="play-icon">&#9654;</div>
-                            <div style="font-size:1.3rem;">Click to load engine.lol &mdash; Of Time and Spaces</div>
-                            <div style="font-size:0.85rem; color:rgba(51,255,51,0.35); margin-top:5px;">Interactive
-                                experience by Chia Amisola</div>
+                            <div style="font-size:1.4rem; color:#00FF00; margin-bottom:8px;">Click to load &mdash; Of Time and Spaces</div>
+                            <div style="font-size:1rem; color:rgba(0,255,0,0.5);">Interactive experience by Chia Amisola</div>
+                            <a href="Of_time_and_spaces_-_clouds_and_memories.html" target="_blank"
+                                style="display:inline-block; margin-top:14px; color:var(--cyan); font-size:0.95rem; text-decoration:none; border:1px solid var(--cyan); padding:4px 12px;">Open in new tab &nearr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DREAMING 2025 -->
+                <div class="win reveal d3">
+                    <div class="win-bar">
+                        <div class="win-dots"></div>
+                        <span class="win-title">DREAMING 2025 &mdash; Internet art, variable duration</span>
+                        <a href="https://everythingi.love" target="_blank" style="color:var(--accent);text-decoration:none;font-size:10px;margin-left:auto;">everythingi.love &nearr;</a>
+                    </div>
+                    <div class="win-body" style="padding:12px 16px 8px;">
+                        <p class="text-sm text-light italic">(about a dream) &mdash; In development</p>
+                    </div>
+                    <div class="win-flush">
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; background:#000;">
+                            <video src="https://everythingi.love/performance/ambient/falling.mp4"
+                                autoplay muted loop playsinline
+                                style="width:100%; height:40vh; object-fit:cover; display:block; border-right:1px solid #333;">
+                            </video>
+                            <video src="https://everythingi.love/world/dreaming/horsejump.mp4"
+                                autoplay muted loop playsinline
+                                style="width:100%; height:40vh; object-fit:cover; display:block;">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STARGAZING -->
+                <div class="win reveal d3" style="margin-top:15px;">
+                    <div class="win-bar">
+                        <div class="win-dots"></div>
+                        <span class="win-title">Stargazing</span>
+                        <button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
+                    </div>
+                    <div class="win-flush">
+                        <div class="yt-wrap">
+                            <iframe src="https://www.youtube.com/embed/unvfFRSEsiw?rel=0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen title="Stargazing" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 16b · THE HANDMADE WEB ══ -->
+        <section class="slide">
+            <div class="max-w">
+                <div class="reveal mb-md">
+                    <span class="label">Small Web &middot; Indie Web &middot; Digital Sovereignty</span>
+                    <h2 class="mb-sm">The Handmade Web</h2>
+                    <p class="text-mid text-lg" style="max-width:780px;">Before the platform swallowed the page, the web was a place where anyone could build a room of their own. Some people never stopped building.</p>
+                </div>
+                <div class="grid-2 gap-lg">
+                    <div class="reveal d1">
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm">From GeoCities to Neocities</h4>
+                            <p class="text-sm text-mid">GeoCities (1994&ndash;2009) hosted over 38 million user-built pages. When Yahoo shut it down, a community archived it. <a href="https://neocities.org" target="_blank" class="ref">Neocities</a> (2013) revived the spirit: free hosting, raw HTML, no algorithm.</p>
+                        </div>
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm">Against the Walled Garden</h4>
+                            <p class="text-sm text-mid">Social platforms offer reach in exchange for control. The handmade web offers the opposite: zero reach, total autonomy. It is the <strong>zine culture of the internet</strong> &mdash; distributed, personal, intentionally small.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-accent bold text-sm mb-sm">J.R. Carpenter &mdash; &ldquo;A Handmade Web&rdquo; (2015)</h4>
+                            <p class="text-sm text-mid">&ldquo;I evoke the term <em>handmade web</em> to suggest slowness and smallness as a forms of resistance.&rdquo; The personal webpage as narrative act: a space authored, curated, and inhabited by a single voice.</p>
+                        </div>
+                    </div>
+                    <div class="reveal d2">
+                        <!-- Sadgrl embed -->
+                        <div class="win mb-sm">
+                            <div class="win-bar">
+                                <div class="win-dots"></div>
+                                <span class="win-title">sadgrl.online</span>
+                                <a href="https://sadgrl.online" target="_blank" style="color:var(--accent);text-decoration:none;font-size:10px;margin-left:auto;">Open &nearr;</a>
+                                <button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
+                            </div>
+                            <div class="win-flush embed-placeholder" data-src="https://sadgrl.online" data-height="36vh" style="height:36vh;" data-sandbox="allow-scripts allow-same-origin allow-popups">
+                                <div style="text-align:center;font-family:'VT323',monospace;padding:16px;">
+                                    <div class="play-icon" style="font-size:2rem;">&#9654;</div>
+                                    <div style="font-size:1.2rem;color:#00FF00;margin-bottom:6px;">sadgrl.online &mdash; personal page &amp; web advocacy</div>
+                                    <a href="https://sadgrl.online" target="_blank" style="color:var(--cyan);font-size:0.9rem;text-decoration:none;border:1px solid var(--cyan);padding:3px 10px;">Open in new tab &nearr;</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Yesterweb embed -->
+                        <div class="win mb-md">
+                            <div class="win-bar">
+                                <div class="win-dots"></div>
+                                <span class="win-title">yesterweb.org &mdash; manifesto</span>
+                                <a href="https://yesterweb.org" target="_blank" style="color:var(--accent);text-decoration:none;font-size:10px;margin-left:auto;">Open &nearr;</a>
+                                <button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
+                            </div>
+                            <div class="win-flush embed-placeholder" data-src="https://yesterweb.org" data-height="36vh" style="height:36vh;" data-sandbox="allow-scripts allow-same-origin allow-popups">
+                                <div style="text-align:center;font-family:'VT323',monospace;padding:16px;">
+                                    <div class="play-icon" style="font-size:2rem;">&#9654;</div>
+                                    <div style="font-size:1.2rem;color:#00FF00;margin-bottom:6px;">yesterweb.org &mdash; anti-commercial web manifesto</div>
+                                    <a href="https://yesterweb.org" target="_blank" style="color:var(--cyan);font-size:0.9rem;text-decoration:none;border:1px solid var(--cyan);padding:3px 10px;">Open in new tab &nearr;</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exercise-block">
+                            <span class="exercise-label">✦ At Home Exercise</span>
+                            <p class="text-sm text-mid mb-sm">Open <strong>neocities.org/browse</strong>. Find one page that tells a personal story. Ask yourself:</p>
+                            <ul class="bl text-sm text-mid">
+                                <li>What narrative choices did the author make?</li>
+                                <li>How does the <strong>design</strong> itself communicate meaning?</li>
+                                <li>Could this story exist on Instagram? Why not?</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -661,7 +890,7 @@
                         <div class="win-bar">
                             <div class="win-dots"><span class="win-dot win-dot-r"></span><span
                                     class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
-                                class="win-title">A MAZE. Berlin 2023</span>
+                                class="win-title">A MAZE. Berlin 2023</span><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                         </div>
                         <div class="win-flush">
                             <div class="yt-wrap"><iframe src="https://www.youtube-nocookie.com/embed/4tIpFGkBVMo?rel=0"
@@ -680,7 +909,7 @@
                 <div class="grid-2 gap-lg items-center mb-lg">
                     <div class="reveal">
                         <span class="label">Net Art &middot; Games &middot; Tools</span>
-                        <h2 class="mb-md"><a href="https://alienmelon.com/" target="_blank" class="ref">Nathalie
+                        <h2 class="mb-md glitch-text"><a href="https://alienmelon.com/" target="_blank" class="ref">Nathalie
                                 Lawhead</a></h2>
                         <p class="text-mid text-lg mb-md">Multimedia artist creating <strong>chaotic, personal
                                 interactive experiences</strong>. Maximalism, glitch, collage.</p>
@@ -714,16 +943,88 @@
                                 class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
                             class="win-title">tetrageddon.com</span><a href="http://tetrageddon.com/" target="_blank"
                             style="color:var(--accent); text-decoration:none; font-size:10px; margin-left:auto;">Open
-                            &nearr;</a>
+                            &nearr;</a><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                     </div>
                     <div class="win-flush embed-placeholder" data-src="https://tetrageddon.com/" data-height="70vh"
                         data-title="Tetrageddon" data-sandbox="allow-scripts allow-same-origin allow-popups"
                         style="height:70vh;">
-                        <div style="text-align:center; color:var(--pink); font-family:'VT323',monospace;">
+                        <div style="text-align:center; font-family:'VT323',monospace; padding:20px;">
                             <div class="play-icon">&#9654;</div>
-                            <div style="font-size:1.3rem;">Click to load Tetrageddon</div>
-                            <div style="font-size:0.85rem; color:rgba(255,106,213,0.35); margin-top:5px;">
-                                tetrageddon.com &mdash; Interactive art experience</div>
+                            <div style="font-size:1.4rem; color:#00FF00; margin-bottom:8px;">Click to load Tetrageddon</div>
+                            <div style="font-size:1rem; color:rgba(0,255,0,0.5);">tetrageddon.com &mdash; Interactive art experience</div>
+                            <a href="http://tetrageddon.com/" target="_blank"
+                                style="display:inline-block; margin-top:14px; color:var(--cyan); font-size:0.95rem; text-decoration:none; border:1px solid var(--cyan); padding:4px 12px;">Open in new tab &nearr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 18b · GLITCH / VAPORWAVE / HYPERPOP / DEEP FRIED / EXIT REALITY ══ -->
+        <section class="slide">
+            <div class="max-w">
+                <div class="reveal mb-md">
+                    <span class="label">Digital Aesthetics &middot; Net Culture &middot; Narrative Form</span>
+                    <h2 class="mb-sm glitch-text">Aesthetics as Storytelling</h2>
+                    <p class="text-mid text-lg" style="max-width:820px;">Every aesthetic movement encodes a worldview &mdash; and a narrative. These are not genres of music or image styles. They are <strong>survival strategies</strong> for living inside digital culture.</p>
+                </div>
+                <div class="grid-2 gap-md reveal d1 mb-md">
+                    <!-- VAPORWAVE -->
+                    <div class="win">
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">VAPORWAVE &mdash; 2010&ndash;</span><button class="win-fs-btn" onclick="enterFullscreen(this)">⛶</button></div>
+                        <div class="win-body" style="padding:14px 20px 10px;">
+                            <p class="text-sm text-mid mb-sm"><strong>Grief for futures that never arrived.</strong> Vaporwave aestheticizes the wreckage of late capitalism &mdash; elevator music, Windows 95, mall architecture &mdash; and turns nostalgia into narrative. A E S T H E T I C as performance.</p>
+                            <p class="text-sm text-light italic">Macintosh Plus, 2814, Chuck Person &mdash; the album as interactive memory palace.</p>
+                        </div>
+                        <div class="win-flush">
+                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/pFptt7Cargc?rel=0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen title="Vaporwave" loading="lazy"></iframe></div>
+                        </div>
+                    </div>
+                    <!-- GLITCH -->
+                    <div class="win">
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">GLITCH ART &mdash; Error as Grammar</span><button class="win-fs-btn" onclick="enterFullscreen(this)">⛶</button></div>
+                        <div class="win-body" style="padding:14px 20px 10px;">
+                            <p class="text-sm text-mid mb-sm"><a href="https://rosa-menkman.blogspot.com/" target="_blank" class="ref">Rosa Menkman</a>: &ldquo;A glitch is a wonderful window into the machine.&rdquo; Glitch art weaponizes system failure as a <strong>narrative of disruption</strong>. When the interface breaks, ideology becomes visible.</p>
+                            <p class="text-sm text-light italic">Cory Arcangel, JODI, net.art &mdash; error as authorial choice.</p>
+                        </div>
+                        <div class="win-flush">
+                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/gr0yiOyvas4?rel=0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen title="Rosa Menkman Glitch" loading="lazy"></iframe></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-3 gap-md reveal d2">
+                    <!-- HYPERPOP -->
+                    <div class="win">
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">HYPERPOP &mdash; 2019&ndash;</span><button class="win-fs-btn" onclick="enterFullscreen(this)">⛶</button></div>
+                        <div class="win-body" style="padding:14px 20px 10px;">
+                            <p class="text-sm text-mid mb-sm">SOPHIE, 100 gecs, A.G. Cook &mdash; PC Music. <strong>Maximalist digital production as narrative overload.</strong> The sound of being online at 4am. Every element pushed to saturation: the interface as overwhelm.</p>
+                        </div>
+                        <div class="win-flush">
+                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/KY5Y-M3WW9Y?rel=0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen title="SOPHIE Faceshopping" loading="lazy"></iframe></div>
+                        </div>
+                    </div>
+                    <!-- DEEP FRIED FEELS -->
+                    <div class="win">
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">DEEP FRIED FEELS</span></div>
+                        <div class="win-body" style="padding:14px 20px;">
+                            <p class="text-sm text-mid mb-sm"><strong>Emotional irony through compression artifacts.</strong> Deep-fried aesthetics (extreme JPEG noise, oversaturation, distortion) create a <em>second layer of reading</em>: the content says one thing, the damage says another.</p>
+                            <p class="text-sm text-mid mb-sm">It is the <strong>unreliable narrator of image formats</strong>. Distortion becomes sincerity by other means &mdash; the meme so compressed it loops back to feeling.</p>
+                            <p class="text-sm italic text-light">&ldquo;Deep fried feels&rdquo; &mdash; irony as an aesthetic survival tool in digital culture.</p>
+                        </div>
+                    </div>
+                    <!-- EXIT REALITY -->
+                    <div class="win">
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">EXIT REALITY</span></div>
+                        <div class="win-body" style="padding:14px 20px;">
+                            <p class="text-sm text-mid mb-sm"><strong>The desire to leave.</strong> Exit Reality names a recurring theme across VR art, net art, game culture, and digital fiction: the screen as threshold, the avatar as escape hatch, the world as optional.</p>
+                            <p class="text-sm text-mid mb-sm">From Second Life to VRChat to <em>Ready Player One</em> to Fortnite concerts &mdash; the interactive narrative that promises: <strong>you can be elsewhere.</strong></p>
+                            <p class="text-sm italic text-light">Critical question: who gets to exit &mdash; and what are they exiting into?</p>
                         </div>
                     </div>
                 </div>
@@ -761,10 +1062,11 @@
                         <div class="win-bar">
                             <div class="win-dots"><span class="win-dot win-dot-r"></span><span
                                     class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
-                                class="win-title">Shell Song</span>
+                                class="win-title">Shell Song</span><a href="https://shell-song.neocities.org/" target="_blank"
+                                style="color:var(--accent); text-decoration:none; font-size:10px; margin-left:auto;">Open &nearr;</a><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                         </div>
                         <div class="win-flush">
-                            <iframe src="https://shell-song.neocities.org/" style="width:100%;height:50vh;border:none;"
+                            <iframe src="https://shell-song.neocities.org/" style="width:100%;height:55vh;border:none;"
                                 title="Shell Song" loading="lazy"></iframe>
                         </div>
                     </div>
@@ -886,34 +1188,33 @@
         <!-- ══ 22 · FACADE ══ -->
         <section class="slide">
             <span class="sec-num">21</span>
-            <div class="max-w grid-2 gap-lg items-center">
-                <div class="reveal">
-                    <span class="label">Drama Manager at Work</span>
-                    <h2 class="mb-md"><a href="https://en.wikipedia.org/wiki/Fa%C3%A7ade_(video_game)" target="_blank"
-                            class="ref">Fa&ccedil;ade</a></h2>
-                    <p class="text-mid text-lg mb-md">Fa&ccedil;ade (2005) by Mateas &amp; Stern &mdash; groundbreaking
-                        interactive drama.</p>
-                    <div class="card mb-sm">
-                        <h4 class="text-accent bold text-sm mb-sm">Narrative Setup</h4>
-                        <p class="text-sm text-mid">Natural language input. Type freely, AI responds.</p>
+            <div class="max-w">
+                <div class="grid-2 gap-lg reveal mb-md">
+                    <div>
+                        <span class="label">Drama Manager at Work</span>
+                        <h2 class="mb-md"><a href="https://en.wikipedia.org/wiki/Fa%C3%A7ade_(video_game)" target="_blank"
+                                class="ref">Fa&ccedil;ade</a></h2>
+                        <p class="text-mid text-lg mb-md">Fa&ccedil;ade (2005) by Michael Mateas &amp; Andrew Stern &mdash; the first full-length interactive drama driven by a live Drama Manager. You visit a couple, you type freely, the AI responds in real time. It can throw you out.</p>
                     </div>
-                    <div class="card mb-sm">
-                        <h4 class="text-accent bold text-sm mb-sm">Key Innovation</h4>
-                        <p class="text-sm text-mid">Drama Manager orchestrates. AI dialogue. Multiple outcomes.</p>
-                    </div>
-                    <div class="card">
-                        <h4 class="text-accent bold text-sm mb-sm">Significance</h4>
-                        <p class="text-sm text-mid">Blurs scripted and improvised storytelling.</p>
+                    <div style="display:flex; flex-direction:column; gap:10px; justify-content:center;">
+                        <div class="card">
+                            <h4 class="text-accent bold text-sm mb-sm">Narrative Setup</h4>
+                            <p class="text-sm text-mid">Natural language input. No menus, no buttons. Type anything &mdash; the system interprets intent.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-accent bold text-sm mb-sm">Key Innovation</h4>
+                            <p class="text-sm text-mid">The Drama Manager reads the emotional arc, selects the next beat. Scripted and emergent in the same breath.</p>
+                        </div>
                     </div>
                 </div>
-                <div style="display:flex; flex-direction:column; gap:14px;" class="reveal d1">
+                <div class="img-row-2 reveal d1">
                     <div class="img-frame"><img src="asset/drama%20manager%20in%20facade.png" alt="Facade Drama Manager"
                             loading="lazy" onclick="zoomImg(this)" class="zoomable">
-                        <div class="img-caption">Fa&ccedil;ade &mdash; Drama Manager &middot; 2005</div>
+                        <div class="img-caption">Fa&ccedil;ade &mdash; Drama Manager architecture &middot; 2005</div>
                     </div>
                     <div class="img-frame"><img
                             src="https://upload.wikimedia.org/wikipedia/en/9/9c/Facade_screenshot_Trip_%26_Grace.jpg"
-                            alt="Facade" loading="lazy">
+                            alt="Facade" loading="lazy" onclick="zoomImg(this)" class="zoomable">
                         <div class="img-caption">Fa&ccedil;ade &mdash; Trip &amp; Grace &middot; 2005</div>
                     </div>
                 </div>
@@ -941,10 +1242,68 @@
                         <p class="text-sm text-mid">Games tackling morality, identity, politics.</p>
                     </div>
                 </div>
-                <div class="img-frame reveal d1"><img
-                        src="https://upload.wikimedia.org/wikipedia/en/c/c9/The_Sims_1_Build.jpg" alt="The Sims"
+                <div class="img-frame img-frame--hero reveal d1">
+                    <img src="https://preview.redd.it/my-ex-husband-ruined-my-wedding-v0-nulgnvu9ihyc1.png?auto=webp&s=87302c2983d66c9d95583dedfaffdcf34dd6361c" alt="The Sims"
                         loading="lazy" onclick="zoomImg(this)" class="zoomable">
                     <div class="img-caption">The Sims &mdash; Maxis / EA, 2000</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 23b · PLATFORMIZATION ══ -->
+        <section class="slide">
+            <div class="max-w">
+                <div class="reveal mb-md">
+                    <span class="label">Platform Studies &middot; Algorithmic Culture &middot; Narrative Architecture</span>
+                    <h2 class="mb-sm">Platformization &amp; the Algorithmic Narrator</h2>
+                    <p class="text-mid text-lg" style="max-width:780px;">The most influential storyteller of the 21st century has no name, no face, and no artistic intent. It is an algorithm &mdash; and it decides what you see next.</p>
+                </div>
+                <div class="grid-3 gap-md reveal d1 mb-lg">
+                    <div class="win">
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">TikTok / Reels</span></div>
+                        <div class="win-body">
+                            <p class="text-sm text-mid mb-sm">Avg. video: <strong>21&ndash;34 seconds</strong>. The platform rewards a specific narrative arc: <strong>hook in 2s &rarr; conflict &rarr; payoff</strong>. Creators who break this structure disappear from the feed.</p>
+                            <p class="text-sm italic text-light">&ldquo;The For You Page is a Drama Manager that optimises for retention, not meaning.&rdquo;</p>
+                        </div>
+                    </div>
+                    <div class="win">
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">YouTube</span></div>
+                        <div class="win-body">
+                            <p class="text-sm text-mid mb-sm"><strong>70%</strong> of watch time comes from autoplay recommendations. YouTube&rsquo;s algorithm is the world&rsquo;s largest serialized narrative engine: it decides the <em>next episode</em> of your life.</p>
+                            <p class="text-sm italic text-light">Rabbit holes as unintentional branching narratives.</p>
+                        </div>
+                    </div>
+                    <div class="win">
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">Instagram</span></div>
+                        <div class="win-body">
+                            <p class="text-sm text-mid mb-sm">Organic reach: <strong>&lt;10%</strong> of followers. The Stories format (24h ephemeral) introduced <strong>narrative scarcity</strong> to social media. Miss it and the story is gone &mdash; FOMO as narrative mechanism.</p>
+                            <p class="text-sm italic text-light">The timeline as curated autobiography.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-2 gap-lg">
+                    <div class="reveal d2">
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm">José van Dijck &mdash; <em>The Culture of Connectivity</em> (2013)</h4>
+                            <p class="text-sm text-mid">Platforms are not neutral pipelines. They have embedded values, business models, and defaults that <strong>shape what stories get told</strong> and which ones vanish.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-accent bold text-sm mb-sm">The Attention Economy</h4>
+                            <p class="text-sm text-mid">Herbert Simon (1971): &ldquo;A wealth of information creates a poverty of attention.&rdquo; Platform narratives are optimized not for depth or truth, but for the single metric that funds them: <strong>time on screen</strong>.</p>
+                        </div>
+                    </div>
+                    <div class="reveal d3">
+                        <div class="exercise-block">
+                            <span class="exercise-label">✦ At Home Exercise</span>
+                            <p class="text-sm text-mid mb-sm">Open TikTok or Reels. Watch 5 videos back to back. For each one, map:</p>
+                            <ul class="bl text-sm text-mid mb-sm">
+                                <li><strong>Hook</strong>: what keeps you watching past second 2?</li>
+                                <li><strong>Structure</strong>: setup &rarr; conflict &rarr; resolution?</li>
+                                <li><strong>Cliffhanger</strong>: does it make you scroll to the next?</li>
+                            </ul>
+                            <p class="text-sm italic text-light">Is the algorithm writing a story for you &mdash; or <em>about</em> you?</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -979,14 +1338,16 @@
         <!-- ══ 25 · BANDERSNATCH ══ -->
         <section class="slide">
             <span class="sec-num">24</span>
-            <div class="max-w grid-2 gap-lg items-center">
-                <div class="reveal">
-                    <span class="label">Interactive Film</span>
-                    <h2 class="mb-md"><a href="https://en.wikipedia.org/wiki/Black_Mirror:_Bandersnatch" target="_blank"
-                            class="ref">Black Mirror: Bandersnatch</a></h2>
-                    <p class="text-mid text-lg mb-md">Netflix (2018) &mdash; viewers make decisions. Set in 1984, a
-                        programmer develops a choose-your-own-adventure game.</p>
-                    <div class="grid-3 gap-sm">
+            <div class="max-w">
+                <div class="reveal mb-md" style="display:flex; align-items:baseline; gap:32px; flex-wrap:wrap;">
+                    <div>
+                        <span class="label">Interactive Film</span>
+                        <h2 class="mb-sm"><a href="https://en.wikipedia.org/wiki/Black_Mirror:_Bandersnatch" target="_blank"
+                                class="ref">Black Mirror: Bandersnatch</a></h2>
+                        <p class="text-mid text-lg">Netflix (2018) &mdash; viewers make decisions. Set in 1984, a
+                            programmer develops a choose-your-own-adventure game.</p>
+                    </div>
+                    <div class="grid-3 gap-sm" style="min-width:280px;">
                         <div class="stat-card"><span class="stat-num">150<span
                                     style="font-size:0.9rem;">min</span></span><br><span
                                 class="text-sm text-mid">Footage</span></div>
@@ -1000,11 +1361,62 @@
                     <div class="win-bar">
                         <div class="win-dots"><span class="win-dot win-dot-r"></span><span
                                 class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div>
-                        <span class="win-title">Bandersnatch Trailer</span>
+                        <span class="win-title">Bandersnatch — Behind the Scenes</span><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                     </div>
                     <div class="win-flush">
-                        <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/XM0xd6T7P1s?rel=0"
-                                allowfullscreen title="Bandersnatch Trailer" loading="lazy"></iframe></div>
+                        <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/VNw9DAwp2Kk?rel=0"
+                                allowfullscreen title="Bandersnatch Behind the Scenes" loading="lazy"></iframe></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 25b · AR/VR & IMMERSIVE STORYTELLING ══ -->
+        <section class="slide">
+            <div class="max-w">
+                <div class="reveal mb-md">
+                    <span class="label">Extended Reality &middot; Embodied Narrative &middot; Presence</span>
+                    <h2 class="mb-sm">AR/VR &amp; Immersive Storytelling</h2>
+                    <p class="text-mid text-lg" style="max-width:780px;">When the story surrounds you on all sides and responds to your body, the line between audience and protagonist dissolves. Whether this is liberation or vertigo depends on the day.</p>
+                </div>
+                <div class="grid-2 gap-lg">
+                    <div class="reveal d1">
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm"><a href="https://www.notesonblindness.co.uk/vr/" target="_blank" class="ref">Notes on Blindness: Into Darkness</a> (2016)</h4>
+                            <p class="text-sm text-mid">Based on John Hull&rsquo;s audio diaries. VR experience of blindness through <strong>spatial sound and haptics</strong>. Narrative delivered without images &mdash; the medium itself enacts the theme.</p>
+                        </div>
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm"><a href="https://en.wikipedia.org/wiki/Punchdrunk" target="_blank" class="ref">Punchdrunk &mdash; Sleep No More</a> (2011&ndash;)</h4>
+                            <p class="text-sm text-mid">Immersive theater in a 5-floor building. Audience wears masks, moves freely, constructs their own version of Macbeth. No two people experience the same story. <strong>Physical multilinearity</strong>.</p>
+                        </div>
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm"><a href="https://en.wikipedia.org/wiki/Pok%C3%A9mon_Go" target="_blank" class="ref">Pok&eacute;mon Go</a> (2016)</h4>
+                            <p class="text-sm text-mid">AR as <strong>location-triggered narrative</strong>: the city becomes a story map. 500M+ downloads. First mainstream proof that the world itself can be a game board.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-accent bold text-sm mb-sm">Presence &amp; Embodied Agency</h4>
+                            <p class="text-sm text-mid">The defining feature of VR narrative is <strong>presence</strong> &mdash; the sensation of &ldquo;being there.&rdquo; Chris Milk called VR &ldquo;the empathy machine.&rdquo; Researchers have since complicated that claim considerably.</p>
+                        </div>
+                    </div>
+                    <div class="reveal d2" style="display:flex; flex-direction:column; gap:16px;">
+                        <div class="win">
+                            <div class="win-bar">
+                                <div class="win-dots"><span class="win-dot win-dot-r"></span><span
+                                        class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div>
+                                <span class="win-title">Notes on Blindness: Into Darkness</span><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
+                            </div>
+                            <div class="win-flush">
+                                <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/mHL9cNeMSAY?rel=0"
+                                        allowfullscreen title="Notes on Blindness VR" loading="lazy"></iframe></div>
+                            </div>
+                        </div>
+                        <div class="exercise-block">
+                            <span class="exercise-label">✦ At Home Exercise &mdash; Verbal Branching</span>
+                            <p class="text-sm text-mid mb-sm"><em>Close your eyes.</em> I will describe a scene. When I stop, you choose &mdash; without thinking:</p>
+                            <p class="text-sm text-mid mb-sm" style="border-left:2px solid var(--accent); padding-left:12px;">&ldquo;You are in a corridor. At the end, two doors. Behind the left door you hear music. Behind the right, silence. You have been walking for hours. You are tired.&rdquo;</p>
+                            <p class="text-sm bold text-mid">LEFT or RIGHT?</p>
+                            <p class="text-sm italic text-light" style="margin-top:8px;">What made you choose? That instinct is what immersive narrative designers are trying to engineer.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1014,9 +1426,8 @@
         <section class="slide">
             <span class="sec-num">25</span>
             <div class="max-w">
-                <h2 class="reveal mb-sm">The Emerging Impact of AI</h2>
-                <p class="text-mid mb-lg reveal d1">AI is reshaping interactive storytelling across three dimensions.
-                </p>
+                <h2 class="reveal mb-sm glitch-text">The Emerging Impact of AI</h2>
+                <p class="text-mid mb-lg reveal d1" style="max-width:780px;">AI doesn&rsquo;t just accelerate interactive storytelling &mdash; it fundamentally reframes the question of authorship. The machine can now generate the possibility space <em>as you explore it</em>. This is either exciting or terrifying. Possibly both.</p>
                 <div class="grid-3 gap-md">
                     <div class="win reveal d1">
                         <div class="win-bar">
@@ -1025,10 +1436,11 @@
                                 class="win-title">NARRATIVE CREATION</span>
                         </div>
                         <div class="win-body">
-                            <ul class="bl">
-                                <li>Complex, dynamic narratives</li>
-                                <li>Responsive systems</li>
-                                <li>Real-time adaptation</li>
+                            <p class="text-sm text-mid mb-sm">LLMs can generate branching narratives, adapt tone to player choices, and maintain character consistency across thousands of interactions. The Drama Manager of the 1990s is now a foundation model.</p>
+                            <ul class="bl text-sm text-mid">
+                                <li>Infinite story branches, generated live</li>
+                                <li>NPC dialogue that remembers context</li>
+                                <li>Real-time narrative adaptation</li>
                             </ul>
                         </div>
                     </div>
@@ -1039,10 +1451,11 @@
                                 class="win-title">WRITER ASSISTANCE</span>
                         </div>
                         <div class="win-body">
-                            <ul class="bl">
-                                <li>Plot development</li>
-                                <li>Character creation</li>
-                                <li>Plot hole detection</li>
+                            <p class="text-sm text-mid mb-sm">For interactive fiction authors, AI becomes a co-writer, continuity editor, and stress-tester &mdash; identifying plot holes across hundreds of narrative branches humans can&rsquo;t track simultaneously.</p>
+                            <ul class="bl text-sm text-mid">
+                                <li>Plot consistency across branches</li>
+                                <li>Character voice maintenance</li>
+                                <li>Automated playtesting</li>
                             </ul>
                         </div>
                     </div>
@@ -1050,14 +1463,11 @@
                         <div class="win-bar">
                             <div class="win-dots"><span class="win-dot win-dot-r"></span><span
                                     class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
-                                class="win-title">CONTENT GENERATION</span>
+                                class="win-title">THE OPEN QUESTION</span>
                         </div>
                         <div class="win-body">
-                            <ul class="bl">
-                                <li>Adaptive dialogue</li>
-                                <li>Contextual music</li>
-                                <li>Reactive environments</li>
-                            </ul>
+                            <p class="text-sm text-mid mb-sm">If the story is generated in response to you, is it <em>yours</em>? If the AI adapts to your choices, is there still an author &mdash; or only a mirror?</p>
+                            <p class="text-sm italic text-light">&ldquo;The hallucination is not a bug. It&rsquo;s the only honest answer to an impossible question.&rdquo;</p>
                         </div>
                     </div>
                 </div>
@@ -1106,27 +1516,38 @@
             <span class="sec-num">27</span>
             <div class="max-w">
                 <h2 class="reveal mb-sm">Educational Focus</h2>
-                <p class="text-mid mb-lg reveal d1">Interactive storytelling transforms the learning process.</p>
-                <div class="grid-3 gap-md" style="grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));">
-                    <div class="card reveal d1">
-                        <h3 class="mb-sm" style="font-size:1.05rem;">Identity Construction</h3>
-                        <p class="text-sm text-mid">Develop identity through narrative choices.</p>
+                <p class="text-mid mb-lg reveal d1" style="max-width:780px;">Interactive storytelling is not a pedagogical trick. It is a structural shift: from <em>telling students what happened</em> to <em>putting them inside a situation where it matters</em>. The difference is not marginal.</p>
+                <div class="grid-2 gap-lg reveal d1">
+                    <div>
+                        <div class="grid-2 gap-sm mb-md">
+                            <div class="card">
+                                <h3 class="mb-sm" style="font-size:1rem;">Identity &amp; Agency</h3>
+                                <p class="text-sm text-mid">Choices carry consequence. Students rehearse decision-making in a space where failure is allowed &mdash; and instructive.</p>
+                            </div>
+                            <div class="card">
+                                <h3 class="mb-sm" style="font-size:1rem;">Transversal Skills</h3>
+                                <p class="text-sm text-mid">Creativity, collaboration, critical thinking &mdash; not as listed objectives, but as the mechanics of the experience itself.</p>
+                            </div>
+                            <div class="card">
+                                <h3 class="mb-sm" style="font-size:1rem;">Metacognition</h3>
+                                <p class="text-sm text-mid">After a branching narrative, students can trace their path. They learn to ask: why did I choose that? What did I assume?</p>
+                            </div>
+                            <div class="card">
+                                <h3 class="mb-sm" style="font-size:1rem;">Emotional Intelligence</h3>
+                                <p class="text-sm text-mid">Perspective-taking through character embodiment. Empathy as a design mechanic, not a virtue lecture.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card reveal d2">
-                        <h3 class="mb-sm" style="font-size:1.05rem;">Transversal Skills</h3>
-                        <p class="text-sm text-mid">Creativity, collaboration, communication, critical thinking.</p>
-                    </div>
-                    <div class="card reveal d3">
-                        <h3 class="mb-sm" style="font-size:1.05rem;">Meaningful Learning</h3>
-                        <p class="text-sm text-mid">Immersive, personalized experiences.</p>
-                    </div>
-                    <div class="card reveal d1">
-                        <h3 class="mb-sm" style="font-size:1.05rem;">Metacognition</h3>
-                        <p class="text-sm text-mid">Reflection on one&rsquo;s own learning.</p>
-                    </div>
-                    <div class="card reveal d2">
-                        <h3 class="mb-sm" style="font-size:1.05rem;">Emotional Education</h3>
-                        <p class="text-sm text-mid">Safe exploration of complex situations.</p>
+                    <div>
+                        <div class="win mb-sm">
+                            <div class="win-bar"><div class="win-dots"></div><span class="win-title">80 Days &mdash; Inkle Studios</span><button class="win-fs-btn" onclick="enterFullscreen(this)">⛶</button></div>
+                            <div class="win-flush">
+                                <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/sgFBuDk7x0M?rel=0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen title="80 Days" loading="lazy"></iframe></div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-light italic" style="padding:0 4px;">80 Days (2014) &mdash; Inkle Studios. A global branching narrative with 150+ cities, used in secondary education worldwide for geography, history and ethics.</p>
                     </div>
                 </div>
             </div>
@@ -1203,7 +1624,7 @@
                             class="win-title">Heaven Isn&rsquo;t Hiring &mdash; Arcweave</span><a
                             href="https://arcweave.com/embed/zr63z97EZR/play" target="_blank"
                             style="color:var(--accent); text-decoration:none; font-size:10px; margin-left:auto;">Open
-                            &nearr;</a>
+                            &nearr;</a><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                     </div>
                     <div class="win-flush"><iframe src="https://arcweave.com/embed/zr63z97EZR/play"
                             style="width:100%;height:60vh;border:none;" allow="fullscreen" title="Heaven Isn't Hiring"
@@ -1225,16 +1646,12 @@
                         class="win-title">CONCLUSION</span>
                 </div>
                 <div class="win-body" style="padding:36px;">
-                    <h2 class="mb-md" style="color:var(--accent);">Conclusion</h2>
-                    <p class="italic text-mid text-lg border-l mb-md" style="text-align:left;">&ldquo;Interactive
-                        storytelling merges the ancient art of narrative with the dynamic possibilities of digital
-                        media.&rdquo;</p>
-                    <p class="text-mid" style="text-align:left; margin-bottom:14px;">This form invites audiences to step
-                        into the story world, making choices that unfold the narrative in unique directions.</p>
-                    <p class="bold"
-                        style="text-align:left; border-left:3px solid var(--accent); padding:10px 14px; background:rgba(200,56,32,0.03); border-radius:2px;">
-                        At its core, interactive storytelling is about empowering participants to influence the
-                        story&rsquo;s path, making each journey personal.</p>
+                    <h2 class="mb-md" style="color:var(--accent);">What we've learned</h2>
+                    <p class="italic text-mid text-lg border-l mb-md" style="text-align:left;">&ldquo;Interactive storytelling is not a genre. It is a <strong>relationship</strong> between author, system, and reader &mdash; and that relationship has been redesigned every decade for fifty years.&rdquo;</p>
+                    <p class="text-mid" style="text-align:left; margin-bottom:14px;">From Colossal Cave to AI Dungeon, from Storyspace to Neocities, from MYST to Bandersnatch: the question has always been the same. <em>What does it mean to give the audience a choice?</em></p>
+                    <p class="text-mid" style="text-align:left; margin-bottom:14px;">The answer changes depending on who asks &mdash; programmer, artist, activist, platform, algorithm. The history of interactive storytelling is the history of that negotiation.</p>
+                    <p class="bold" style="text-align:left; border-left:3px solid var(--accent); padding:10px 14px; background:rgba(255,0,255,0.04);">
+                        The story is not over. It never was. You just reached a branch point.</p>
                     <div class="vw-bar" style="margin-top:20px;"></div>
                 </div>
             </div>
@@ -1262,6 +1679,21 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        function enterFullscreen(btn) {
+            const win = btn.closest('.win');
+            const iframe = win ? win.querySelector('iframe') : null;
+            if (iframe) {
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen();
+                } else if (iframe.webkitRequestFullscreen) {
+                    iframe.webkitRequestFullscreen();
+                } else if (iframe.mozRequestFullScreen) {
+                    iframe.mozRequestFullScreen();
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
