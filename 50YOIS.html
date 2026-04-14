@@ -34,6 +34,33 @@
             </div>
         </section>
 
+        <!-- ══ 1b · HOW THIS WORKS ══ -->
+        <section class="slide" style="align-items:center; text-align:center;">
+            <div class="max-w reveal" style="max-width:860px;">
+                <div class="win" style="text-align:left;">
+                    <div class="win-bar">
+                        <div class="win-dots"><span class="win-dot win-dot-r"></span><span class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div>
+                        <span class="win-title">README.txt &mdash; before you do anything else</span>
+                    </div>
+                    <div class="win-body" style="padding:32px 36px;">
+                        <h2 class="mb-md" style="font-size:clamp(1.6rem,3vw,2.4rem);">A brief orientation for people<br><span class="text-accent">who have never been inside a story before.</span></h2>
+                        <p class="text-mid text-lg mb-md">These slides contain things. Games that are fifty years old and run on logic you could fit on a napkin. Tools trained on the entire internet. Interactive fiction that will ask for your participation and occasionally judge your choices. This progression repeats approximately thirty times.</p>
+                        <div class="grid-2 gap-md mb-md">
+                            <div class="card">
+                                <h4 class="text-accent bold text-sm mb-sm">&#9654; Embeds &amp; Live Demos</h4>
+                                <p class="text-sm text-mid">Some slides have buttons. Press them. Some have games you can play directly in class. Play them. One will probably insult you &mdash; consider it a compliment from a machine with no social skills and excellent taste.</p>
+                            </div>
+                            <div class="card">
+                                <h4 class="text-accent bold text-sm mb-sm">&#9654; Your Participation</h4>
+                                <p class="text-sm text-mid">&ldquo;I prefer to observe&rdquo; is a valid epistemological position. It is also what every secondary character says in the first act of a novel, immediately before the novel makes them the protagonist.</p>
+                            </div>
+                        </div>
+                        <p class="italic text-mid border-l">A few things in here will ask you to make a choice. The interesting part &mdash; which we will spend the next two hours on &mdash; is that someone designed that moment. On purpose. With intent. Possibly malicious.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ══ 2 · INTRODUCTION ══ -->
         <section class="slide">
             <span class="sec-num">01</span>
@@ -272,11 +299,6 @@
                     </div>
                     <p class="text-sm text-light">From <a href="https://if50.substack.com/" target="_blank"
                             class="ref">50 Years of Text Games</a> &mdash; 1976</p>
-                    <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;">
-                        <button onclick="runCaveCommand('GET SILVER')" class="choice-btn">GET SILVER</button>
-                        <button onclick="runCaveCommand('GO NORTH')" class="choice-btn">GO NORTH</button>
-                        <button onclick="runCaveCommand('GET AXE')" class="choice-btn">GET AXE</button>
-                    </div>
                 </div>
                 <div class="terminal aesthetic-effect-crt reveal d1" id="cave-terminal"
                     style="min-height:480px; display:flex; flex-direction:column;">
@@ -290,6 +312,12 @@
                         <div style="color:rgba(0,255,0,0.6);">Initializing adventure...</div>
                     </div>
                 </div>
+            </div>
+            <div style="margin-top:16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                <span class="retro text-light" style="font-size:14px; letter-spacing:0.1em;">TRY IT &rarr;</span>
+                <button onclick="runCaveCommand('GET SILVER')" class="choice-btn">GET SILVER</button>
+                <button onclick="runCaveCommand('GO NORTH')" class="choice-btn">GO NORTH</button>
+                <button onclick="runCaveCommand('GET AXE')" class="choice-btn">GET AXE</button>
             </div>
         </section>
 
@@ -351,6 +379,22 @@
                         <img src="asset/galatea%20cover.png" alt="Galatea cover" loading="lazy" onclick="zoomImg(this)"
                             class="zoomable">
                         <div class="img-caption">Galatea &mdash; Emily Short, 2000</div>
+                    </div>
+                </div>
+                <div class="win reveal d3" style="margin-top:20px;">
+                    <div class="win-bar">
+                        <div class="win-dots"><span class="win-dot win-dot-r"></span><span class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div>
+                        <span class="win-title">Play Galatea &mdash; Emily Short, 2000</span>
+                        <a href="https://iplayif.com/?story=http%3A%2F%2Fwww.ifarchive.org%2Fif-archive%2Fgames%2Fzcode%2FGalatea.zblorb" target="_blank" style="color:var(--accent);text-decoration:none;font-size:10px;margin-left:auto;">Open &nearr;</a>
+                        <button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
+                    </div>
+                    <div class="win-flush embed-placeholder" data-src="https://iplayif.com/?story=http%3A%2F%2Fwww.ifarchive.org%2Fif-archive%2Fgames%2Fzcode%2FGalatea.zblorb" data-height="60vh" data-sandbox="allow-scripts allow-same-origin allow-popups" style="height:60vh;">
+                        <div style="text-align:center;font-family:'VT323',monospace;padding:24px;">
+                            <div class="play-icon">&#9654;</div>
+                            <div style="font-size:1.4rem;color:#00FF00;margin-bottom:8px;">Click to play Galatea</div>
+                            <div style="font-size:1rem;color:rgba(0,255,0,0.5);">Emily Short, 2000 &mdash; interactive fiction via iplayif.com</div>
+                            <a href="https://iplayif.com/?story=http%3A%2F%2Fwww.ifarchive.org%2Fif-archive%2Fgames%2Fzcode%2FGalatea.zblorb" target="_blank" style="display:inline-block;margin-top:14px;color:var(--cyan);font-size:0.95rem;text-decoration:none;border:1px solid var(--cyan);padding:4px 12px;">Open in new tab &nearr;</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -468,6 +512,18 @@
                                     allowfullscreen title="Machine Hallucinations" loading="lazy"></iframe></div>
                         </div>
                     </div>
+                    <div class="win reveal d3">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div>
+                            <span class="win-title">Escape Rooms &mdash; Physical Multilinearity</span>
+                        </div>
+                        <div class="win-body" style="padding:0;">
+                            <img src="https://i.pinimg.com/1200x/41/9b/a4/419ba4557dc5e77ee9afcca241dae552.jpg" alt="Escape Room" style="width:100%;display:block;object-fit:cover;max-height:200px;" loading="lazy">
+                        </div>
+                        <div class="win-body" style="padding:12px 16px;">
+                            <p class="text-sm text-mid">An escape room is a <strong>spatially-authored branching narrative</strong>: the players decide what to explore, in what order, with what collaborators. The puzzle is the plot. There is no single reading &mdash; only a shared attempt at one. Physical multilinearity, sold by the hour.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -481,10 +537,18 @@
                     <h2 class="mb-md">Gamebooks</h2>
                     <p class="text-mid text-lg mb-md">Interactive analog texts where choices impact the narrative.
                         Puzzles, combat, and challenges determine the story&rsquo;s path.</p>
-                    <div class="card">
+                    <div class="card mb-sm">
                         <p class="text-mid text-sm"><a href="https://www.wearemuesli.it/" target="_blank"
                                 class="ref"><strong>We Are Muesli</strong></a> (Milan) &mdash; Narrative games for
                             cultural heritage since 2013.</p>
+                    </div>
+                    <div class="card mb-sm">
+                        <h4 class="text-accent bold text-sm mb-sm"><a href="https://en.wikipedia.org/wiki/House_of_Leaves" target="_blank" class="ref">House of Leaves</a> &mdash; Mark Z. Danielewski, 2000</h4>
+                        <p class="text-sm text-mid">A novel about a house that is bigger on the inside than the outside &mdash; and a book that enacts this structurally. Footnotes that devour the text, appendices that contradict the narrative, multiple unreliable editors. <strong>The page itself becomes a labyrinth.</strong> Physical hypertext before anyone called it that.</p>
+                    </div>
+                    <div class="card">
+                        <h4 class="text-accent bold text-sm mb-sm"><a href="https://en.wikipedia.org/wiki/Ergodic_literature" target="_blank" class="ref">Ergodic Literature</a> &mdash; Espen Aarseth, 1997</h4>
+                        <p class="text-sm text-mid">From the Greek <em>ergon</em> (work) + <em>hodos</em> (path): literature that requires <strong>non-trivial effort</strong> to traverse. Aarseth gave us the vocabulary to say why the I Ching and MUDs belong in the same sentence &mdash; and why reading a novel and navigating a hypertext are structurally different acts.</p>
                     </div>
                 </div>
                 <div class="img-frame img-frame--hero reveal d1"><img
@@ -520,36 +584,69 @@
         <!-- ══ 12 · GRAPHICAL ADVENTURES ══ -->
         <section class="slide">
             <span class="sec-num">11</span>
-            <div class="max-w grid-2 gap-lg items-center">
-                <div class="reveal">
-                    <h2 class="mb-md">Graphical Adventures</h2>
-                    <p class="text-mid text-lg mb-md">Point, click, explore, solve &mdash; the evolution of visual
-                        narrative games.</p>
-                    <div class="grid-3 gap-sm mb-md">
-                        <div class="card">
-                            <h4 class="text-accent text-sm bold mb-sm">Core</h4>
-                            <p class="text-sm text-mid">Point-and-click, puzzles, narrative</p>
+            <div class="max-w">
+                <div class="grid-2 gap-lg items-start mb-md">
+                    <div class="reveal">
+                        <h2 class="mb-md">Graphical Adventures</h2>
+                        <p class="text-mid text-lg mb-md">Point, click, explore, solve &mdash; the evolution of visual
+                            narrative games.</p>
+                        <div class="grid-3 gap-sm mb-md">
+                            <div class="card">
+                                <h4 class="text-accent text-sm bold mb-sm">Core</h4>
+                                <p class="text-sm text-mid">Point-and-click, puzzles, narrative</p>
+                            </div>
+                            <div class="card">
+                                <h4 class="text-accent text-sm bold mb-sm">Experience</h4>
+                                <p class="text-sm text-mid">World exploration, character interaction</p>
+                            </div>
+                            <div class="card">
+                                <h4 class="text-accent text-sm bold mb-sm">Mechanics</h4>
+                                <p class="text-sm text-mid">Mouse-driven, progressive unlocking</p>
+                            </div>
                         </div>
                         <div class="card">
-                            <h4 class="text-accent text-sm bold mb-sm">Experience</h4>
-                            <p class="text-sm text-mid">World exploration, character interaction</p>
-                        </div>
-                        <div class="card">
-                            <h4 class="text-accent text-sm bold mb-sm">Mechanics</h4>
-                            <p class="text-sm text-mid">Mouse-driven, progressive unlocking</p>
+                            <h3 style="color:var(--accent);" class="mb-sm"><a
+                                    href="https://en.wikipedia.org/wiki/Monkey_Island_(series)" target="_blank"
+                                    class="ref">The Monkey Island Series</a></h3>
+                            <p class="text-mid text-sm">LucasArts&rsquo; iconic series defined the genre.</p>
                         </div>
                     </div>
-                    <div class="card">
-                        <h3 style="color:var(--accent);" class="mb-sm"><a
-                                href="https://en.wikipedia.org/wiki/Monkey_Island_(series)" target="_blank"
-                                class="ref">The Monkey Island Series</a></h3>
-                        <p class="text-mid text-sm">LucasArts&rsquo; iconic series defined the genre.</p>
+                    <div class="reveal d1">
+                        <div class="img-frame"><img
+                                src="https://upload.wikimedia.org/wikipedia/en/9/9f/The_Secret_of_Monkey_Island_SCUMM_Bar.jpg"
+                                alt="Monkey Island" loading="lazy">
+                            <div class="img-caption">The Secret of Monkey Island &mdash; SCUMM Bar &middot; LucasArts, 1990</div>
+                        </div>
                     </div>
                 </div>
-                <div class="img-frame reveal d1"><img
-                        src="https://upload.wikimedia.org/wikipedia/en/9/9f/The_Secret_of_Monkey_Island_SCUMM_Bar.jpg"
-                        alt="Monkey Island" loading="lazy">
-                    <div class="img-caption">The Secret of Monkey Island &mdash; SCUMM Bar &middot; LucasArts, 1990
+                <!-- MINI POINT-AND-CLICK — full width -->
+                <div class="win reveal d2" id="scumm-game">
+                    <div class="win-bar">
+                        <div class="win-dots"></div>
+                        <span class="win-title">The SCUMM Bar &mdash; try it</span>
+                    </div>
+                    <div style="background:#1a0e2e; position:relative; height:220px; overflow:hidden; border-bottom:2px solid var(--border); user-select:none;">
+                        <div id="scumm-scene" style="width:100%; height:100%; position:relative;">
+                            <div style="position:absolute;top:0;left:0;right:0;height:60%;background:linear-gradient(180deg,#0d0628 0%,#3a0d6e 100%);"></div>
+                            <div style="position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(180deg,#2a1a00 0%,#1a0e00 100%); border-top:2px solid #8b6914;"></div>
+                            <div style="position:absolute;top:12px;right:60px;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle,#fffad0 60%,#e8d870 100%);box-shadow:0 0 14px #fffad0;"></div>
+                            <div style="position:absolute;top:8px;left:40px;width:3px;height:3px;background:#fff;border-radius:50%;"></div>
+                            <div style="position:absolute;top:22px;left:120px;width:2px;height:2px;background:#fff;border-radius:50%;"></div>
+                            <div style="position:absolute;top:14px;left:220px;width:2px;height:2px;background:#fff;border-radius:50%;"></div>
+                            <div style="position:absolute;top:30px;left:55%;width:3px;height:3px;background:#fff;border-radius:50%;"></div>
+                            <div style="position:absolute;top:18px;left:70%;width:2px;height:2px;background:#fff;border-radius:50%;"></div>
+                            <div class="scumm-obj" data-name="barrel" title="LOOK AT barrel" style="position:absolute;bottom:38%;left:10%;width:36px;height:44px;background:#5a3a00;border:2px solid #8b6914;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;">🪣</div>
+                            <div class="scumm-obj" data-name="bartender" title="TALK TO bartender" style="position:absolute;bottom:38%;left:42%;font-size:36px;cursor:pointer;line-height:1;">🧔</div>
+                            <div class="scumm-obj" data-name="sword" title="PICK UP sword" style="position:absolute;bottom:52%;right:15%;font-size:28px;cursor:pointer;line-height:1;transform:rotate(45deg);">⚔️</div>
+                        </div>
+                    </div>
+                    <div style="padding:8px 14px; display:flex; gap:8px; flex-wrap:wrap; background:var(--card); border-bottom:1px solid var(--border);">
+                        <button class="scumm-verb choice-btn" data-verb="LOOK AT" style="font-size:13px; padding:4px 12px;">LOOK AT</button>
+                        <button class="scumm-verb choice-btn" data-verb="PICK UP" style="font-size:13px; padding:4px 12px;">PICK UP</button>
+                        <button class="scumm-verb choice-btn" data-verb="TALK TO" style="font-size:13px; padding:4px 12px;">TALK TO</button>
+                    </div>
+                    <div id="scumm-line" style="padding:8px 14px; font-family:'VT323',monospace; font-size:16px; color:var(--text); min-height:32px; background:var(--bg);">
+                        Select a verb, then click an object.
                     </div>
                 </div>
             </div>
@@ -623,67 +720,6 @@
             </div>
         </section>
 
-        <!-- ══ 14b · MEMES & PARTICIPATORY CULTURE ══ -->
-        <section class="slide">
-            <div class="max-w">
-                <div class="reveal mb-md">
-                    <span class="label">Participatory Culture &middot; Remix &middot; Collective Authorship</span>
-                    <h2 class="mb-sm">Memes &amp; the Distributed Narrative</h2>
-                    <p class="text-mid text-lg" style="max-width:780px;">The meme is the folk tale of the digital age &mdash; collectively authored, endlessly remixed, and fundamentally untraceable. Which is, depending on your perspective, either democracy or chaos.</p>
-                </div>
-                <div class="grid-2 gap-lg">
-                    <div class="reveal d1">
-                        <div class="card mb-sm">
-                            <h4 class="text-accent bold text-sm mb-sm"><a href="https://en.wikipedia.org/wiki/Henry_Jenkins" target="_blank" class="ref">Henry Jenkins</a> &mdash; Participatory Culture</h4>
-                            <p class="text-sm text-mid">A culture with low barriers to expression, strong support for sharing, and informal mentorship. The audience is no longer passive: it <em>produces</em>.</p>
-                        </div>
-                        <div class="card mb-sm">
-                            <h4 class="text-accent bold text-sm mb-sm">The Meme as Narrative Unit</h4>
-                            <p class="text-sm text-mid">Every meme format encodes a <strong>story grammar</strong>: setup, subversion, punchline. The Drake Format, "This is Fine", Distracted Boyfriend &mdash; each one is a reusable narrative template.</p>
-                        </div>
-                        <div class="card">
-                            <h4 class="text-accent bold text-sm mb-sm">Remix Culture &amp; Intertextuality</h4>
-                            <p class="text-sm text-mid">Meaning is produced through <strong>recombination</strong>. A meme divorced from its original context generates new readings. Lawrence Lessig called it &ldquo;Read/Write culture&rdquo; &mdash; as opposed to a Read-Only one.</p>
-                        </div>
-                    </div>
-                    <div class="reveal d2">
-                        <div class="grid-2 gap-sm mb-md">
-                            <div class="stat-card text-center">
-                                <div style="font-size:2rem; margin-bottom:6px;">🐸</div>
-                                <span class="retro text-accent" style="font-size:13px;">Pepe / Wojak</span><br>
-                                <span class="text-sm text-mid">emotional archetypes</span>
-                            </div>
-                            <div class="stat-card text-center">
-                                <div style="font-size:2rem; margin-bottom:6px;">🔥</div>
-                                <span class="retro text-accent" style="font-size:13px;">This is Fine</span><br>
-                                <span class="text-sm text-mid">crisis normalization</span>
-                            </div>
-                            <div class="stat-card text-center">
-                                <div style="font-size:2rem; margin-bottom:6px;">👇</div>
-                                <span class="retro text-accent" style="font-size:13px;">Drake Format</span><br>
-                                <span class="text-sm text-mid">preference binary</span>
-                            </div>
-                            <div class="stat-card text-center">
-                                <div style="font-size:2rem; margin-bottom:6px;">🧵</div>
-                                <span class="retro text-accent" style="font-size:13px;">Thread Narratives</span><br>
-                                <span class="text-sm text-mid">serial micro-fiction</span>
-                            </div>
-                        </div>
-                        <div class="exercise-block">
-                            <span class="exercise-label">✦ At Home Exercise</span>
-                            <p class="text-sm text-mid mb-sm">Pick any meme format you know. Identify:</p>
-                            <ul class="bl text-sm text-mid">
-                                <li>The <strong>narrative arc</strong> (setup &rarr; tension &rarr; resolution)</li>
-                                <li>The <strong>protagonist</strong> (implicit or explicit)</li>
-                                <li>How many <strong>different readings</strong> the same template allows</li>
-                            </ul>
-                            <p class="text-sm italic text-light" style="margin-top:10px;">Is the meme an interactive story? Who is the author?</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- ══ 15 · ABIGAIL CORFMAN ══ -->
         <section class="slide" style="align-items:center;">
             <span class="sec-num">14</span>
@@ -710,6 +746,79 @@
             </div>
         </section>
 
+        <!-- ══ 14b · MEMES & PARTICIPATORY CULTURE ══ -->
+        <section class="slide" style="position:relative;">
+            <!-- Meme PNG background decoration — clipped to section, tooltips can overflow -->
+            <div aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;">
+                <img src="asset/memes/5845e687fb0b0755fa99d7ee.png" style="position:absolute;top:-20px;left:-30px;width:240px;opacity:0.22;--meme-rot:-12deg;animation:memeFloat 8s ease-in-out infinite;animation-delay:0s;">
+                <img src="asset/memes/584877787b758d6b0758d00c.png" style="position:absolute;top:30px;right:-20px;width:210px;opacity:0.20;--meme-rot:9deg;animation:memeFloat 9s ease-in-out infinite;animation-delay:-2s;">
+                <img src="asset/memes/5ec287be6add2c0004e5326b.png" style="position:absolute;bottom:-10px;left:130px;width:260px;opacity:0.25;--meme-rot:5deg;animation:memeFloat 7s ease-in-out infinite;animation-delay:-4s;">
+                <img src="asset/memes/58961fa0cba9841eabab60fb.png" style="position:absolute;bottom:20px;right:70px;width:200px;opacity:0.20;--meme-rot:-7deg;animation:memeFloat 10s ease-in-out infinite;animation-delay:-1s;">
+                <img src="asset/memes/sticker_20.webp" style="position:absolute;top:45%;left:-5px;width:175px;opacity:0.24;--meme-rot:16deg;animation:memeFloat 11s ease-in-out infinite;animation-delay:-3s;">
+                <img src="asset/memes/MLZTnPa.png" style="position:absolute;top:15px;left:42%;width:220px;opacity:0.18;--meme-rot:-4deg;animation:memeFloat 9.5s ease-in-out infinite;animation-delay:-5s;">
+            </div>
+            <div class="max-w" style="position:relative;z-index:1;">
+                <div class="reveal mb-md">
+                    <span class="label">Participatory Culture &middot; Remix &middot; Collective Authorship</span>
+                    <h2 class="mb-sm">Memes &amp; the Distributed Narrative</h2>
+                    <p class="text-mid text-lg" style="max-width:780px;">The meme is the folk tale of the digital age &mdash; collectively authored, endlessly remixed, and fundamentally untraceable. Which is, depending on your perspective, either democracy or chaos.</p>
+                </div>
+                <div class="grid-2 gap-lg">
+                    <div class="reveal d1">
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm"><a href="https://en.wikipedia.org/wiki/Henry_Jenkins" target="_blank" class="ref">Henry Jenkins</a> &mdash; Participatory Culture</h4>
+                            <p class="text-sm text-mid">A culture with low barriers to expression, strong support for sharing, and informal mentorship. The audience is no longer passive: it <em>produces</em>.</p>
+                        </div>
+                        <div class="card mb-sm">
+                            <h4 class="text-accent bold text-sm mb-sm">The Meme as Narrative Unit</h4>
+                            <p class="text-sm text-mid">Every meme format encodes a <strong>story grammar</strong>: setup, subversion, punchline. The Drake Format, "This is Fine", Distracted Boyfriend &mdash; each one is a reusable narrative template.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-accent bold text-sm mb-sm">Remix Culture &amp; Intertextuality</h4>
+                            <p class="text-sm text-mid">Meaning is produced through <strong>recombination</strong>. A meme divorced from its original context generates new readings. Lawrence Lessig called it &ldquo;Read/Write culture&rdquo; &mdash; as opposed to a Read-Only one.</p>
+                        </div>
+                    </div>
+                    <div class="reveal d2">
+                        <div class="grid-2 gap-sm mb-md">
+                            <div class="stat-card text-center">
+                                <div style="font-size:2rem; margin-bottom:6px;">🐸</div>
+                                <span class="retro text-accent" style="font-size:13px;">Pepe / Wojak</span><br>
+                                <span class="text-sm text-mid">emotional archetypes</span>
+                                <div class="gif-tooltip"><img src="https://media.giphy.com/media/lXiRoPam2O1OH7LIYK/giphy.gif" alt="Pepe gif" loading="lazy"></div>
+                            </div>
+                            <div class="stat-card text-center">
+                                <div style="font-size:2rem; margin-bottom:6px;">🔥</div>
+                                <span class="retro text-accent" style="font-size:13px;">This is Fine</span><br>
+                                <span class="text-sm text-mid">crisis normalization</span>
+                                <div class="gif-tooltip"><img src="https://media.giphy.com/media/QMHoU66sBXqqLqYvGO/giphy.gif" alt="This is Fine gif" loading="lazy"></div>
+                            </div>
+                            <div class="stat-card text-center">
+                                <div style="font-size:2rem; margin-bottom:6px;">👇</div>
+                                <span class="retro text-accent" style="font-size:13px;">Drake Format</span><br>
+                                <span class="text-sm text-mid">preference binary</span>
+                                <div class="gif-tooltip"><img src="https://media.giphy.com/media/l4FGGafcOHmrlQxG0/giphy.gif" alt="Drake gif" loading="lazy"></div>
+                            </div>
+                            <div class="stat-card text-center">
+                                <div style="font-size:2rem; margin-bottom:6px;">🧵</div>
+                                <span class="retro text-accent" style="font-size:13px;">Thread Narratives</span><br>
+                                <span class="text-sm text-mid">serial micro-fiction</span>
+                            </div>
+                        </div>
+                        <div class="exercise-block">
+                            <span class="exercise-label">✦ At Home Exercise</span>
+                            <p class="text-sm text-mid mb-sm">Pick any meme format you know. Identify:</p>
+                            <ul class="bl text-sm text-mid">
+                                <li>The <strong>narrative arc</strong> (setup &rarr; tension &rarr; resolution)</li>
+                                <li>The <strong>protagonist</strong> (implicit or explicit)</li>
+                                <li>How many <strong>different readings</strong> the same template allows</li>
+                            </ul>
+                            <p class="text-sm italic text-light" style="margin-top:10px;">Is the meme an interactive story? Who is the author?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ══ 16 · CHIA AMISOLA ══ -->
         <section class="slide">
             <span class="sec-num">15</span>
@@ -722,18 +831,6 @@
                         <strong>&ldquo;internet ambient&rdquo;</strong> &mdash; reconfigures our attention to the web.
                         Forbes 30 Under 30, Lumen Prize, Tate Britain, V&amp;A, MoMA, Transmediale Berlin.
                     </p>
-                </div>
-                <div class="win mb-md reveal d1">
-                    <div class="win-bar">
-                        <div class="win-dots"><span class="win-dot win-dot-r"></span><span
-                                class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
-                            class="win-title">How to Make Love (HTML)</span>
-                    </div>
-                    <div class="win-flush">
-                        <div class="yt-wrap"><iframe src="https://www.youtube-nocookie.com/embed/5rCgbWmX0Wo?rel=0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen title="Chia Amisola" loading="lazy"></iframe></div>
-                    </div>
                 </div>
                 <div class="win reveal d2">
                     <div class="win-bar">
@@ -898,6 +995,21 @@
                                     allowfullscreen title="A MAZE. Berlin" loading="lazy"></iframe></div>
                         </div>
                     </div>
+                    <div class="win reveal d2" style="margin-top:16px;">
+                        <div class="win-bar">
+                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div>
+                            <span class="win-title">Riceboy Dream &mdash; A MAZE. 2024</span>
+                            <button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
+                        </div>
+                        <div class="win-body" style="padding:10px 16px 6px;">
+                            <p class="text-sm text-mid"><strong>Riceboy Dream</strong> &mdash; an audiovisual experience presented at A MAZE. Berlin. Dreamlike, immersive, somewhere between a game and a memory.</p>
+                        </div>
+                        <div class="win-flush">
+                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/c2cx0k-Lm-w?rel=0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen title="Riceboy Dream" loading="lazy"></iframe></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -961,62 +1073,63 @@
         </section>
 
         <!-- ══ 18b · GLITCH / VAPORWAVE / HYPERPOP / DEEP FRIED / EXIT REALITY ══ -->
-        <section class="slide">
+        <section class="slide glitch-slide" onclick="this.classList.toggle('glitch-off')" title="Click to toggle glitch">
             <div class="max-w">
                 <div class="reveal mb-md">
                     <span class="label">Digital Aesthetics &middot; Net Culture &middot; Narrative Form</span>
                     <h2 class="mb-sm glitch-text">Aesthetics as Storytelling</h2>
-                    <p class="text-mid text-lg" style="max-width:820px;">Every aesthetic movement encodes a worldview &mdash; and a narrative. These are not genres of music or image styles. They are <strong>survival strategies</strong> for living inside digital culture.</p>
+                    <p class="text-mid text-lg" style="max-width:820px;">Every aesthetic movement encodes a worldview &mdash; and a narrative. These are not genres of music or image styles. They are <strong>survival strategies</strong> for living inside digital culture. <span class="text-light text-sm">(click slide to toggle glitch)</span></p>
                 </div>
                 <div class="grid-2 gap-md reveal d1 mb-md">
                     <!-- VAPORWAVE -->
                     <div class="win">
-                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">VAPORWAVE &mdash; 2010&ndash;</span><button class="win-fs-btn" onclick="enterFullscreen(this)">⛶</button></div>
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">VAPORWAVE &mdash; 2010&ndash;</span><button class="win-fs-btn" onclick="event.stopPropagation();enterFullscreen(this)">⛶</button></div>
                         <div class="win-body" style="padding:14px 20px 10px;">
                             <p class="text-sm text-mid mb-sm"><strong>Grief for futures that never arrived.</strong> Vaporwave aestheticizes the wreckage of late capitalism &mdash; elevator music, Windows 95, mall architecture &mdash; and turns nostalgia into narrative. A E S T H E T I C as performance.</p>
                             <p class="text-sm text-light italic">Macintosh Plus, 2814, Chuck Person &mdash; the album as interactive memory palace.</p>
                         </div>
-                        <div class="win-flush">
-                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/pFptt7Cargc?rel=0"
+                        <div class="win-flush" onclick="event.stopPropagation()">
+                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/aQkPcPqTq4M?rel=0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen title="Vaporwave" loading="lazy"></iframe></div>
                         </div>
                     </div>
                     <!-- GLITCH -->
                     <div class="win">
-                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">GLITCH ART &mdash; Error as Grammar</span><button class="win-fs-btn" onclick="enterFullscreen(this)">⛶</button></div>
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">GLITCH ART &mdash; Error as Grammar</span><button class="win-fs-btn" onclick="event.stopPropagation();enterFullscreen(this)">⛶</button></div>
                         <div class="win-body" style="padding:14px 20px 10px;">
                             <p class="text-sm text-mid mb-sm"><a href="https://rosa-menkman.blogspot.com/" target="_blank" class="ref">Rosa Menkman</a>: &ldquo;A glitch is a wonderful window into the machine.&rdquo; Glitch art weaponizes system failure as a <strong>narrative of disruption</strong>. When the interface breaks, ideology becomes visible.</p>
-                            <p class="text-sm text-light italic">Cory Arcangel, JODI, net.art &mdash; error as authorial choice.</p>
+                            <p class="text-sm text-light italic mb-sm">Cory Arcangel, JODI, net.art &mdash; error as authorial choice.</p>
+                            <p class="text-sm text-mid">Also: <a href="https://glitchology.com/" target="_blank" class="ref">glitchology.com</a> &mdash; a taxonomy of glitch aesthetics.</p>
                         </div>
-                        <div class="win-flush">
-                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/gr0yiOyvas4?rel=0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen title="Rosa Menkman Glitch" loading="lazy"></iframe></div>
+                        <div class="win-flush embed-placeholder" data-src="https://rosa-menkman.blogspot.com/" data-height="35vh" data-sandbox="allow-scripts allow-same-origin allow-popups" style="height:35vh;" onclick="event.stopPropagation()">
+                            <div style="text-align:center;font-family:'VT323',monospace;padding:16px;">
+                                <div class="play-icon" style="font-size:2rem;">&#9654;</div>
+                                <div style="font-size:1.2rem;color:#00FF00;margin-bottom:6px;">rosa-menkman.blogspot.com</div>
+                                <a href="https://rosa-menkman.blogspot.com/" target="_blank" style="color:var(--cyan);font-size:0.9rem;text-decoration:none;border:1px solid var(--cyan);padding:3px 10px;">Open &nearr;</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="grid-3 gap-md reveal d2">
                     <!-- HYPERPOP -->
                     <div class="win">
-                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">HYPERPOP &mdash; 2019&ndash;</span><button class="win-fs-btn" onclick="enterFullscreen(this)">⛶</button></div>
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">HYPERPOP &mdash; 2019&ndash;</span></div>
                         <div class="win-body" style="padding:14px 20px 10px;">
                             <p class="text-sm text-mid mb-sm">SOPHIE, 100 gecs, A.G. Cook &mdash; PC Music. <strong>Maximalist digital production as narrative overload.</strong> The sound of being online at 4am. Every element pushed to saturation: the interface as overwhelm.</p>
                         </div>
-                        <div class="win-flush">
-                            <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/KY5Y-M3WW9Y?rel=0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen title="SOPHIE Faceshopping" loading="lazy"></iframe></div>
-                        </div>
                     </div>
                     <!-- DEEP FRIED FEELS -->
-                    <div class="win">
-                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">DEEP FRIED FEELS</span></div>
-                        <div class="win-body" style="padding:14px 20px;">
-                            <p class="text-sm text-mid mb-sm"><strong>Emotional irony through compression artifacts.</strong> Deep-fried aesthetics (extreme JPEG noise, oversaturation, distortion) create a <em>second layer of reading</em>: the content says one thing, the damage says another.</p>
-                            <p class="text-sm text-mid mb-sm">It is the <strong>unreliable narrator of image formats</strong>. Distortion becomes sincerity by other means &mdash; the meme so compressed it loops back to feeling.</p>
-                            <p class="text-sm italic text-light">&ldquo;Deep fried feels&rdquo; &mdash; irony as an aesthetic survival tool in digital culture.</p>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div class="win">
+                            <div class="win-bar"><div class="win-dots"></div><span class="win-title">DEEP FRIED FEELS</span></div>
+                            <div class="win-body" style="padding:14px 20px;">
+                                <p class="text-sm text-mid mb-sm"><strong>Emotional irony through compression artifacts.</strong> Deep-fried aesthetics (extreme JPEG noise, oversaturation, distortion) create a <em>second layer of reading</em>: the content says one thing, the damage says another.</p>
+                                <p class="text-sm text-mid mb-sm">It is the <strong>unreliable narrator of image formats</strong>. Distortion becomes sincerity by other means &mdash; the meme so compressed it loops back to feeling.</p>
+                                <p class="text-sm italic text-light">&ldquo;Deep fried feels&rdquo; &mdash; irony as an aesthetic survival tool in digital culture.</p>
+                            </div>
                         </div>
+                        <img src="https://hawaidolphino.cc/static/f7e72cb358d364d857ff64d0da4a8659/568ec/02_deep-fried-feels.jpg" alt="Deep Fried Feels" style="width:100%;display:block;object-fit:cover;max-height:160px;border:2px solid var(--border);box-shadow:var(--shadow);" loading="lazy">
                     </div>
                     <!-- EXIT REALITY -->
                     <div class="win">
@@ -1041,20 +1154,10 @@
                             Pipkin</a></h2>
                     <p class="text-mid text-lg mb-md">Digital artist exploring <strong>networked culture, ecology, and
                             the internet as environment</strong>.</p>
-                    <div class="card mb-sm">
-                        <h4 class="text-accent bold text-sm mb-sm"><a href="https://barnaclegoose.quest/"
-                                target="_blank" class="ref">The Barnacle Goose Experiment</a></h4>
-                        <p class="text-sm text-mid">Collaborative ecological world-building game.</p>
-                    </div>
-                    <div class="card mb-sm">
+                    <div class="card">
                         <h4 class="text-accent bold text-sm mb-sm"><a href="https://shell-song.neocities.org/"
                                 target="_blank" class="ref">Shell Song</a></h4>
                         <p class="text-sm text-mid">Interactive procedural poetry &mdash; shells, ocean, loss.</p>
-                    </div>
-                    <div class="card">
-                        <h4 class="text-accent bold text-sm mb-sm"><a href="https://github.com/nicoth-in/mushy"
-                                target="_blank" class="ref">Mushy</a></h4>
-                        <p class="text-sm text-mid">P2P mesh networking without internet.</p>
                     </div>
                 </div>
                 <div class="reveal d1">
@@ -1069,67 +1172,6 @@
                             <iframe src="https://shell-song.neocities.org/" style="width:100%;height:55vh;border:none;"
                                 title="Shell Song" loading="lazy"></iframe>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ══ 20 · PORPENTINE ══ -->
-        <section class="slide">
-            <span class="sec-num">19</span>
-            <div class="max-w grid-2 gap-lg items-center">
-                <div class="reveal">
-                    <span class="label">Twine Revolution &middot; Hypertext Art</span>
-                    <h2 class="mb-md"><a href="https://en.wikipedia.org/wiki/Porpentine_Charity_Heartscape"
-                            target="_blank" class="ref">Porpentine Charity Heartscape</a></h2>
-                    <p class="text-mid text-lg mb-md">Pioneer of the <strong>Twine revolution</strong>. Visceral
-                        hypertext fiction about transness, trauma, survival.</p>
-                    <div class="card mb-sm">
-                        <h4 class="text-accent bold text-sm mb-sm"><a
-                                href="https://slimedaughter.com/games/twine/howlingdogs/" target="_blank"
-                                class="ref">Howling Dogs</a> (2012)</h4>
-                        <p class="text-sm text-mid">Landmark Twine game of confinement and transformation.</p>
-                    </div>
-                    <div class="card">
-                        <h4 class="text-accent bold text-sm mb-sm"><a
-                                href="https://slimedaughter.com/games/twine/cyberqueen/" target="_blank"
-                                class="ref">Cyberqueen</a> (2012)</h4>
-                        <p class="text-sm text-mid">Body horror in space. Cruelty, survival, flesh.</p>
-                    </div>
-                    <p class="italic text-light border-l" style="margin-top:14px;">&ldquo;I&rsquo;m interested in the
-                        space where the screen meets the body.&rdquo;</p>
-                </div>
-                <div class="reveal d1">
-                    <div class="win mb-md">
-                        <div class="win-bar">
-                            <div class="win-dots"><span class="win-dot win-dot-r"></span><span
-                                    class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div><span
-                                class="win-title">Howling Dogs</span>
-                        </div>
-                        <div class="win-flush"
-                            style="background:#000; padding:60px; text-align:center; border-top: 2px solid var(--border);">
-                            <h2
-                                style="color:#FFF; font-family:'Times New Roman', serif; font-style:italic; font-size:42px; border-bottom:1px solid #444; padding-bottom:20px;">
-                                Howling Dogs</h2>
-                            <p style="color:#666; font-family:'VT323', monospace; margin-top:20px; font-size:24px;">>>>
-                                FATAL: Network connection lost.</p>
-                            <p style="color:#00FF00; font-family:'VT323', monospace; margin-top:10px; font-size:24px;">[
-                                Loading local archive data... ]</p>
-                        </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
-                        <div class="stat-card"><span class="retro text-accent"
-                                style="font-size:17px;">2016</span><br><span class="text-sm text-mid">Whitney
-                                Biennial</span></div>
-                        <div class="stat-card"><span class="retro text-accent"
-                                style="font-size:17px;">Rhizome</span><br><span class="text-sm text-mid">Prix Net
-                                Art</span></div>
-                        <div class="stat-card"><span class="retro text-accent"
-                                style="font-size:17px;">IndieCade</span><br><span
-                                class="text-sm text-mid">Nominated</span></div>
-                        <div class="stat-card"><span class="retro text-accent"
-                                style="font-size:17px;">IGF</span><br><span class="text-sm text-mid">Nuovo
-                                Finalist</span></div>
                     </div>
                 </div>
             </div>
@@ -1327,10 +1369,17 @@
                                 class="text-sm text-mid">Paths</span></div>
                     </div>
                 </div>
-                <div class="img-frame reveal d1"><img
-                        src="https://upload.wikimedia.org/wikipedia/en/c/c5/Detroit_Become_Human_gameplay.png"
-                        alt="Detroit" loading="lazy">
-                    <div class="img-caption">Detroit: Become Human &mdash; Quantic Dream, 2018</div>
+                <div class="reveal d1" style="display:flex; flex-direction:column; gap:10px;">
+                    <div class="img-frame"><img
+                            src="https://upload.wikimedia.org/wikipedia/en/c/c5/Detroit_Become_Human_gameplay.png"
+                            alt="Detroit: Become Human gameplay" loading="lazy">
+                        <div class="img-caption">Detroit: Become Human &mdash; Quantic Dream, 2018</div>
+                    </div>
+                    <div class="img-frame"><img
+                            src="https://i.imgur.com/3qX5H89.jpg"
+                            alt="Detroit: Become Human chapter flowchart" loading="lazy">
+                        <div class="img-caption">In-game chapter flowchart — every path, every consequence</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1406,16 +1455,9 @@
                                 <span class="win-title">Notes on Blindness: Into Darkness</span><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                             </div>
                             <div class="win-flush">
-                                <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/mHL9cNeMSAY?rel=0"
+                                <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/Y26L5VqHG2Y?rel=0"
                                         allowfullscreen title="Notes on Blindness VR" loading="lazy"></iframe></div>
                             </div>
-                        </div>
-                        <div class="exercise-block">
-                            <span class="exercise-label">✦ At Home Exercise &mdash; Verbal Branching</span>
-                            <p class="text-sm text-mid mb-sm"><em>Close your eyes.</em> I will describe a scene. When I stop, you choose &mdash; without thinking:</p>
-                            <p class="text-sm text-mid mb-sm" style="border-left:2px solid var(--accent); padding-left:12px;">&ldquo;You are in a corridor. At the end, two doors. Behind the left door you hear music. Behind the right, silence. You have been walking for hours. You are tired.&rdquo;</p>
-                            <p class="text-sm bold text-mid">LEFT or RIGHT?</p>
-                            <p class="text-sm italic text-light" style="margin-top:8px;">What made you choose? That instinct is what immersive narrative designers are trying to engineer.</p>
                         </div>
                     </div>
                 </div>
@@ -1511,12 +1553,59 @@
             </div>
         </section>
 
+        <!-- ══ AI DRAMA MANAGER ══ -->
+        <section class="slide">
+            <div class="max-w">
+                <div class="reveal mb-md">
+                    <span class="label">AI &middot; Procedural Narrative &middot; Drama Management</span>
+                    <h2 class="mb-sm">AI Drama Manager <span style="font-size:0.6em; font-weight:400; color:var(--text-mid);">— or, what happens when the system writes back</span></h2>
+                    <p class="text-mid text-lg" style="max-width:800px;">The Drama Manager is the invisible author inside the machine. It reads the story, reads the player, and bends one toward the other. AI becomes the authorial layer that the original Drama Manager was only simulating.</p>
+                </div>
+                <div class="grid-2 gap-md reveal d1" style="margin-bottom:16px;">
+                    <div class="win">
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">AI Dungeon &mdash; 2019</span></div>
+                        <div class="win-body" style="padding:14px 20px;">
+                            <p class="text-sm text-mid mb-sm">Nick Walton&rsquo;s GPT-2 experiment that became a product. The model doesn&rsquo;t manage drama &mdash; it <em>improvises</em> it. Every response is a bet on what the story probably does next.</p>
+                            <p class="text-sm italic text-light">Fascinating for what it gets right accidentally. Terrifying for what it gets wrong with complete confidence.</p>
+                        </div>
+                    </div>
+                    <div class="win">
+                        <div class="win-bar"><div class="win-dots"></div><span class="win-title">Drama Manager — the concept</span></div>
+                        <div class="win-body" style="padding:14px 20px;">
+                            <p class="text-sm text-mid mb-sm">James Lester, 1997. A system monitoring narrative state to maintain tension, pacing, and character arc. Running in real time, editing what the player experiences.</p>
+                            <p class="text-sm text-mid">The question it asks: <strong>what should happen next, given everything that has already happened?</strong> Which is, incidentally, the same question every writer asks at 2am.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Full-width Arcweave embed -->
+                <div class="win reveal d2" style="border-color:var(--accent); box-shadow:3px 3px 0 var(--accent);">
+                    <div class="win-bar" style="background: repeating-linear-gradient(90deg, var(--accent) 0px, var(--accent) 2px, transparent 2px, transparent 8px);">
+                        <div class="win-dots"></div>
+                        <span class="win-title" style="background:var(--card);">Arcweave Drama Manager &mdash; by me</span>
+                    </div>
+                    <div class="win-body" style="padding:10px 16px 8px;">
+                        <p class="text-sm text-mid">A Drama Manager prototype built in Arcweave. Monitors state variables across branches and routes the narrative toward unresolved tension.</p>
+                    </div>
+                    <div class="win-flush embed-placeholder"
+                         data-src="https://pr-858.arcweave-stg.com/embed/rVO64rMlxY/play"
+                         data-height="65vh"
+                         style="height:65vh;">
+                        <div style="text-align:center; font-family:'VT323',monospace; padding:32px 20px;">
+                            <div class="play-icon">&#9654;</div>
+                            <div style="margin:10px 0 14px;">Click to load &mdash; Arcweave Drama Manager</div>
+                            <a href="https://pr-858.arcweave-stg.com/embed/rVO64rMlxY/play" target="_blank" style="font-size:13px; opacity:0.7;">Open in new tab &nearr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ══ 28 · EDUCATIONAL FOCUS ══ -->
         <section class="slide">
             <span class="sec-num">27</span>
             <div class="max-w">
                 <h2 class="reveal mb-sm">Educational Focus</h2>
-                <p class="text-mid mb-lg reveal d1" style="max-width:780px;">Interactive storytelling is not a pedagogical trick. It is a structural shift: from <em>telling students what happened</em> to <em>putting them inside a situation where it matters</em>. The difference is not marginal.</p>
+                <p class="text-mid mb-lg reveal d1" style="max-width:780px;">Interactive storytelling in education: a structural shift from <em>telling students what happened</em> to <em>putting them inside a situation where it matters</em>. The difference is the difference between a map and a journey.</p>
                 <div class="grid-2 gap-lg reveal d1">
                     <div>
                         <div class="grid-2 gap-sm mb-md">
@@ -1542,7 +1631,7 @@
                         <div class="win mb-sm">
                             <div class="win-bar"><div class="win-dots"></div><span class="win-title">80 Days &mdash; Inkle Studios</span><button class="win-fs-btn" onclick="enterFullscreen(this)">⛶</button></div>
                             <div class="win-flush">
-                                <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/sgFBuDk7x0M?rel=0"
+                                <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/e5nNouXYOuM?rel=0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen title="80 Days" loading="lazy"></iframe></div>
                             </div>
@@ -1626,9 +1715,14 @@
                             style="color:var(--accent); text-decoration:none; font-size:10px; margin-left:auto;">Open
                             &nearr;</a><button class="win-fs-btn" onclick="enterFullscreen(this)" title="Fullscreen">⛶</button>
                     </div>
-                    <div class="win-flush"><iframe src="https://arcweave.com/embed/zr63z97EZR/play"
-                            style="width:100%;height:60vh;border:none;" allow="fullscreen" title="Heaven Isn't Hiring"
-                            loading="lazy"></iframe></div>
+                    <div class="win-flush embed-placeholder" data-src="https://arcweave.com/embed/zr63z97EZR/play" data-height="60vh" style="height:60vh;">
+                        <div style="text-align:center;font-family:'VT323',monospace;padding:24px;">
+                            <div class="play-icon">&#9654;</div>
+                            <div style="font-size:1.4rem;color:#00FF00;margin-bottom:8px;">Click to load &mdash; Heaven Isn&rsquo;t Hiring</div>
+                            <div style="font-size:1rem;color:rgba(0,255,0,0.5);">Arcweave interactive story</div>
+                            <a href="https://arcweave.com/embed/zr63z97EZR/play" target="_blank" style="display:inline-block;margin-top:14px;color:var(--cyan);font-size:0.95rem;text-decoration:none;border:1px solid var(--cyan);padding:4px 12px;">Open in new tab &nearr;</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card reveal d2" style="margin-top:10px;">
                     <p class="text-sm text-mid"><strong>Heaven Isn&rsquo;t Hiring</strong> &mdash; Game Writing SIG
@@ -1647,7 +1741,7 @@
                 </div>
                 <div class="win-body" style="padding:36px;">
                     <h2 class="mb-md" style="color:var(--accent);">What we've learned</h2>
-                    <p class="italic text-mid text-lg border-l mb-md" style="text-align:left;">&ldquo;Interactive storytelling is not a genre. It is a <strong>relationship</strong> between author, system, and reader &mdash; and that relationship has been redesigned every decade for fifty years.&rdquo;</p>
+                    <p class="italic text-mid text-lg border-l mb-md" style="text-align:left;">&ldquo;Interactive storytelling: a <strong>relationship</strong> between author, system, and reader. One that has been redesigned, contested, and reinvented every decade for fifty years &mdash; and shows no signs of settling down.&rdquo;</p>
                     <p class="text-mid" style="text-align:left; margin-bottom:14px;">From Colossal Cave to AI Dungeon, from Storyspace to Neocities, from MYST to Bandersnatch: the question has always been the same. <em>What does it mean to give the audience a choice?</em></p>
                     <p class="text-mid" style="text-align:left; margin-bottom:14px;">The answer changes depending on who asks &mdash; programmer, artist, activist, platform, algorithm. The history of interactive storytelling is the history of that negotiation.</p>
                     <p class="bold" style="text-align:left; border-left:3px solid var(--accent); padding:10px 14px; background:rgba(255,0,255,0.04);">
@@ -1657,6 +1751,44 @@
             </div>
             <p class="retro text-light reveal d2" style="font-size:17px; letter-spacing:0.25em; margin-top:28px;">END OF
                 PRESENTATION</p>
+        </section>
+
+        <!-- ══ CONTACTS ══ -->
+        <section class="slide" style="align-items:center; text-align:center;">
+            <div class="win reveal" style="max-width:680px; width:100%;">
+                <div class="win-bar">
+                    <div class="win-dots"><span class="win-dot win-dot-r"></span><span class="win-dot win-dot-y"></span><span class="win-dot win-dot-g"></span></div>
+                    <span class="win-title">Find me (if you dare)</span>
+                </div>
+                <div class="win-body" style="padding:40px 44px;">
+                    <p class="text-mid text-lg mb-md" style="text-align:left;">You have survived fifty years of interactive storytelling compressed into a single session. That is statistically improbable and personally flattering. If you have questions, objections, or have identified a factual error you would like to correct in front of the entire class — here is where I live.</p>
+                    <div style="display:flex; flex-direction:column; gap:14px; text-align:left; margin:24px 0;">
+                        <div class="card" style="display:flex; align-items:center; gap:14px;">
+                            <span style="font-size:1.4rem;">🌐</span>
+                            <div>
+                                <div class="retro bold text-sm" style="letter-spacing:0.08em; margin-bottom:2px;">LINKTREE</div>
+                                <a href="https://linktr.ee/leonardocodamo" target="_blank" class="ref" style="font-size:1rem;">linktr.ee/leonardocodamo</a>
+                            </div>
+                        </div>
+                        <div class="card" style="display:flex; align-items:center; gap:14px;">
+                            <span style="font-size:1.4rem;">✉️</span>
+                            <div>
+                                <div class="retro bold text-sm" style="letter-spacing:0.08em; margin-bottom:2px;">EMAIL</div>
+                                <a href="mailto:codaleo@gmail.com" class="ref" style="font-size:1rem;">codaleo@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="card" style="display:flex; align-items:center; gap:14px;">
+                            <span style="font-size:1.4rem;">📷</span>
+                            <div>
+                                <div class="retro bold text-sm" style="letter-spacing:0.08em; margin-bottom:2px;">INSTAGRAM</div>
+                                <span style="font-size:1rem; font-family:'Georgia',serif;">@_la_memeria</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm italic text-light" style="text-align:left; border-left:3px solid var(--border); padding-left:14px;">Response times vary. The author is a Drama Manager: he monitors the state of the inbox and intervenes only when tension becomes narratively productive.</p>
+                    <div class="vw-bar" style="margin-top:24px;"></div>
+                </div>
+            </div>
         </section>
 
     </main>
@@ -1693,6 +1825,55 @@
                 }
             }
         }
+
+        /* ── SCUMM MINI GAME ── */
+        (function() {
+            const responses = {
+                'LOOK AT': {
+                    barrel: "It's a barrel. Probably rum. Definitely not water — this is the Caribbean.",
+                    bartender: "He stares at you with the specific exhaustion of someone who has heard every pirate pun.",
+                    sword: "A mighty sword. Or a theatrical prop. In 1990, the distinction was irrelevant."
+                },
+                'PICK UP': {
+                    barrel: "You try. Your back makes a sound you'd rather not repeat in polite company.",
+                    bartender: "He declines. Firmly.",
+                    sword: "You grab it. It feels lighter than your ambitions and heavier than your regrets."
+                },
+                'TALK TO': {
+                    barrel: "The barrel says nothing. As barrels do. You feel judged.",
+                    bartender: "He sighs. 'What'll it be?' You realize you have no idea. Classic adventure game moment.",
+                    sword: "You address the sword directly. 'I want to be a mighty pirate,' you say. It offers no feedback."
+                }
+            };
+            let activeVerb = 'LOOK AT';
+            const line = document.getElementById('scumm-line');
+
+            document.querySelectorAll('.scumm-verb').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    activeVerb = this.dataset.verb;
+                    document.querySelectorAll('.scumm-verb').forEach(b => b.style.outline = 'none');
+                    this.style.outline = '2px solid var(--accent)';
+                    if (line) line.textContent = activeVerb + '...';
+                });
+            });
+
+            document.querySelectorAll('.scumm-obj').forEach(obj => {
+                obj.addEventListener('click', function() {
+                    const name = this.dataset.name;
+                    const r = responses[activeVerb] && responses[activeVerb][name];
+                    if (line && r) {
+                        line.textContent = '> ' + activeVerb + ' ' + name.toUpperCase() + ': ' + r;
+                    }
+                });
+                obj.addEventListener('mouseenter', function() {
+                    if (line) line.textContent = activeVerb + ' ' + this.dataset.name.toUpperCase();
+                });
+            });
+
+            // default verb highlight
+            const firstVerb = document.querySelector('.scumm-verb');
+            if (firstVerb) firstVerb.style.outline = '2px solid var(--accent)';
+        })();
     </script>
 </body>
 

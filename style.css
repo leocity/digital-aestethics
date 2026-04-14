@@ -475,10 +475,35 @@ a.ref:hover {
     box-shadow: var(--shadow);
     padding: 14px;
     text-align: center;
+    position: relative;
 }
 
 .stat-card:hover {
     box-shadow: var(--shadow-hover);
+}
+
+/* ── GIF TOOLTIP (meme cards hover) ── */
+.gif-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    width: 220px;
+    border: 2px solid var(--border);
+    box-shadow: 4px 4px 0 var(--border);
+    background: var(--card);
+    pointer-events: none;
+}
+
+.gif-tooltip img {
+    width: 100%;
+    display: block;
+}
+
+.stat-card:hover .gif-tooltip {
+    display: block;
 }
 
 .stat-num {
@@ -535,20 +560,34 @@ a.ref:hover {
     font-size: 16px;
     color: var(--accent);
     cursor: pointer;
-    margin-left: auto;
-    padding: 0 8px;
-    background: none;
+    margin-left: 6px;
+    padding: 1px 8px;
+    background: var(--card);
     border: none;
     font-family: monospace;
     transition: color 0.2s, transform 0.15s;
-    line-height: 1;
+    line-height: 1.4;
     z-index: 10;
     flex-shrink: 0;
+    position: relative;
 }
 
 .win-fs-btn:hover {
     color: var(--cyan);
     transform: scale(1.2);
+}
+
+/* Open ↗ links inside win-bar */
+.win-bar > a {
+    background: var(--card);
+    padding: 1px 8px;
+    z-index: 10;
+    position: relative;
+    flex-shrink: 0;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    line-height: 1.4;
 }
 
 /* ── GLITCH IMAGE ── */
@@ -648,7 +687,7 @@ a.ref:hover {
 }
 
 .text-accent {
-    color: var(--accent);
+    color: var(--text);
 }
 
 .text-center {
@@ -934,4 +973,95 @@ body::after {
     .stat-num { font-size: 1.8rem; }
 
     .exercise-block { padding: 14px 16px; }
+}
+
+/* ── VHS GLITCH SLIDE (Aesthetics section) — calm, accessible ── */
+@keyframes vhsDrift {
+    0%   { transform: translateX(0px);    filter: saturate(0.88) contrast(1.08) sepia(0.06); }
+    12%  { transform: translateX(1px);    filter: saturate(0.93) hue-rotate(2deg) contrast(1.06); }
+    25%  { transform: translateX(-1px);   filter: saturate(0.85) sepia(0.1) hue-rotate(-1deg) brightness(1.02); }
+    38%  { transform: translateX(0px);    filter: saturate(0.9) contrast(1.05); }
+    /* Brief head-switch (slow transition — not a flash) */
+    52%  { transform: translateX(2px);    filter: saturate(1.1) hue-rotate(4deg) brightness(1.05); }
+    57%  { transform: translateX(-1px);   filter: saturate(0.8) hue-rotate(-2deg) brightness(0.97); }
+    60%  { transform: translateX(0px);    filter: saturate(0.88) contrast(1.08) sepia(0.06); }
+    72%  { transform: translateX(-1px);   filter: hue-rotate(1deg) contrast(1.06) sepia(0.04); }
+    84%  { transform: translateX(0.5px);  filter: saturate(0.9) hue-rotate(-1deg); }
+    93%  { transform: translateX(2px) skewX(0.2deg); filter: saturate(1.12) hue-rotate(4deg) brightness(1.04); }
+    97%  { transform: translateX(0px);    filter: saturate(0.88) contrast(1.08) sepia(0.06); }
+    100% { transform: translateX(0px);    filter: saturate(0.88) contrast(1.08) sepia(0.06); }
+}
+
+@keyframes vhsTracking {
+    0%   { top: -6px; opacity: 0; }
+    5%   { opacity: 0.65; }
+    95%  { opacity: 0.45; }
+    100% { top: 108%; opacity: 0; }
+}
+
+.glitch-slide {
+    animation: vhsDrift 7s linear infinite;
+    position: relative;
+}
+
+/* VHS scanline overlay */
+.glitch-slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0, 0, 0, 0.028) 3px,
+        rgba(0, 0, 0, 0.028) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* VHS tracking light */
+.glitch-slide::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 30%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.2) 70%, transparent 100%);
+    animation: vhsTracking 9s linear infinite;
+    pointer-events: none;
+    z-index: 11;
+}
+
+.glitch-slide.glitch-off {
+    animation: none;
+    transform: none;
+    filter: none;
+}
+
+.glitch-slide.glitch-off::before,
+.glitch-slide.glitch-off::after {
+    display: none;
+}
+
+.glitch-slide .win,
+.glitch-slide .card,
+.glitch-slide .max-w {
+    position: relative;
+    z-index: 2;
+}
+
+/* ── MEME FLOAT ── */
+@keyframes memeFloat {
+    0%, 100% { transform: rotate(var(--meme-rot, 0deg)) translateY(0px) scale(1); }
+    33%       { transform: rotate(var(--meme-rot, 0deg)) translateY(-10px) scale(1.02); }
+    66%       { transform: rotate(var(--meme-rot, 0deg)) translateY(5px) scale(0.98); }
+}
+
+/* ── VAPORWAVE CURSOR ── */
+body {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23FF00FF'/%3E%3Cstop offset='50%25' stop-color='%2300FFFF'/%3E%3Cstop offset='100%25' stop-color='%23FF00FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='4,2 4,26 10,20 14,28 17,27 13,19 20,19' fill='url(%23cg)' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") 4 2, auto;
+}
+
+a, button, .choice-btn, .win-fs-btn, .zoomable, .embed-placeholder, [onclick] {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='cg2' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%2300FFFF'/%3E%3Cstop offset='100%25' stop-color='%23FF00FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='8' fill='url(%23cg2)' stroke='%23000' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23000'/%3E%3C/svg%3E") 16 16, pointer;
 }
